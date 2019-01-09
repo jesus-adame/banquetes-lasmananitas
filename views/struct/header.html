@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="viewport" content="initial-scale=1">
+    <title>{$titulo}</title>
+    {include file='struct/dependencies.html'}
+  </head>
+  <body>
+  <header>
+    <div class="content m-auto row-between">
+      <img src="storage/thumbs/logo-blanco.png" alt="Las Mañanitas">
+        
+      <nav>
+        <ul id="navbar" class="row-right">
+          <li>
+            <a class="btn-h {if !isset($smarty.get.view) || $smarty.get.view == 'index'}active{/if}" href="?view=index">
+              <i class="fas fa-home"></i> Inicio
+            </a>
+          </li>
+          {if isset($smarty.session.puesto)}
+          <li>
+            <a class="btn-h {if $smarty.get.view == 'calendario'}active{/if}" href="?view=calendario">
+              <i class="far fa-calendar-alt"></i> Calendario
+            </a>
+          </li>
+            {if $smarty.session.puesto eq 'Ventas' || $smarty.session.puesto eq 'Supervisor' || $smarty.session.puesto eq 'Administrador'}
+          <li>
+            <a class="btn-h {if $smarty.get.view == 'eventos'}active{/if}" href="?view=eventos">
+              <i class="far fa-calendar-check"></i> Eventos</a> 
+          </li>
+            {/if}
+            {if $smarty.session.puesto eq 'Administrador'}
+          <li>
+            <a class="btn-h {if $smarty.get.view == 'registros'}active{/if}" href="?view=registros">
+              <i class="fas fa-users-cog"></i> Personal
+            </a>
+          </li>
+          <li>
+            <a class="btn-h {if $smarty.get.view == 'banquetes'}active{/if}" href="?view=banquetes">
+              <i class="fas fa-utensils"></i> Banquetes
+            </a>
+          </li>
+           {/if}
+          {/if}
+        </ul>
+      </nav>
+    </div>
+  </header>

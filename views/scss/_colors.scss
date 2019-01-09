@@ -1,0 +1,58 @@
+/* THEMES */
+
+.default {
+  color: #d9e6f1;
+  border: solid 1px #918d8d;
+  background: #999999;
+
+  &:hover {
+    color: #fff;
+    background: #6c6c6c;
+  }
+}
+
+.primary {
+  color: #d9e6f1;
+  border: solid 1px $primary_border;
+  background: $primary;
+
+  &:hover {
+    color: #fff;
+    background: $primary_hover;
+  }
+}
+
+.success {
+  color: #eef0ef;
+  border: solid 1px $success_border;
+  background: $success;
+
+  &:hover {
+    color: #fff;
+    background: $success_hover;
+  }
+}
+
+.atention {
+  color: #282727;
+  border: solid 1px $atention_border;
+  background: $atention;
+
+  &:hover {
+   color: #000;
+   background: $atention_hover;
+ }
+}
+
+.danger {
+ color: #f5dbdb;
+ border: solid 1px $danger_border;
+ background: $danger;
+
+ &:hover {
+   color: $blanco;
+   background: $danger_hover;
+ }
+}
+
+/*------------------------- end color -------------------------*/

@@ -1,0 +1,17 @@
+header {
+  width: 100%;
+  color: #e1e1e2;
+  background: linear-gradient(to bottom, rgba(112,59,128,1) 0%, rgba(90,42,105,1) 100%);
+  & p {
+    font-size: 36px;
+    text-shadow: 2px 2px 2px #000;
+  }
+  
+  & div {
+    align-items: center;
+  }
+}
+
+hgroup {
+  margin-bottom: 20px;
+}

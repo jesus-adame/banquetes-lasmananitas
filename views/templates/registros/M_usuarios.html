@@ -1,0 +1,22 @@
+<div id="modal_usuarios" class="modal">
+  <div class="flex">
+    <div class="modal-content col-xs-10 col-sm-7 col-md-4">
+      <div class="modal-header">
+        <h3>Personal</h3>
+        <a class="close">&times;</a>
+      </div>
+      <div class="modal-body">
+        <form id="form_usuario" class="form col-xs-12" action="core/ajax/registrosAjaxController.php" method="post">
+            Nombre de usuario:<br>
+            <input type="text" class="col-xs-12" name="usuario"><br>
+            Contraseña:<br>
+            <input type="password" class="col-xs-12" name="pass"><br>
+            Repetir contraseña:<br>
+            <input type="password" class="col-xs-12" name="pass2"><br><br>
+
+            <button type="submit" class="btn success">Registrar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

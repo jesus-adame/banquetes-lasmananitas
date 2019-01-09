@@ -1,0 +1,31 @@
+{include file='struct/header.html'}
+<main>
+  {include file='templates/M_evento.html'}
+  {include file='templates/MD_evento.html'}
+  {include file='templates/MD_logistica.html'}
+  {include file='templates/eventos/form_eliminar_log.html'}
+  {include file='templates/MD_orden.html'}
+  {include file='templates/eventos/form_eliminar_orden.html'}
+
+  <div class="content m-auto">
+    <hgroup>
+      <h1>{$titulo} <i class="fas fa-cogs" style="color: #808080;"></i></h1><br>
+      <h2>{$subtitulo}</h2>
+    </hgroup>
+
+    <div id="calendar"></div>
+  </div>
+</main>
+
+<script src="views/js/obtener_lugares.js"></script>
+<script src="views/js/eventos/funcs_events.js"></script>
+<script src="views/js/eventos/M_evento.js"></script>
+<script src="views/js/eventos/MD_evento.js"></script>
+<script src="views/js/eventos/MD_orden.js"></script>
+<script src="views/js/eventos/MD_logistica.js"></script>
+<script src="views/js/eventos/evento_ajax.js"></script>
+<script src="views/js/calendario.js"></script>
+<script src="views/js/tabs.js"></script>
+<script>tabs('#tabs_ordenes');</script>
+
+{include file='struct/footer.html'}

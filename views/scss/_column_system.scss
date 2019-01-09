@@ -1,0 +1,48 @@
+$bp:(
+  sm: 560px,
+  md: 900px,
+  lg: 1300px,
+  xlg: 1700px
+);
+
+@function columns($num_col, $total_col) {
+  @return percentage($num_col / $total_col);
+}
+
+@for $i from 1 through 12 {
+  .col-xs-#{$i} {
+    width: columns($i, 12);
+  }
+}
+
+@media screen and (min-width: map-get($bp, sm)) {
+  @for $i from 1 through 12 {
+    .col-sm-#{$i} {
+      width: columns($i, 12);
+    }
+  }
+}
+
+@media screen and (min-width: map-get($bp, md)) {
+  @for $i from 1 through 12 {
+    .col-md-#{$i} {
+      width: columns($i, 12);
+    }
+  }
+}
+
+@media screen and (min-width: map-get($bp, lg)) {
+  @for $i from 1 through 12 {
+    .col-lg-#{$i} {
+      width: columns($i, 12);
+    }
+  }
+}
+
+@media screen and (min-width: map-get($bp, xlg)) {
+  @for $i from 1 through 12 {
+    .col-xlg-#{$i} {
+      width: columns($i, 12);
+    }
+  }
+}

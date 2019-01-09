@@ -1,0 +1,27 @@
+<footer>
+  <div class="content m-auto">
+    <div class="row-between">
+      <address>
+        <small>Copyright Las Mañanitas 2018 &copy;</small>
+      </address>
+      <div>
+        {if isset($smarty.session.usuario)}
+        <button class="btn" onclick="cerrarSesion()" type="button" name="button">
+          <i class="fas fa-sign-out-alt"></i> Logout
+        </button>
+        {else}
+        <button class="btn" onclick="abrirMSesion()" type="button" name="button">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </button>
+        {/if}
+      </div>
+    </div>
+  </div>
+</footer>
+{include file='templates/M_sesion.tpl'}
+</body>
+<script src="views/lib/jquery-clockpicker.js"></script>
+<script> $('.clockpicker').clockpicker(); </script>
+<script src="views/js/M_sesion.js"></script>
+<script src="views/js/sesion_ajax.js"></script>
+</html>

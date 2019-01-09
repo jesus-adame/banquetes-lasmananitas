@@ -1,0 +1,134 @@
+.modal {
+  display: none;
+  width: 100%;
+  height: 100%;
+  color: #3d3d3d;
+  position: fixed;
+  z-index: 900;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(37, 37, 37, 0.3);
+  & .flex {
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+}
+
+.modal-content {
+  position: relative;
+  color: #383d42;
+  overflow: hidden;
+  animation-name: modalDown;
+  animation-duration: 0.6s;
+  box-sizing:border-box;
+  -moz-box-sizing:border-box; /* Firefox */ -webkit-box-sizing:border-box; /* Safari */ 
+}
+
+.modal-header {
+  border-top: solid 1px #5c3875;
+  border-left: solid 1px #5c3875;
+  border-right: solid 1px #313131;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-radius: 4px 4px 0 0;
+  font-size: 20px;
+  background: #754f90;
+  color: #e0e4ee;
+  box-shadow: 1px 2px 2px #1f1f1f;
+  -webkit-box-shadow: 1px 2px 2px #1f1f1f;-moz-box-shadow: 1px 2px 2px #1f1f1f;
+  & h3 {
+    font-size: 24px;
+  }
+}
+
+.modal-body {
+  width: auto;
+  overflow: auto;
+  max-height: 88vh;
+  font-size: 18px;
+  padding: 10px 15px;
+  border-radius: 0 0 4px 4px;
+  border-left: solid 1px #838383;
+  border-right: solid 1px #313131;
+  border-bottom: solid 1px #242424;
+  background: #fff;
+  box-sizing: border-box;
+  -moz-box-sizing:border-box; /* Firefox */ -webkit-box-sizing:border-box; /* Safari */ 
+  box-shadow: 1px 2px 2px #1f1f1f;
+  -webkit-box-shadow: 1px 2px 2px #1f1f1f;-moz-box-shadow: 1px 2px 2px #1f1f1f;
+}
+
+.modal-footer {
+  background: #cfd5e2;
+  display: flex;
+  flex-direction: row-reverse;
+  width: 100%;
+  margin-top: 10px;
+  max-height: 70px;
+  font-size: 18px;
+  border-radius: 4px;
+  border: solid 1px #afb7ca;
+  padding: 15px 20px;
+  box-sizing: border-box;
+  @media screen and (max-width: 400px) {
+    padding: 15px 2px;
+  }
+}
+
+.close {
+  color: #f2f2f2;
+  font-size: 30px;
+  font-weight: bold;
+  &:hover {
+    color: #a090af;
+    cursor: pointer;
+  }
+}
+
+.sub-modal {
+  display: none;
+  width: 100%;
+  height: 100vh;
+  color: #3d3d3d;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(37, 37, 37, 0.3);
+  box-sizing: border-box;
+  & .flex {
+    justify-content: center;
+    align-items: center;
+    overflow-y: auto;
+    height: 100%;
+  }
+}
+
+@keyframes modalDown {
+  from {
+    top: -330px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes modalUp {
+  from {
+    top: 0;
+    opacity: 1;
+  }
+  to {
+  top: -330px;
+  opacity: 0;
+  }
+}

@@ -1,0 +1,13 @@
+.index-bg {
+    height: 300px;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 4px;
+    & img {
+        width: 100%;
+    }
+}
+
+svg {
+    pointer-events: none;
+}

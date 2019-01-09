@@ -1,0 +1,9 @@
+{
+    "editor.cursorStyle": "line-thin",
+    "editor.wordWrap": "on",
+    "html.format.indentHandlebars": true,
+    "css.lint.boxModel": "warning",
+    "css.lint.duplicateProperties": "warning",
+    "scss.lint.duplicateProperties": "warning",
+    "scss.lint.boxModel": "warning"
+}

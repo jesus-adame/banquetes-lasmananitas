@@ -1,0 +1,15 @@
+.calendar {
+    & a {
+        font-family: sans-serif;
+    }
+}
+
+.fc-event-container a:hover {
+    cursor: pointer;
+}
+
+.fc-toolbar h2 {
+    font-size: 28px;
+    padding: 0%;
+    margin: 0%;
+}

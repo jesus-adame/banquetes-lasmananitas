@@ -1,0 +1,5 @@
+Options All -Indexes
+
+RewriteEngine On
+
+DirectoryIndex index.php index.html

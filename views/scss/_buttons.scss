@@ -1,0 +1,15 @@
+.btn {
+  cursor: pointer;
+  letter-spacing: 0.4px;
+  padding: 6px 10px;
+  display: block;
+  text-decoration: none;
+  border-radius: 4px;
+  text-align: center;
+  transition: 0.2s;
+  margin: 0 5px;
+  min-width: 90px;
+  &:disabled {
+    display: none;
+  }
+}
