@@ -1,5 +1,5 @@
 <?php
-define('HOST', '192.185.131.35');
-define('USER', 'casadelo_admin');
-define('PASSWORD', 'lasmananitas2018');
-define('DB', 'casadelo_banqutes_lm');
+define('HOST', 'localhost');
+define('USER', 'banquet2_admin');
+define('PASSWORD', 'Lasmananitas2019');
+define('DB', 'banquet2_casanueva');

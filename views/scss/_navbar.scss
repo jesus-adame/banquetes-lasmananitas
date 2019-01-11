@@ -17,12 +17,13 @@ nav {
       line-height: 50px;
       border-radius: 4px;
       height: 100%;
+      box-sizing: border-box;
       color: #e1e1e2;
       transition: 0.2s;
       &:hover {
         color: #fff;
-        background: #4a2653;
-        box-shadow: inset 0 0 8px #2b1930;
+        background: #125512;
+        box-shadow: inset 0 0 8px #032503;
       }
       &:active {
         box-shadow: inset 0 0 8px #000;        
@@ -30,8 +31,8 @@ nav {
     }
     & .active {
       color: #fff;
-      background: #40264b;
-      box-shadow: inset 0 0 8px #000;
+      background: #0a470a;
+      box-shadow: inset 0 0 8px #011301;
       pointer-events: none;
     }
   }

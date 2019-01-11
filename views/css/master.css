@@ -195,7 +195,7 @@ p {
 header {
   width: 100%;
   color: #e1e1e2;
-  background: linear-gradient(to bottom, #703b80 0%, #5a2a69 100%);
+  background: linear-gradient(to bottom, #1d751d 0%, #0c4b0c 100%);
 }
 header p {
   font-size: 36px;
@@ -230,21 +230,22 @@ nav ul a {
   line-height: 50px;
   border-radius: 4px;
   height: 100%;
+  box-sizing: border-box;
   color: #e1e1e2;
   transition: 0.2s;
 }
 nav ul a:hover {
   color: #fff;
-  background: #4a2653;
-  box-shadow: inset 0 0 8px #2b1930;
+  background: #125512;
+  box-shadow: inset 0 0 8px #032503;
 }
 nav ul a:active {
   box-shadow: inset 0 0 8px #000;
 }
 nav ul .active {
   color: #fff;
-  background: #40264b;
-  box-shadow: inset 0 0 8px #000;
+  background: #0a470a;
+  box-shadow: inset 0 0 8px #011301;
   pointer-events: none;
 }
 
@@ -731,8 +732,8 @@ textarea {
 }
 
 .modal-header {
-  border-top: solid 1px #5c3875;
-  border-left: solid 1px #5c3875;
+  border-top: solid 1px #176117;
+  border-left: solid 1px #146114;
   border-right: solid 1px #313131;
   display: flex;
   justify-content: space-between;
@@ -740,7 +741,7 @@ textarea {
   padding: 15px;
   border-radius: 4px 4px 0 0;
   font-size: 20px;
-  background: #754f90;
+  background: #1c6e1c;
   color: #e0e4ee;
   box-shadow: 1px 2px 2px #1f1f1f;
   -webkit-box-shadow: 1px 2px 2px #1f1f1f;
