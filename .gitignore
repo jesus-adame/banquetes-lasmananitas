@@ -1,1 +1,4 @@
 test/
+storage/images/*.*
+cache/*.*
+.vscode/
