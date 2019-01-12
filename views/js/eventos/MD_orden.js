@@ -82,7 +82,6 @@ function abrirAgregarOrden() {
   tabs[0].click();
   
   tabs.forEach(tab => {
-    console.log(tab)
     tab.removeAttribute('style');
     tab.style.color = '#1b1b1b';
     

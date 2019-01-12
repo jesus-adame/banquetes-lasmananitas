@@ -20,14 +20,11 @@ let tabs = (element) => {
             
             /* Se recorren las tabs y se cambia su atributo class */
             for ( let i in tab ) {
-                if (tab[i] == tab_selected) {
-                    tab_selected.className = 'tab active';
-                    tab_content_selected.className = 'tab_content show';
-                } else {
-                    tab[i].className = 'tab';
-                    tab_content[i].className = 'tab_content';
-                }                
+                tab[i].className = 'tab';
+                tab_content[i].className = 'tab_content';           
             }            
+            tab_selected.className = 'tab active';
+            tab_content_selected.className = 'tab_content show';
         }
     })
 }
