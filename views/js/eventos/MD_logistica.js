@@ -30,13 +30,15 @@ const m_borrar = document.querySelector('#f_eliminar_log');
 
 function abrirAgregarLogistica()
 {
-  let fecha = document.querySelector('#date_start').value;
+  let fecha = document.querySelector('#date_start').value,
+  hora = document.getElementById('time').value;
   
   btn_edit.style.display = 'none';
   btn_add.style.display = 'block';
   md_logistica.style.display = 'block';
   document.querySelector('#fecha_edit_log').value = fecha
   document.querySelector('#fecha_f_edit_log').value = fecha
+  document.getElementById('time_start_log').value = hora
 }
 
 function abrirEditarLogistica(id)

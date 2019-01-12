@@ -1,4 +1,4 @@
 test/
 storage/images/*.*
-cache/*.*
+storage/cache/*.*
 .vscode/

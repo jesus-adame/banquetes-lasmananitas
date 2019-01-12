@@ -195,7 +195,7 @@ p {
 header {
   width: 100%;
   color: #e1e1e2;
-  background: linear-gradient(to bottom, #1d751d 0%, #0c4b0c 100%);
+  background: linear-gradient(to bottom, #1d751d 0%, #115a11 100%);
 }
 header p {
   font-size: 36px;
@@ -732,7 +732,7 @@ textarea {
 }
 
 .modal-header {
-  border-top: solid 1px #176117;
+  border-top: solid 1px #125312;
   border-left: solid 1px #146114;
   border-right: solid 1px #313131;
   display: flex;
