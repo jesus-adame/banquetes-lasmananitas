@@ -142,13 +142,14 @@ p {
 
 /* THEMES */
 .default {
-  color: #d9e6f1;
+  color: #272727;
   border: solid 1px #918d8d;
   background: #999999;
 }
 .default:hover {
-  color: #fff;
-  background: #6c6c6c;
+  color: #272727;
+  background: #7a7a7a;
+  border: solid 1px #585858;
 }
 
 .primary {
@@ -159,16 +160,18 @@ p {
 .primary:hover {
   color: #fff;
   background: #1379c2;
+  border: solid 1px #0d5e8d;
 }
 
 .success {
   color: #eef0ef;
   border: solid 1px #1aba73;
-  background: #1ac97b;
+  background: #15b96f;
 }
 .success:hover {
   color: #fff;
-  background: #18af6b;
+  background: #17a163;
+  border: solid 1px #10a763;
 }
 
 .atention {
@@ -179,6 +182,7 @@ p {
 .atention:hover {
   color: #000;
   background: #d9b72c;
+  border: solid 1px #adab0d;
 }
 
 .danger {
@@ -189,6 +193,7 @@ p {
 .danger:hover {
   color: #e9e6e6;
   background: #d43030;
+  border: solid 1px #aa2d2d;
 }
 
 /*------------------------- end color -------------------------*/
@@ -634,6 +639,7 @@ textarea {
   border-collapse: collapse;
   overflow: hidden;
   width: 100%;
+  box-sizing: border-box;
 }
 .table thead {
   font-family: "Roboto", sans-serif;
@@ -645,6 +651,7 @@ textarea {
 .table thead th {
   color: #333333;
   background: #cbc7c7;
+  border: solid 1px #a1a1a1;
   padding: 10px 8px;
 }
 .table tbody {
@@ -663,6 +670,7 @@ textarea {
   padding: 6px 8px;
   box-sizing: border-box;
   vertical-align: middle;
+  border: solid 1px #aaaaaa;
 }
 .table button {
   padding: 3px 5px;
@@ -670,22 +678,19 @@ textarea {
   display: inline-block;
   border-radius: 4px;
   box-sizing: border-box;
+  transition: 0.2s;
 }
 .table button:hover {
   cursor: pointer;
-  opacity: 0.8;
 }
 
 .t-scroll {
-  border: solid 1px #bab7b7;
   margin-top: 15px;
   margin-bottom: 15px;
   overflow: auto;
 }
 
 .t-scroll-y {
-  border: solid 1px #bab7b7;
-  border-radius: 3px;
   margin-top: 15px;
   margin-bottom: 15px;
   overflow: auto;
@@ -773,7 +778,7 @@ textarea {
 }
 
 .modal-footer {
-  background: #cfd5e2;
+  background: #d8dde7;
   display: flex;
   flex-direction: row-reverse;
   width: 100%;
@@ -781,7 +786,7 @@ textarea {
   max-height: 70px;
   font-size: 18px;
   border-radius: 4px;
-  border: solid 1px #afb7ca;
+  border: solid 1px #b7becf;
   padding: 15px 20px;
   box-sizing: border-box;
 }
@@ -846,7 +851,7 @@ textarea {
   height: 300px;
   width: 100%;
   overflow: hidden;
-  border-radius: 4px;
+  border-radius: 3px;
 }
 .index-bg img {
   width: 100%;
