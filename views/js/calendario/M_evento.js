@@ -1,16 +1,13 @@
-let m_evento = document.querySelector('#M_evento')
-let flex = document.querySelector('#flex')
-let close = document.querySelector('#cerrar')
-let form = document.querySelector('#form_evento')
+const m_evento = document.querySelector('#M_evento');
 
-close.addEventListener('click', () => {
-  form.reset()
+cerrar.addEventListener('click', () => {
+  form_evento.reset()
   m_evento.style.display = 'none'
 })
 
 window.addEventListener('click', (e) => {
   if (e.target == flex) {
-    form.reset()
+    form_evento.reset()
     m_evento.style.display = 'none'
   }
 })
@@ -23,6 +20,6 @@ function abrirEvent()
 
 function cerrarEvent()
 {
-  form.reset()
+  form_evento.reset()
   m_evento.style.display = 'none'
 }

@@ -5,7 +5,7 @@
         <h3>Evento</h3>
         <ul class="tabs">
           <li>
-            <button id="btnDetalleEvento" class="btn primary" type="button" onclick="abrirDetalleEvento()">Detalles</button>
+            <button id="btnDetalleEvento" class="btn primary" type="button">Detalles</button>
           </li>
         </ul>
       </div>

@@ -1,18 +1,17 @@
 addEventListener('DOMContentLoaded', () => {
-  const md_evento = document.querySelector('#MD_evento'),
-  md_fondo = md_evento.querySelector('.flex'),
-  btn_cancelar = md_evento.querySelector('#cancelar'),
-  btn_nueva_log = md_evento.querySelector('#btnAgregarLogistica'),
-  btn_nueva_orden = md_evento.querySelector('#btn_agregar_orden'),
-  cerrar = md_evento.querySelector('.close'),
-  tb_logistica = md_evento.querySelector('#tb_logistica'),
-  tb_ordenes = md_evento.querySelector('#tbody_orden');
+  const md_fondo = MD_evento.querySelector('.flex'),
+  btn_cancelar = MD_evento.querySelector('#cancelar'),
+  btn_nueva_log = MD_evento.querySelector('#btnAgregarLogistica'),
+  btn_nueva_orden = MD_evento.querySelector('#btn_agregar_orden'),
+  cerrar = MD_evento.querySelector('.close'),
+  tb_logistica = MD_evento.querySelector('#tb_logistica'),
+  tb_ordenes = MD_evento.querySelector('#tbody_orden');
 
   /*** Funciones para cerrar el modal ***/
 
   md_fondo.addEventListener('click', (e) => {
     if (e.target == md_fondo) {
-      return md_evento.style.display = 'none';
+      return MD_evento.style.display = 'none';
     }
   })
 
@@ -29,7 +28,6 @@ addEventListener('DOMContentLoaded', () => {
       abrirEliminarLogistica(id_btn);
     }
   })
-
 
   /** Se escucha la tabla ordenes */
   tb_ordenes.addEventListener('click', (e) => {
@@ -51,15 +49,13 @@ addEventListener('DOMContentLoaded', () => {
   btn_nueva_log.addEventListener('click', abrirAgregarLogistica);
   btn_nueva_orden.addEventListener('click', abrirAgregarOrden);
 
-  cerrar.addEventListener('click', () => md_evento.style.display = 'none');
-  btn_cancelar.addEventListener('click', () => md_evento.style.display = 'none');
+  cerrar.addEventListener('click', () => MD_evento.style.display = 'none');
+  btn_cancelar.addEventListener('click', () => MD_evento.style.display = 'none');
 })
 
 function abrirDetalleEvento()
 {
-  const md_evento = document.querySelector('#MD_evento');
-
-  let id_evento = m_evento.querySelector('#e_id').value,
+  let id_evento = e_id.value,
   data = new FormData();
 
   data.append('id', id_evento); // Se agrega el id del evento clickeado
@@ -74,9 +70,8 @@ function abrirDetalleEvento()
     console.log('No hay ordenes', dataJson.length);
 
     mostrarOrdenes(dataJson);
-    md_evento.style.display = 'block'; 
+    MD_evento.style.display = 'block'; 
   })
-
 }
 
 /**

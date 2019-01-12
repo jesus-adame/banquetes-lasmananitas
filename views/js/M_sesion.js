@@ -1,6 +1,6 @@
-let m_sesion = document.querySelector('#M_sesion')
-let ms_flex = document.querySelector('#MS_flex')
-let ms_close = document.querySelector('#MS_cerrar')
+let m_sesion = document.querySelector('#M_sesion'),
+ms_flex = document.querySelector('.flex'),
+ms_close = document.querySelector('.close');
 
 ms_close.addEventListener('click', () => {
   m_sesion.style.display = 'none'

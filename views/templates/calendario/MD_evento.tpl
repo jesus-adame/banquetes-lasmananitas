@@ -1,9 +1,9 @@
 <div id="MD_evento" class="sub-modal">
-  <div id="DE_flex" class="flex">
+  <div class="flex">
     <div class="modal-content col-xs-11 col-md-10">
       <div class="modal-header">
         <h3>Información del evento</h3>
-        <a id="mde_cerrar" class="close">&times;</a>
+        <a class="close">&times;</a>
       </div>
       <div class="modal-body row-between">
         <div class="col-xs-11 col-md-6 m-auto-x">
@@ -38,7 +38,7 @@
             <table class="table">
               <thead>
                 <tr>
-                  <th># Id</th>
+                  <th style="min-width: 30px"># Id</th>
                   <th>Fecha</th>
                   <th>Nombre</th>
                   <th>Lugar</th>

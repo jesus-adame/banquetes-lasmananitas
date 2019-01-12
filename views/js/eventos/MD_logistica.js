@@ -1,5 +1,5 @@
 const md_logistica = document.querySelector('#md_logistica'),
-mdl_close = document.querySelector('#mdl_cerrar'),
+mdl_close = md_logistica.querySelector('.close'),
 fondo_mdl = md_logistica.querySelector('.flex'),
 id_evento = document.querySelector('#e_id'),
 btn_edit = document.querySelector('#btn_edit_log'),
@@ -8,7 +8,7 @@ btn_add = document.querySelector('#btn_add_log');
 window.addEventListener('click', (e) => {
   if (e.target == fondo_mdl || e.target == mdl_close) {
     md_logistica.style.display = 'none'
-    document.querySelector('#form_logistica').reset();
+    form_logistica.reset();
   }
 })
 
@@ -36,9 +36,9 @@ function abrirAgregarLogistica()
   btn_edit.style.display = 'none';
   btn_add.style.display = 'block';
   md_logistica.style.display = 'block';
-  document.querySelector('#fecha_edit_log').value = fecha
-  document.querySelector('#fecha_f_edit_log').value = fecha
-  document.getElementById('time_start_log').value = hora
+  fecha_edit_log.value = fecha
+  fecha_f_edit_log.value = fecha
+  time_start_log.value = hora
 }
 
 function abrirEditarLogistica(id)
@@ -49,18 +49,17 @@ function abrirEditarLogistica(id)
   btn_edit.style.display = 'block';
   obtenerDatosLog(id);
   
-  document.querySelector('#id_edit_log').value = id;
+  id_edit_log.value = id;
 }
 
 function abrirEliminarLogistica(id)
 {
   m_borrar.style.display = 'block'
-  document.querySelector('#id_elim_log').value = id
+  id_elim_log.value = id
 }
 
 function addLogistica() {
-  let form = document.querySelector('#form_logistica'),
-  logDatos = new FormData(form);
+  let logDatos = new FormData(form_logistica);
 
   logDatos.append('accion', 'agregar');
   logDatos.append('id_evento', id_evento.value);
@@ -80,7 +79,7 @@ function addLogistica() {
       log.append('id', id_evento.value);
       obtenerLogistica(log);
       md_logis.style.display = 'none';
-      form.reset();
+      form_logistica.reset();
 
     } else if (dataJson == 'empty_fields') {
       alert('Debe ingresar un titulo');
@@ -92,8 +91,7 @@ function addLogistica() {
 }
 
 function editLogistica() {
-  let form = document.querySelector('#form_logistica');
-  let logDatos = new FormData(form);
+  let logDatos = new FormData(form_logistica);
 
   logDatos.append('accion', 'modificar');
 
@@ -111,7 +109,7 @@ function editLogistica() {
       log.append('id', id_evento.value)
       obtenerLogistica(log)
       md_logistica.style.display = 'none'
-      form.reset();
+      form_logistica.reset();
 
     } else if (dataJson == 'empty_fields') {
       alert('Debe ingresar un titulo');
@@ -178,7 +176,7 @@ function ajaxDetalleLogistica(data)
 
 function cancelarDetalleLogistica()
 {
-  document.querySelector('#form_logistica').reset();
+  form_logistica.reset();
   md_logistica.style.display = 'none'
 }
 
@@ -193,19 +191,18 @@ function obtenerDatosLog(id) {
   })
   .then(response => response.json())
   .then(dataJson => {
-    let activ = document.querySelector('#actividad_log');
-    let lugar = document.querySelector('#lugar_log');
-    let id_log = document.querySelector('#id_edit_log');
-    let id_evento = document.querySelector('#id_evento');
-    let fecha = document.querySelector('#fecha_edit_log')
-    let fecha_f = document.querySelector('#fecha_f_edit_log')
-    let time = document.querySelector('#time_start_log')
-    let time_f = document.querySelector('#time_f_log')
+    const activ = document.querySelector('#actividad_log');
+    lugar = document.querySelector('#lugar_log'),
+    id_log = document.querySelector('#id_edit_log'),
+    fecha = document.querySelector('#fecha_edit_log'),
+    fecha_f = document.querySelector('#fecha_f_edit_log'),
+    time = document.querySelector('#time_start_log'),
+    time_f = document.querySelector('#time_f_log');
 
     for (let i in dataJson) {
-      let item = dataJson[i];
-      let date = item.start.split(' ');
-      let date_f = item.end.split(' ');
+      let item = dataJson[i],
+      date = item.start.split(' '),
+      date_f = item.end.split(' ');
 
       activ.value = item.title;
       lugar.value = item.lugar;

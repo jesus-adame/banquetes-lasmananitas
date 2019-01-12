@@ -1,12 +1,11 @@
-let md_orden = document.querySelector('#md_orden')
-let mdo_close = document.querySelector('#mdo_cerrar')
+const mdo_fondo = md_orden.querySelector('.flex');
 
-mdo_close.addEventListener('click', () => {
+mdo_cerrar.addEventListener('click', () => {
   md_orden.style.display = 'none'
 })
 
 window.addEventListener('click', (e) => {
-  if (e.target == document.querySelector('#mdo_flex')) {
+  if (e.target == mdo_fondo) {
     md_orden.style.display = 'none'
   }
 })

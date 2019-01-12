@@ -9,22 +9,19 @@ $('#calendar').fullCalendar({
   events: 'core/ajax/eventosAjaxController.php',
   eventClick: function(calEvent, jsEvent, view) {
 
-    const btnAddEvent = document.querySelector('#btnAgregarEvento'),
-    btnModificar = document.querySelector('#btnModificar'),
-    btnBorrar = document.querySelector('#btnBorrar'),
-    btnDetalleEvent = document.querySelector('#btnDetalleEvento');
+    const btnAddEvent = document.querySelector('#btnAgregarEvento');
 
     if (calEvent.color != '#e62424') {
 
       btnModificar.removeAttribute('disabled');
       btnBorrar.removeAttribute('disabled');
-      btnDetalleEvent.removeAttribute('disabled');
+      btnDetalleEvento.removeAttribute('disabled');
       btnAddEvent.setAttribute('disabled', 'disabled');
 
     } else {
       btnModificar.setAttribute('disabled', 'disabled');
       btnBorrar.setAttribute('disabled', 'disabled');
-      btnDetalleEvent.removeAttribute('disabled');
+      btnDetalleEvento.removeAttribute('disabled');
       btnAddEvent.setAttribute('disabled', 'disabled');
     }
     
@@ -37,13 +34,13 @@ $('#calendar').fullCalendar({
     if (view.name == 'month') {
       
       limpiarDatosEvento(date);
-      $('#btnBorrar').prop('disabled', true);
-      $('#btnModificar').prop('disabled', true);
-      $('#btnDetalleEvento').prop('disabled', true);
-      $('#btnAgregarEvento').prop('disabled', false);
+      btnBorrar.setAttribute('disabled', true);
+      btnModificar.setAttribute('disabled', true);
+      btnDetalleEvento.setAttribute('disabled', true);
+      btnAgregarEvento.removeAttribute('disabled');
       
       abrirEvent();
-      document.getElementById('M_evento').querySelectorAll('input')[1].focus();
+      M_evento.querySelectorAll('input')[1].focus();
     }
   }
 })

@@ -1,14 +1,13 @@
-let md_logistica = document.querySelector('#md_logistica')
-let mdl_close = document.querySelector('#mdl_cerrar')
-const fd_logistica = document.querySelector('#fd_logistica')
-let id_evento = document.querySelector('#e_id').value
+const mdl_close = md_logistica.querySelector('.close'),
+id_evento = e_id.value,
+fd_logistica = document.querySelector('#fd_logistica');
 
 mdl_close.addEventListener('click', () => {
   md_logistica.style.display = 'none'
 })
 
 window.addEventListener('click', (e) => {
-  if (e.target == document.querySelector('#mdl_flex')) {
+  if (e.target == md_logistica.querySelector('.flex')) {
     md_logistica.style.display = 'none'
   }
 })

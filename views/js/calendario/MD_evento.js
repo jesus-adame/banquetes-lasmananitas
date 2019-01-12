@@ -1,20 +1,22 @@
-let md_evento = document.querySelector('#MD_evento')
-let mde_close = document.querySelector('#mde_cerrar')
+const mde_close = MD_evento.querySelector('.close'),
+mde_fondo = MD_evento.querySelector('.flex');
 
 mde_close.addEventListener('click', () => {
-  md_evento.style.display = 'none'
+  MD_evento.style.display = 'none'
 })
 
 window.addEventListener('click', (e) => {
-  if (e.target == document.querySelector('#DE_flex')) {
-    md_evento.style.display = 'none'
+  if (e.target == mde_fondo) {
+    MD_evento.style.display = 'none'
   }
 })
 
+btnDetalleEvento.addEventListener('click', (e) => abrirDetalleEvento());
+
 function abrirDetalleEvento()
 {
-  let btn_detalle = document.querySelector('#e_id').value
-  let data = new FormData()
+  let btn_detalle = e_id.value,
+  data = new FormData()
 
   data.append('id', btn_detalle)
 
@@ -23,7 +25,7 @@ function abrirDetalleEvento()
   ajaxOrdenes(data)
   .then(dataJson => {
     mostrarOrdenes(dataJson)
-    md_evento.style.display = 'block'
+    MD_evento.style.display = 'block'
   })
 
 }
@@ -88,5 +90,5 @@ function mostrarOrdenes(data) {
 
 function cancelarDetalleEvento()
 {
-  md_evento.style.display = 'none'
+  MD_evento.style.display = 'none'
 }

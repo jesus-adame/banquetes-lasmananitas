@@ -231,7 +231,7 @@ function borrarOrden(form_orden, modal) {
 }
 
 function obtenerDatosOrden(id) {
-  let mdl = document.querySelector('#md_orden'),
+  let mdl = document.getElementById('md_orden'),
   tabs = mdl.querySelectorAll('.tab');
 
   data = new FormData();

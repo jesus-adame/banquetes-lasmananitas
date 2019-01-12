@@ -1,19 +1,17 @@
 /* Configuración de botones */
-(() => {
-  const form_sesion = document.querySelector('#form_sesion')
-
+addEventListener('DOMContentLoaded', () => {
   form_sesion.addEventListener('submit', (e) => {
     iniciarSesion(e)
   })
-})()
+})
 
 /* Funciones de sesión */
-var iniciarSesion = (event) => {
+const iniciarSesion = (event) => {
   event.preventDefault()
   enviarFormSesion('iniciar')
 }
 
-var cerrarSesion = () => {
+const cerrarSesion = () => {
   enviarFormSesion('mostrar')
 }
 
