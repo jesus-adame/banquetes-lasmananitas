@@ -918,7 +918,6 @@ span {
   border-bottom: 0;
   position: relative;
   top: 1px;
-  transition: 0.1s;
 }
 .tabs .tab:hover {
   background: #bbbbbb;
