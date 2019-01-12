@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/banquet2/public_html/deplyed/
+    - /bin/cp index.php $DEPLOYPATH
+    - /bin/cp style.css $DEPLOYPATH
