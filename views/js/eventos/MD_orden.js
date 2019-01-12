@@ -82,8 +82,10 @@ function abrirAgregarOrden() {
   tabs[0].click();
   
   tabs.forEach(tab => {
-    tab.style.pointerEvents = 'auto';
+    console.log(tab)
+    tab.removeAttribute('style');
     tab.style.color = '#1b1b1b';
+    
   });
   
   for (let i = 0; i < btns_agregar.length; i++) {

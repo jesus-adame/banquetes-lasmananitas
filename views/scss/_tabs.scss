@@ -18,6 +18,10 @@
         border-bottom: 0;
         position: relative;
         top: 1px;
+        transition: 0.1s;
+        &:hover {
+            background: #bbbbbb;
+        }
         @media screen and (max-width: 500px) {
         padding: 5px 10px;
         }
@@ -26,6 +30,7 @@
     & .active {
         background: #f1f1f1;
         padding-bottom: 11px;
+        pointer-events: none;
         @media screen and (max-width: 500px) {
             padding-bottom: 5px;
         }
