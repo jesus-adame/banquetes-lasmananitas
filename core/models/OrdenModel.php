@@ -175,18 +175,16 @@ class Orden
 
   private function obtenerValidacionEvento($id_usu, $id_evento)
   {
-    $sql = "SELECT id_usuario FROM eventos
-    WHERE id_usuario = :id AND id_evento = :id_evento";
+    $sql = "SELECT COUNT(*) FROM eventos
+    WHERE id_usuario = :id_usu AND id_evento = :id_evento";
 
     $exe = $this->db->prepare($sql);
     $exe->execute(array(
-      'id' => $id_usu,
+      'id_usu' => $id_usu,
       'id_evento' => $id_evento
     ));
 
-    if (count($exe->fetchAll()) >= 1) {
-      return 1;
-    } else { return 0; }
+    return $exe->fetchColumn();
   }
 
   public function agregarCampoExtra($id_orden, $tag, $cont)

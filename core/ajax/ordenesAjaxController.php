@@ -19,7 +19,7 @@ switch ($accion) {
       
       $lastInsertId = $orden->agregarOrden($datos);
       
-      if (isset($_POST['tag']) && isset($_POST['content'])) {
+      if (isset($_POST['tag'])) {
         $tag = $_POST['tag'];
         $content = $_POST['content'];
         $ts = array();
