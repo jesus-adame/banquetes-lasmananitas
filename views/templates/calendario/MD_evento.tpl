@@ -9,7 +9,7 @@
         <div class="col-xs-11 col-md-6 m-auto-x">
           <h3>Logística</h3>
 
-          <div class="t-scroll-y" style="margin-right: 10px">
+          <div class="t-scroll-y" style="margin-right: 5px">
             <table class="table">
               <thead>
                 <tr>
@@ -34,7 +34,7 @@
         <div class="col-xs-11 col-md-6 m-auto-x">
           <h3>Ordenes de servicio</h3>
 
-          <div class="t-scroll-y">
+          <div class="t-scroll-y" style="margin-left: 5px">
             <table class="table">
               <thead>
                 <tr>

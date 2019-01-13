@@ -4,7 +4,7 @@ addEventListener('DOMContentLoaded', () => {
     flex_empl = modal_empleados.querySelector('.flex');
 
     btn_agregar_empleados.addEventListener('click', () => {
-        abrirModalEmpl();
+        modal_empleados.style.display = 'block';
     });
 
     btn_cerrar.addEventListener('click', () => {
@@ -19,12 +19,17 @@ addEventListener('DOMContentLoaded', () => {
 
     form_empleado.addEventListener('submit', (e) => {
         e.preventDefault();
+        let data = new FormData(form_empleado);
+        console.log(data)
+        /*
+        solicitarRegistro('core/empleadosAjax.php', 'insertar', data)
+        .then(dataJson => {
+            if (dataJson == 'success') {
+                alert('Se registró correctamente');
+            }
+        })*/
     })
 })
-
-function abrirModalEmpl() {
-    modal_empleados.style.display = 'block';
-}
 
 function cerrarModalEmpl() {
     modal_empleados.style.display = 'none';
