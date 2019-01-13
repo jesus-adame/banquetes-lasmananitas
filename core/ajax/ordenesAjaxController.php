@@ -52,17 +52,16 @@ switch ($accion) {
   case 'modificar':
     if (!empty($_POST['id']) && !empty($_POST['nombre'])
     && !empty($_POST['lugar']) && !empty($_POST['montaje'])
-    && !empty($_POST['garantia'])) {
+    && !empty($_POST['garantia'])) {      
       
-      $content = $_POST['content'];
-
       $datos = crearArrayDatos($_POST['tipo_formato']);
-
+      
       $res = $orden->modificarOrden($_POST['id'], $datos);
-
+      
       if (isset($_POST['id_campo']) && isset($_POST['tag'])) {
         $id_campo = $_POST['id_campo'];
         $tag = $_POST['tag'];
+        $content = $_POST['content'];
 
         for ($i = 0; $i < sizeof($id_campo); $i++) {
           $orden->editarCampoExtra($id_campo[$i], $tag[$i], $content[$i]);

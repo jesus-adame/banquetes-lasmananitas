@@ -1,17 +1,44 @@
 {include file='struct/header.html'}
-<main>
-  <div class="content m-auto">
-    <hgroup>
-      <h1>{$titulo}</h1>
-      <h2>{$subtitulo}</h2>
-      <h3>No. de Sesión {$id_usuario}</h3>
-    </hgroup>
-    
-    <p>USUARIO: <strong>{$usuario}</strong></p>
-    <p>ROL: <strong>{$puesto}</strong></p><br>
-    
-    <div class="index-bg" style="background-image: url('storage/thumbs/index_bg.jpg'); background-position: center; height: 40vh; min-height: 400px; max-height: 600px; box-sizing: border-box;background-repeat: repeat-x;">
-    </div>
+<main class="pg-inicio">
+  <style>
+    .pg-inicio {
+      background-image: url('storage/thumbs/mañanitas_casanueva.jpg'); background-position: center; height: 75vh; min-height: 400px; max-height: 1200px; box-sizing: border-box; background-repeat: repeat-x;
+      background-size: cover;
+      display: flex;
+      align-items: center;
+    }
+    .pg-inicio h1, h2, h3, p {
+      color: #fff;
+      text-shadow: 2px 2px 2px #000;
+    }
+    hgroup {
+      padding-top: 20px;
+      text-align: center;
+    }
+    p {
+      width: 100%;
+      text-align: center;
+    }
+    .marco-index {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 15px;
+      border-radius: 5px;
+    }
+  </style>
+  <div class="m-auto marco-index">
+    <div>
+      <hgroup>
+        <h1>{$titulo}</h1>
+        <h2>{$subtitulo}</h2>
+        <h3>No. de Sesión {$id_usuario}</h3>
+      </hgroup>
+      
+      <p>USUARIO: <strong>{$usuario}</strong></p>
+      <p>ROL: <strong>{$puesto}</strong></p>
+    </div>    
   </div>
 </main>
 {include file='struct/footer.html'}
