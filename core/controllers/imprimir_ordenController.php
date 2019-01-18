@@ -1,4 +1,9 @@
-<?php
+<?php session_start();
+if (!isset($_SESSION['puesto'])) {
+    unset($_GET['view']);
+    header('location:index.php?view=index');
+}
+
 require 'core/lib/vendor/autoload.php';
 include 'core/models/TablasModel.php';
 use Spipu\Html2Pdf\Html2Pdf;

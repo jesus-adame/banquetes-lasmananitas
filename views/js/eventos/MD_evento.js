@@ -64,11 +64,6 @@ function abrirDetalleEvento()
   obtenerLogistica(data);
   obtenerOrdenes(data)
   .then(dataJson => {
-    let results = dataJson.length;
-
-    if (results <= 0)
-    console.log('No hay ordenes', dataJson.length);
-
     mostrarOrdenes(dataJson);
     MD_evento.style.display = 'block'; 
   })
@@ -86,11 +81,6 @@ function obtenerLogistica(data)
   })
   .then(response => response.json())
   .then(dataJson => {
-    let results = dataJson.length;
-
-    if (results <= 0)
-    console.log('No hay logistica', dataJson.length);
-
     mostrarLogistica(dataJson);
   })
 }

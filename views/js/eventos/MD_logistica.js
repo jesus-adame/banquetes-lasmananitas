@@ -1,9 +1,6 @@
 const md_logistica = document.querySelector('#md_logistica'),
 mdl_close = md_logistica.querySelector('.close'),
-fondo_mdl = md_logistica.querySelector('.flex'),
-id_evento = document.querySelector('#e_id'),
-btn_edit = document.querySelector('#btn_edit_log'),
-btn_add = document.querySelector('#btn_add_log');
+fondo_mdl = md_logistica.querySelector('.flex');
 
 window.addEventListener('click', (e) => {
   if (e.target == fondo_mdl || e.target == mdl_close) {
@@ -39,6 +36,7 @@ function abrirAgregarLogistica()
   fecha_edit_log.value = fecha
   fecha_f_edit_log.value = fecha
   time_start_log.value = hora
+  id_evento.value = e_id.value;
 }
 
 function abrirEditarLogistica(id)
@@ -50,6 +48,7 @@ function abrirEditarLogistica(id)
   obtenerDatosLog(id);
   
   id_edit_log.value = id;
+  id_evento.value = e_id;
 }
 
 function abrirEliminarLogistica(id)
@@ -62,7 +61,6 @@ function addLogistica() {
   let logDatos = new FormData(form_logistica);
 
   logDatos.append('accion', 'agregar');
-  logDatos.append('id_evento', id_evento.value);
 
   fetch('core/ajax/logisticaAjaxController.php', {
     method: 'POST',
@@ -106,7 +104,7 @@ function editLogistica() {
       $('#calendar').fullCalendar('refetchEvents')
       let log = new FormData();
 
-      log.append('id', id_evento.value)
+      log.append('id', e_id.value)
       obtenerLogistica(log)
       md_logistica.style.display = 'none'
       form_logistica.reset();
@@ -138,7 +136,7 @@ function eliminarLogistica() {
   let logDatos = new FormData(form);
   
   logDatos.append('accion', 'eliminar');
-  logDatos.append('id_evento', id_evento.value);
+  logDatos.append('id_evento', e_id.value);
 
   fetch('core/ajax/logisticaAjaxController.php', {
     method: 'POST',
@@ -151,7 +149,7 @@ function eliminarLogistica() {
       $('#calendar').fullCalendar('refetchEvents')
       let log = new FormData();
       
-      log.append('id', id_evento.value)
+      log.append('id', e_id.value)
       obtenerLogistica(log)
       m_borrar.style.display = 'none';
     } else if (dataJson == 'not_user') {

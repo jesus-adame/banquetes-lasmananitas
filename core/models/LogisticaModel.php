@@ -56,9 +56,9 @@ class Logistica
     if ($this->obtenerValidacionEvento($_SESSION['id_usuario'], $datos[0])
     || $_SESSION['puesto'] == 'Administrador') {
       $sql = "UPDATE sub_evento SET
-      id_evento = :id_evento, start = :start, end = :end,
-      title = :title, lugar = :lugar
-      WHERE id_sub_evento = :id";
+      id_evento = :id_evento, start = :start,
+      end = :end, title = :title,
+      lugar = :lugar WHERE id_sub_evento = :id";
 
       $exe = $this->db->prepare($sql);
       $exe->execute(array(

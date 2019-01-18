@@ -114,7 +114,7 @@ function addOrden(frm, forms) {
   formData = new FormData(frm);
 
   formData.append('accion', 'agregar');
-  formData.append('id_evento', id_evento.value);
+  formData.append('id_evento', e_id.value);
   formData.append('fecha', fecha.value);
   formData.append('time', time.value);
 
@@ -128,7 +128,7 @@ function addOrden(frm, forms) {
     if (dataJson == 'success') {
 
       let ord = new FormData();
-      ord.append('id', id_evento.value);
+      ord.append('id', e_id.value);
       obtenerOrdenes(ord)
       .then(dataJson => {
         let results = dataJson.length;
@@ -159,7 +159,7 @@ function editOrden(frm, forms) {
   formData = new FormData(frm);
 
   formData.append('accion', 'modificar');
-  formData.append('id_evento', id_evento.value);
+  formData.append('id_evento', e_id.value);
   formData.append('fecha', fecha.value);
   formData.append('time', time.value);
 
@@ -172,7 +172,7 @@ function editOrden(frm, forms) {
 
     if (dataJson == 'success') {
       let ord = new FormData();
-      ord.append('id', id_evento.value)
+      ord.append('id', e_id.value)
 
       obtenerOrdenes(ord)
       .then(dataJson => {
@@ -199,7 +199,7 @@ function editOrden(frm, forms) {
 function borrarOrden(form_orden, modal) {
   let Datos = new FormData(form_orden);
   
-  Datos.append('id_evento', id_evento.value);
+  Datos.append('id_evento', e_id.value);
   Datos.append('accion', 'eliminar');
 
   fetch('core/ajax/ordenesAjaxController.php', {
@@ -212,7 +212,7 @@ function borrarOrden(form_orden, modal) {
     if (dataJson == 'success') {
       
       let ord = new FormData();
-      ord.append('id', id_evento.value);
+      ord.append('id', e_id.value);
       obtenerOrdenes(ord)
       .then(dataJson => {
         let results = dataJson.length;

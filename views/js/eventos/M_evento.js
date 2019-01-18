@@ -19,6 +19,22 @@ addEventListener('DOMContentLoaded', () => {
       M_evento.style.display = 'none';
     }
   })
+
+  btnModificar.addEventListener('click', (e) => {
+    mcxDialog.confirm('El evento se modificará', {
+      sureBtnClick: () => {
+        modificarEvento();
+      }
+    });
+  })
+
+  btnBorrar.addEventListener('click', (e) => {
+    mcxDialog.confirm('El evento se borrará', {
+      sureBtnClick: () => {
+        eliminarEvento();
+      }
+    });
+  })
 })
 
 function abrirEvent() { M_evento.style.display = 'block' }

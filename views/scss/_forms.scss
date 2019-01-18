@@ -3,7 +3,10 @@
   padding: 10px;
   color: #000;
   box-sizing: border-box;
-  -moz-box-sizing:border-box; /* Firefox */ -webkit-box-sizing:border-box; /* Safari */ 
+  -moz-box-sizing:border-box; /* Firefox */ -webkit-box-sizing:border-box; /* Safari */
+  & a {
+    font-size: 14px;
+  } 
 }
 
 button, label {

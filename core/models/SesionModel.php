@@ -16,14 +16,14 @@ class Sesion
 
   public function iniciarSesion()
   {
-    $sql = "SELECT * FROM usuarios as u INNER JOIN usuario_empleado as ue
-    ON u.id_usuario = ue.id_usuario
-    WHERE u.nombre_usuario = :user AND pass = :pass";
+    $sql = "SELECT * FROM usuarios
+    WHERE username = :user AND pass = :pass AND estado = :estado";
 
     $statement = $this->db->prepare($sql);
     $statement->execute(array(
       'user' => $this->user,
-      'pass' => $this->pass
+      'pass' => $this->pass,
+      'estado' => '1'
     ));
 
     $res = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -31,9 +31,8 @@ class Sesion
     if (count($res) > 0) {
       foreach ($res as $key) {
         $_SESSION['id_usuario'] = $key['id_usuario'];
-        $_SESSION['id_empleado'] = $key['id_empleado'];
-        $_SESSION['usuario'] = $key['nombre_usuario'];
-        $_SESSION['puesto'] = $key['puesto'];
+        $_SESSION['usuario'] = $key['username'];
+        $_SESSION['puesto'] = $key['nivel'];
       }
 
       return 1;

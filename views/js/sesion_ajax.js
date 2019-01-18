@@ -1,27 +1,30 @@
 /* Configuración de botones */
+
 addEventListener('DOMContentLoaded', () => {
   form_sesion.addEventListener('submit', (e) => {
-    iniciarSesion(e)
+    e.preventDefault();
+    iniciarSesion(e);
   })
 })
 
 /* Funciones de sesión */
 const iniciarSesion = (event) => {
   event.preventDefault()
-  enviarFormSesion('iniciar')
+  enviarFormSesion('iniciar');
 }
 
 const cerrarSesion = () => {
-  enviarFormSesion('mostrar')
+  mcxDialog.confirm('Se cerrará la sesión', {
+    sureBtnClick: () => {
+      enviarFormSesion('mostrar');
+    }
+  })
 }
 
 /* Peticiones ajax */
-
-function enviarFormSesion(accion)
-{
-  const form = document.querySelector('#form_sesion');
-  let data = new FormData(form_sesion)
-  data.append('accion', accion)
+function enviarFormSesion(accion) {
+  let data = new FormData(form_sesion);
+  data.append('accion', accion);
 
   fetch('core/ajax/sesionAjaxController.php', {
     method: 'POST',
@@ -30,19 +33,21 @@ function enviarFormSesion(accion)
   .then(response => response.text())
   .then(dataText => {
     if (dataText == 'empty_fields') {
-      alert('Debe llenar todos los campos')
+      mcxDialog.alert('Debe llenar todos los campos');
+      
     } else if (dataText == 'no_users') {
-      alert('Datos incorrectos');
+      mcxDialog.alert('Datos incorrectos');
+
     } else if (dataText == 'success') {
-      alert('Has iniciado sesión')
+      mcxDialog.alert('Has iniciado sesión');
       cerrarMSesion();
-      form.reset();
+      form_sesion.reset();
       location.reload();
+
     } else if (dataText == 'logout') {
-      alert('Has cerrado la sesión')
-      location.reload()
+      location.reload();
     } else {
-      alert('Ha ocurrido un error')
+      mcxDialog.alert('Ha ocurrido un error');
     }
   })
 }

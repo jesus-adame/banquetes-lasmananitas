@@ -5,7 +5,6 @@ if (!isset($_SESSION['puesto'])) {
 }
 $html = new Smarty();
 
-$html->assign('titulo', 'Banquetes');
-$html->assign('subtitulo', 'Platillos las Mañanitas');
-$html->display('views/banquetes.html');
-?>
+$html->assign('titulo', 'Mi perfil');
+$html->assign('usuario', $_SESSION['usuario']);
+$html->display('views/mi_perfil.html');

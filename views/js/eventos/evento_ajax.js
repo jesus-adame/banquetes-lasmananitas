@@ -48,12 +48,10 @@ function enviarInformacion(accion, objEvento) {
     data: objEvento,
     success: function(r) {
       if (r == 'empty_fields') {
-        alert('Debe llenar los campos obligatorios (*)');
-        console.log(r)
+        mcxDialog.alert('Debe llenar los campos obligatorios (*)');
 
       } else if (r == 'not_user') {
-        alert('No tiene permiso de editar este evento');
-        console.log(r)
+        mcxDialog.alert('No tiene permiso de editar este evento');
 
       } else {
         $('#calendar').fullCalendar('refetchEvents')

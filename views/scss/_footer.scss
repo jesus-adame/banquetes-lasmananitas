@@ -4,14 +4,32 @@ footer {
   background: #323131;
   overflow: hidden;
   width: 100%;
-  padding: 5px 0;
+  padding-top: 15px;
+  padding-bottom: 10px;
   & .btn {
     color: #e3e0e3;
-    border: solid 1px;
     background: #323131;
+    border: solid 1px #323131;
+    margin-bottom: 5px;
     &:hover {
       background: #1b1b1b;
-
+      border: solid 1px;      
     }
+  }
+  & a {
+    color: #e3e0e3;
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+      color: #fff;
+    }
+  }
+  .perfil {
+    @media screen and (max-width: map-get($bp, sm)) { 
+      margin: 10px auto;
+    }
+  }
+  .legal {
+    text-align: center;
   }
 }

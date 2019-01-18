@@ -21,3 +21,10 @@
   flex-wrap: wrap;
   justify-content: flex-end;
 }
+
+.row-between-reverse {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+}

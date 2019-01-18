@@ -5,6 +5,7 @@ body {
   background: #323131;
 }
 
+@import 'column_system';
 @import 'variables';
 @import 'constants';
 @import 'paragraph';
@@ -15,7 +16,6 @@ body {
 @import 'aside';
 @import 'main';
 @import 'footer';
-@import 'column_system';
 @import 'buttons';
 @import 'rows';
 @import 'forms';

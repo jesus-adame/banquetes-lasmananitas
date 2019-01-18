@@ -1,0 +1,54 @@
+{include file='views/struct/header.html'}
+<main>
+    <div class="content m-auto">
+        <h1>Mi perfil</h1>
+        
+        <form id="form_pass" class="form col-xs-11 col-sm-6 col-md-4 m-auto-x" action="#">
+            <h3>Username: {$usuario}</h3><br>
+            <caption>Cambiar contraseña</caption>
+            <fieldset>
+                Contraseña actual: <br>
+                <input class="col-xs-12" type="password" name="pass">
+                Nueva Contraseña: <br>
+                <input class="col-xs-12" type="password" name="pass1">
+                Repetir Contraseña: <br>
+                <input class="col-xs-12" type="password" name="pass2"><br><br>
+                <button class="btn atention">Cambiar</button>
+            </fieldset>            
+        </form>
+    </div>
+</main>
+
+<script>
+form_pass.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let d = new FormData(form_pass);
+    d.append('action', 'cambiar_pass');
+
+    ajaxReq(d, 'core/ajax/registrosAjaxController.php')
+    .then(dataJson => {
+        if (dataJson == 'empty_fields') {
+            mcxDialog.alert('No se ingresaron datos');
+        } else if (dataJson == 'pass_dont_match') {
+            mcxDialog.alert('Las nuevas contraseñas no coinciden');
+            form_pass.reset();
+
+        } else if (dataJson == 'error') {
+            mcxDialog.alert('Se equivocó en la contraseña actual');
+
+        } else if (dataJson == 'success') {
+            mcxDialog.alert('Su contraseña se ha actualizado');
+            form_pass.reset();
+        }
+    })
+})
+
+const ajaxReq = (formData, url) => {
+    return res = fetch(url, {
+        method: 'POST',
+        body: formData
+    }).then(response => response.json());
+}
+
+</script>
+{include file='views/struct/footer.html'}

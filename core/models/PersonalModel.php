@@ -1,6 +1,6 @@
 <?php
 
-class Usuario
+class Personal
 {
     private $usuario;
     private $pass;
@@ -23,25 +23,22 @@ class Usuario
         $this->pass = $pass;
     }
 
-    public function insertarUsuario($nivel)
+    public function insertar()
     {
         if ($this->usuario == '' || $this->pass == '') {
             return 0;
         }
 
         $sql = "INSERT INTO usuarios (
-            username,
-            pass,
-            nivel) VALUES (
+            nombre_usuario,
+            pass) VALUES (
             :usuario,
-            :pass,
-            :nivel)";
+            :pass)";
 
         $exe = $this->db->prepare($sql);
         $exe->execute(array(
             'usuario' => $this->usuario,
-            'pass' => $this->pass,
-            'nivel' => $nivel
+            'pass' => $this->pass
         ));
 
         if ($exe) {
@@ -51,22 +48,20 @@ class Usuario
         }
     }
 
-    public function editarUsuario($id, $nivel, $estado)
+    public function editar($id)
     {
-        if ($this->usuario == '') {
+        if ($this->usuario == '' || $this->pass == '') {
             return 0;
         }
         
         $sql = "UPDATE usuarios SET
-        username = :usuario,
-        nivel = :nivel,
-        estado = :estado WHERE id_usuario = :id";
+        nombre_usuario = :usuario,
+        pass = :pass WHERE id_usuario = :id";
 
         $exe = $this->db->prepare($sql);
         $exe->execute(array(
             'usuario' => $this->usuario,
-            'nivel' => $nivel,
-            'estado' => $estado,
+            'pass' => $this->pass,
             'id' => $id
         ));
 
@@ -77,7 +72,7 @@ class Usuario
         }
     }
 
-    public function borrarUsuario($id)
+    public function borrar($id)
     {
         $sql = "DELETE FROM usuarios
         WHERE id_usuario = :id";
@@ -92,33 +87,5 @@ class Usuario
         } else {
             return 0;
         }
-    }
-
-    function cambiarPass($id_usuario, $pass) {
-        $sql = 'UPDATE usuarios SET
-        pass = :pass WHERE id_usuario = :id';
-
-        $exe = $this->db->prepare($sql);
-        $exe->execute(array(
-            'pass' => $pass,
-            'id' => $id_usuario
-        ));
-
-        if ($exe) { return 1; }
-        else { return 0; }
-    }
-
-    function validar($id_usuario, $pass) {
-        $sql = "SELECT id_usuario FROM usuarios
-        WHERE id_usuario = :id_usuario AND pass = :pass";
-  
-        $exe = $this->db->prepare($sql);
-        $exe->execute(array(
-            'id_usuario' => $id_usuario,
-            'pass' => $pass
-        ));
-
-        if (count($exe->fetchAll())) { return 1; }
-        else { return 0; }
     }
 }

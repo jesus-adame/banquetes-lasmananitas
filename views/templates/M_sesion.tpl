@@ -10,7 +10,9 @@
           Usuario:
           <input class="col-xs-12" type="text" name="usuario" value="">
           Contraseña:
-          <input class="col-xs-12" type="password" name="pass" value=""><br><br>
+          <input class="col-xs-12" type="password" name="pass" value=""><br>
+          <a href="?view=auto-registro">Crear un usuario</a>
+          <br>
 
           <button class="btn primary" type="submit" name="button">Ingresar</button>
         </form>

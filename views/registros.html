@@ -1,8 +1,6 @@
 {include file='struct/header.html'}
 <main>
-{include file='views/templates/registros/M_empleados.html'}
 {include file='views/templates/registros/M_usuarios.html'}
-{include file='views/templates/registros/M_validados.html'}
   <div class="content m-auto">
     <hgroup>
       <h1>{$titulo}</h1>
@@ -13,36 +11,24 @@
 
       <ul class="tabs">
         <li><a href="#tab1" class="tab active">Usuarios</a></li>
-        <li><a href="#tab2" class="tab">Personal</a></li>
-        <li><a href="#tab3" class="tab">Validados</a></li>
       </ul>
 
       <div class="tabs_content">
         <section id="tab1" class="tab_content show">
           {include file='views/templates/registros/TB_usuarios.tpl'}
         </section>
-    
-        <section id="tab2" class="tab_content">
-          {include file='views/templates/registros/TB_empleados.tpl'}
-        </section>
-    
-        <section id="tab3" class="tab_content">
-          {include file='views/templates/registros/TB_validados.tpl'}
-        </section>
       </div>
-      
+          
     </div>
     
   </div>
 </main>
-<script src="views/js/registros/tab_usuarios.js"></script>
-<script src="views/js/registros/registros.js"></script>
-<script src="views/js/registros/M_usuarios.js"></script>
-<script src="views/js/registros/M_empleados.js"></script>
-<script src="views/js/registros/M_validados.js"></script>
-<script src="views/js/registros/ajax_request.js"></script>
+
 <script src="views/js/tabs.js"></script>
+<script src="views/js/registros/Modal.js"></script>
+<script src="views/js/registros/listeners.js"></script>
+<script src="views/js/registros/ajax_request.js"></script>
 <script>
-addEventListener('DOMContentLoaded', () => tabs('#tabs_menu'))
+addEventListener('DOMContentLoaded', () => tabs('#tabs_menu'));
 </script>
 {include file='struct/footer.html'}

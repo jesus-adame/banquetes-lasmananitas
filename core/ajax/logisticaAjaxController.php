@@ -34,7 +34,7 @@ switch ($accion) {
     if (!empty($_POST['id']) && !empty($_POST['title'])) {
       $datos = array(
         $_POST['id_evento'],
-        $_POST['date_start'].' '.$_POST['time_start'],
+        $_POST['date_start']. ' ' .$_POST['time_start'],
         $_POST['date_end']. ' ' .$_POST['time_end'],
         $_POST['title'],
         $_POST['lugar']);

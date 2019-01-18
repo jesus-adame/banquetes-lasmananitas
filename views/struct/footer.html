@@ -1,27 +1,32 @@
 <footer>
   <div class="content m-auto">
     <div class="row-between">
-      <address>
-        <small>Copyright Las Mañanitas {date(Y)} &copy;</small>
-      </address>
-      <div>
-        {if isset($smarty.session.usuario)}
-        <button class="btn" onclick="cerrarSesion()" type="button" name="button">
-          <i class="fas fa-sign-out-alt"></i> Logout
-        </button>
-        {else}
-        <button class="btn" onclick="abrirMSesion()" type="button" name="button">
-          <i class="fas fa-sign-in-alt"></i> Login
-        </button>
-        {/if}
+      <div class="col-xs-5"></div>
+
+      <div class="perfil">
+        <ul>
+          {if isset($smarty.session.usuario)}
+          <li><a class="btn" href="?view=mi_perfil">
+              <i class="far fa-user"></i> Mi Perfil</a></li>
+          {if $smarty.session.puesto eq 'Administrador'}
+          <li><a class="btn" href="?view=admin">
+              <i class="fas fa-chart-bar"></i> Administración</a></li>
+          {/if}
+          {/if}
+        </ul>
+      </div>
+
+      <div class="legal col-xs-12">
+        <address>
+          <small>Copyright Las Mañanitas {date(Y)} &copy;</small>
+        </address>
       </div>
     </div>
   </div>
 </footer>
+
 {include file='templates/M_sesion.tpl'}
 </body>
-<script src="views/lib/jquery-clockpicker.js"></script>
-<script> $('.clockpicker').clockpicker(); </script>
 <script src="views/js/M_sesion.js"></script>
 <script src="views/js/sesion_ajax.js"></script>
 </html>
