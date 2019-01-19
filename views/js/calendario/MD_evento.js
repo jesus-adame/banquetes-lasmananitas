@@ -13,26 +13,28 @@ window.addEventListener('click', (e) => {
 
 btnDetalleEvento.addEventListener('click', (e) => abrirDetalleEvento());
 
-function abrirDetalleEvento()
+async function abrirDetalleEvento()
 {
   let btn_detalle = e_id.value,
   data = new FormData()
 
+  openLoading();
   data.append('id', btn_detalle)
 
-  ajaxLogistica(data)
+  await ajaxLogistica(data)
 
   ajaxOrdenes(data)
   .then(dataJson => {
     mostrarOrdenes(dataJson)
-    MD_evento.style.display = 'block'
+    closeLoading();
+    MD_evento.style.display = 'block';
   })
 
 }
 
-function ajaxLogistica(data)
+async function ajaxLogistica(data)
 {
-  fetch('core/ajax/logisticaAjaxController.php', {
+  return fetch('core/ajax/logisticaAjaxController.php', {
     method: 'POST',
     body: data
   })

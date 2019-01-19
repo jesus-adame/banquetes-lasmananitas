@@ -14,8 +14,8 @@ window.addEventListener('click', (e) => {
 
 function abrirEvent()
 {
-  let content;
-  m_evento.style.display = 'block'
+  m_evento.style.display = 'block';
+  closeLoading();
 }
 
 function cerrarEvent()

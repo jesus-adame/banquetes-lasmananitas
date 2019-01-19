@@ -61,10 +61,12 @@ function abrirDetalleEvento()
   data.append('id', id_evento); // Se agrega el id del evento clickeado
 
   // Muestra los datos en el formulario
+  openLoading();
   obtenerLogistica(data);
   obtenerOrdenes(data)
   .then(dataJson => {
     mostrarOrdenes(dataJson);
+    closeLoading();
     MD_evento.style.display = 'block'; 
   })
 }

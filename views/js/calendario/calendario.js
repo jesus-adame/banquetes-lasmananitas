@@ -10,6 +10,7 @@ $('#calendar').fullCalendar({
   eventClick: function(calEvent, jsEvent, view) {
     
     if (calEvent.evento != null && view.name == 'month') {
+      openLoading();
       extraerDatosEvento(calEvent);
       abrirEvent();
     }

@@ -67,7 +67,7 @@ function abrirEditarOrden(id) {
     btns_editar[i].style.display = 'block';
     btns_mas[i].style.display = 'none';
   }
-
+  openLoading();
   obtenerDatosOrden(id);
 }
 
@@ -353,8 +353,8 @@ function obtenerDatosOrden(id) {
           });
         break;
       }
-    }
-    
+      closeLoading();
+    }    
   });
 
   async function getCamposExtra() {
