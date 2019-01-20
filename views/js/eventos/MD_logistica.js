@@ -67,6 +67,7 @@ function addLogistica() {
     body: logDatos
   })
   .then(response => response.json())
+  .catch(error => mcxDialog.alert('No hay conexión\n' + error))
   .then(dataJson => {
     
     if (dataJson == 'success') {
@@ -80,10 +81,10 @@ function addLogistica() {
       form_logistica.reset();
 
     } else if (dataJson == 'empty_fields') {
-      alert('Debe ingresar un titulo');
+      mcxDialog.alert('Debe ingresar un titulo');
 
     } else if (dataJson == 'not_user') {
-      alert('No tiene permiso de editar este evento');
+      mcxDialog.alert('No tiene permiso de editar este evento');
     }
   })
 }
@@ -98,6 +99,7 @@ function editLogistica() {
     body: logDatos
   })
   .then(response => response.json())
+  .catch(error => alert(error))
   .then(dataJson => {
 
     if (dataJson == 'success') {
@@ -110,9 +112,9 @@ function editLogistica() {
       form_logistica.reset();
 
     } else if (dataJson == 'empty_fields') {
-      alert('Debe ingresar un titulo');
+      mcxDialog.alert('Debe ingresar un titulo');
     } else if (dataJson == 'not_user') {
-      alert('No tiene permiso de editar este evento');
+      mcxDialog.alert('No tiene permiso de editar este evento');
     }
   })
 }
@@ -122,9 +124,7 @@ function mostrarDatosLog(data) {
     method: 'POST',
     body: data
   })
-  .then(response => {
-    return response.json()
-  })
+  .then(response => response.json())
   .then(dataJson => {
     mostrarDatosLog(dataJson)
   })
@@ -143,6 +143,7 @@ function eliminarLogistica() {
     body: logDatos
   })
   .then(response => response.json())
+  .catch(error => alert(error))
   .then(dataJson => {
 
     if (dataJson == 'success') {
@@ -153,7 +154,7 @@ function eliminarLogistica() {
       obtenerLogistica(log)
       m_borrar.style.display = 'none';
     } else if (dataJson == 'not_user') {
-      alert('No tiene permiso de modificar este evento');
+      mcxDialog.alert('No tiene permiso de modificar este evento');
     } 
   })
 }
@@ -164,9 +165,8 @@ function ajaxDetalleLogistica(data)
     method: 'POST',
     body: data
   })
-  .then(response => {
-    return response.json()
-  })
+  .then(response => response.json())
+  .catch(error => alert(error))
   .then(dataJson => {
     mostrarLogistica(dataJson)
   })

@@ -37,7 +37,7 @@ function recolectarDatosGUI() {
       color: $('#color').val()
     }
   } else {
-    alert('La fecha de finalización no puede ser anterior a la fecha de inicio')
+    mcxDialog.alert('La fecha de finalización no puede ser anterior a la fecha de inicio')
   }
 }
 
@@ -59,7 +59,7 @@ function enviarInformacion(accion, objEvento) {
       }
     },
     error: function() {
-      alert('Hay un error')
+      mcxDialog.alert('Hay un error de conexion')
     }
 
   })

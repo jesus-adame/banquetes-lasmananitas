@@ -73,7 +73,7 @@ function abrirDetalleEvento()
 
 /**
  * Funcion para obtener las actividades
- * @param {Object} data 
+ * @param {Object} data
  */
 function obtenerLogistica(data)
 {
@@ -82,6 +82,7 @@ function obtenerLogistica(data)
     body: data
   })
   .then(response => response.json())
+  .catch(error => mcxDialog.alert('No hay conexión\n' + error))
   .then(dataJson => {
     mostrarLogistica(dataJson);
   })

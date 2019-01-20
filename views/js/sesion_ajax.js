@@ -16,7 +16,7 @@ const iniciarSesion = (event) => {
 const cerrarSesion = () => {
   mcxDialog.confirm('Se cerrará la sesión', {
     sureBtnClick: () => {
-      enviarFormSesion('mostrar');
+      enviarFormSesion('cerrar');
     }
   })
 }
@@ -31,6 +31,7 @@ function enviarFormSesion(accion) {
     body: data
   })
   .then(response => response.text())
+  .catch(error => mcxDialog.alert('No hay conexión\n' + error))
   .then(dataText => {
     if (dataText == 'empty_fields') {
       mcxDialog.alert('Debe llenar todos los campos');
@@ -40,14 +41,12 @@ function enviarFormSesion(accion) {
 
     } else if (dataText == 'success') {
       mcxDialog.alert('Has iniciado sesión');
-      cerrarMSesion();
+      M_sesion.style.display = 'none';
       form_sesion.reset();
       location.reload();
 
     } else if (dataText == 'logout') {
       location.reload();
-    } else {
-      mcxDialog.alert('Ha ocurrido un error');
     }
   })
 }

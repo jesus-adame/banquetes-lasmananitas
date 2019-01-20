@@ -123,6 +123,7 @@ function addOrden(frm, forms) {
     body: formData
   })
   .then(response => response.json())
+  .catch(error => alert(error))
   .then(dataJson => {
 
     if (dataJson == 'success') {
@@ -144,10 +145,10 @@ function addOrden(frm, forms) {
       forms.forEach(item => item.reset());
 
     } else if (dataJson == 'empty_fields') {
-      alert('Debe llenar los campos obligatorios (*)');
+      mcxDialog.alert('Debe llenar los campos obligatorios (*)');
       
     } else if (dataJson == 'not_user') {
-      alert('No tiene permiso de editar este usuario');
+      mcxDialog.alert('No tiene permiso de editar este usuario');
     }
   })
 }
@@ -168,6 +169,7 @@ function editOrden(frm, forms) {
     body: formData
   })
   .then(response => response.json())
+  .catch(error => alert(error))
   .then(dataJson => {
 
     if (dataJson == 'success') {
@@ -188,10 +190,10 @@ function editOrden(frm, forms) {
       forms.forEach(item => item.reset());
 
     } else if (dataJson == 'empty_fields') {
-      alert('Debe llenar los campos obligatorios (*)');
+      mcxDialog.alert('Debe llenar los campos obligatorios (*)');
       
     } else if (dataJson == 'not_user') {
-      alert('No tiene permiso de editar este evento');
+      mcxDialog.alert('No tiene permiso de editar este evento');
     }
   });
 }
@@ -207,6 +209,7 @@ function borrarOrden(form_orden, modal) {
     body: Datos
   })
   .then(response => response.json())
+  .catch(error => alert(error))
   .then(dataJson => {
     
     if (dataJson == 'success') {
@@ -225,7 +228,7 @@ function borrarOrden(form_orden, modal) {
       modal.style.display = 'none';
       
     } else if (dataJson == 'not_user') {
-      alert('No tiene permiso de modificar este evento');
+      mcxDialog.alert('No tiene permiso de modificar este evento');
     }
   })
 }
@@ -244,6 +247,7 @@ function obtenerDatosOrden(id) {
     body: data
   })
   .then(response => response.json())
+  .catch(error => alert(error))
   .then(dataJson => {
     let id_orden = mdl.querySelectorAll('.id_orden');    
     evento = mdl.querySelectorAll('.o_nombre'),

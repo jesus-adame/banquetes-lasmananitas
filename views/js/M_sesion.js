@@ -1,24 +1,16 @@
-let m_sesion = document.querySelector('#M_sesion'),
-ms_flex = document.querySelector('.flex'),
-ms_close = document.querySelector('.close');
-
-ms_close.addEventListener('click', () => {
-  m_sesion.style.display = 'none'
-})
+const ms_flex = M_sesion.querySelector('.flex'),
+ms_close = M_sesion.querySelector('.close');
 
 window.addEventListener('click', (e) => {
-  if (e.target == ms_flex) {
-    m_sesion.style.display = 'none'
+  if (e.target == ms_flex || e.target == ms_close) {
+    M_sesion.style.display = 'none';
+    form_sesion.reset();
   }
 })
 
-function abrirMSesion()
-{
-  m_sesion.style.display = 'block'
-  m_sesion.querySelectorAll('input')[0].focus()
+const openMSesion = () => {
+  M_sesion.style.display = 'block';
+  M_sesion.querySelectorAll('input')[0].focus();
 }
 
-function cerrarMSesion()
-{
-  m_sesion.style.display = 'none'
-}
+const closeMSesion = () => { M_sesion.style.display = 'none'; form_sesion.reset(); }

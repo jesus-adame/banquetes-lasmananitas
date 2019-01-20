@@ -5,10 +5,5 @@ load_baner.style = 'display: none';
 load_baner.innerHTML = `<div class="loader">Loading...</div>`;
 document.querySelector('body').appendChild(load_baner);
   
-const openLoading = () => {
-    loader.style.display = 'flex';
-}
-
-const closeLoading = () => {
-    loader.style.display = 'none';
-}
+const openLoading = () => loader.style.display = 'flex';
+const closeLoading = () => loader.style.display = 'none';

@@ -9,10 +9,9 @@
             for (let i in dataJson) {
                 let item = dataJson[i];
                 select.innerHTML += `<option value="${item.id_lugar}"> ${item.lugar} </option>`;
-            }
-            
+            }            
         } else {
-            alert('No hay registros');
+            select.innerHTML = `<option value="2"> No se han registrado lugares </option>`;
         }
     })
     .catch(error => {
