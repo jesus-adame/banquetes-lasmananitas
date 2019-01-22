@@ -28,16 +28,18 @@ form_pass.addEventListener('submit', (e) => {
     ajaxReq(d, 'core/ajax/registrosAjaxController.php')
     .then(dataJson => {
         if (dataJson == 'empty_fields') {
-            mcxDialog.alert('No se ingresaron datos');
+            popup.alert({ content: 'No se ingresaron datos', effect: 'bottom' });
         } else if (dataJson == 'pass_dont_match') {
-            mcxDialog.alert('Las nuevas contraseñas no coinciden');
-            form_pass.reset();
+            popup.alert({ content: 'Las nuevas contraseñas no coinciden', effect: 'bottom' });
 
         } else if (dataJson == 'error') {
-            mcxDialog.alert('Se equivocó en la contraseña actual');
+            popup.alert({ content: 'Se equivocó en la contraseña actual', effect: 'bottom' });
+
+        } else if (dataJson == 'dont_length') {
+            popup.alert({ content: 'La contraseña debe ser de al menos 6 caracteres', effect: 'bottom' });
 
         } else if (dataJson == 'success') {
-            mcxDialog.alert('Su contraseña se ha actualizado');
+            popup.alert({ content: 'Su contraseña se ha actualizado', effect: 'bottom' });
             form_pass.reset();
         }
     })

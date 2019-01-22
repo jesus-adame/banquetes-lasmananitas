@@ -60,16 +60,21 @@ switch ($_POST['action']) {
         if (!empty($_POST['pass']) && !empty($_POST['pass1']) && !empty($_POST['pass2'])) {
             
             if ($_POST['pass1'] === $_POST['pass2']) {
-                $pass = sha1($_POST['pass']);
-                $pass1 = sha1($_POST['pass1']);
-                
-                $validar = $usu->validar($_SESSION['id_usuario'], $pass);
-                
-                if ($validar) {
-                    $usu->cambiarPass($_SESSION['id_usuario'], $pass1);
-                    echo json_encode('success');
+
+                if (strlen($_POST['pass1']) < 6) {
+                    echo json_encode('dont_length');                    
                 } else {
-                    echo json_encode('error');
+                    $pass = sha1($_POST['pass']);
+                    $pass1 = sha1($_POST['pass1']);
+                    
+                    $validar = $usu->validar($_SESSION['id_usuario'], $pass);
+                    
+                    if ($validar) {
+                        $usu->cambiarPass($_SESSION['id_usuario'], $pass1);
+                        echo json_encode('success');
+                    } else {
+                        echo json_encode('error');
+                    }
                 }
 
             } else { echo json_encode('pass_dont_match'); }
