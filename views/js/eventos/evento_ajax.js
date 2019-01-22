@@ -17,8 +17,8 @@ function modificarEvento() {
 }
 
 function recolectarDatosGUI() {
-  let start = $('#date_start').val() + ' ' + $('#time').val();
-  let end = $('#date_end').val() + ' ' + $('#time_f').val();
+  let start = $('#date_start').val() + ' ' + $('#time').val(),
+  end = $('#date_end').val() + ' ' + $('#time_f').val();
 
   if (start < end) {
     nuevoEvento = {
@@ -37,7 +37,7 @@ function recolectarDatosGUI() {
       color: $('#color').val()
     }
   } else {
-    mcxDialog.alert('La fecha de finalización no puede ser anterior a la fecha de inicio')
+    popup.alert({ content: 'La fecha de finalización no puede ser anterior a la fecha de inicio' })
   }
 }
 
@@ -46,21 +46,20 @@ function enviarInformacion(accion, objEvento) {
     type: 'POST',
     url: 'core/ajax/eventosAjaxController.php?accion=' + accion,
     data: objEvento,
-    success: function(r) {
+    success: (r) => {
       if (r == 'empty_fields') {
-        mcxDialog.alert('Debe llenar los campos obligatorios (*)');
+        popup.alert({ content: 'Debe llenar los campos obligatorios (*)' });
 
       } else if (r == 'not_user') {
-        mcxDialog.alert('No tiene permiso de editar este evento');
+        popup.alert({ content: 'No tiene permiso de editar este evento' });
 
       } else {
         $('#calendar').fullCalendar('refetchEvents')
         cerrarEvent();
       }
     },
-    error: function() {
-      mcxDialog.alert('Hay un error de conexion')
+    error: () => {
+      popup.alert({ content: 'Hay un error de conexion' })
     }
-
   })
 }

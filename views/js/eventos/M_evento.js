@@ -21,16 +21,24 @@ addEventListener('DOMContentLoaded', () => {
   })
 
   btnModificar.addEventListener('click', (e) => {
-    mcxDialog.confirm('El evento se modificará', {
-      sureBtnClick: () => {
+    popup.confirm({
+      content: 'El evento se modificará',
+      effect: 'bottom'
+    },
+    (click) => {
+      if (click.proceed) {
         modificarEvento();
       }
     });
   })
 
   btnBorrar.addEventListener('click', (e) => {
-    mcxDialog.confirm('El evento se borrará', {
-      sureBtnClick: () => {
+    popup.confirm({
+      content: 'El evento se borrará',
+      effect: 'bottom'
+    },
+    (click) => {
+      if (click.proceed) {
         eliminarEvento();
       }
     });

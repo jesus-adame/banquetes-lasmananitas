@@ -23,13 +23,13 @@ addEventListener('DOMContentLoaded', () => {
         res = peticionAjax('core/ajax/registrosAjaxController.php', 'agregar', formdata)
         .then(dataJson => {
             if (dataJson == 'empty_fields') {
-                mcxDialog.alert('Debes llenar todos los campos');
+                popup.alert({ content: 'Debes llenar todos los campos' });
             } else if (dataJson == 'pass_dont_match') {
-                mcxDialog.alert('Las contraseñas no coinciden');
+                popup.alert({ content: 'Las contraseñas no coinciden' });
             } else if (dataJson == 'dont_length') {
-                mcxDialog.alert('Las contraseñas deben ser de almenos 6 caracteres');
+                popup.alert({ content: 'Las contraseñas deben ser de almenos 6 caracteres' });
             } else if (dataJson == 'success') {
-                mcxDialog.alert('Se ha creado el usuario');
+                popup.alert({ content: 'Se ha creado el usuario' });
                 location.reload();
                 modal_usuarios.style.display = 'none';
             }
@@ -59,15 +59,18 @@ addEventListener('DOMContentLoaded', () => {
             })
 
         } else if (btn == 'btn danger') {
-            mcxDialog.confirm('El usuario se borrará', {
-                sureBtnClick: () => {
+            popup.confirm({
+                content: 'El usuario se borrará'
+            },
+            (clk) => {
+                if (clk.proceed) {
                     let formdata = new FormData();
                     formdata.append('id', id);
         
                     resPromise = peticionAjax('core/ajax/registrosAjaxController.php', 'borrar', formdata)
                     .then(dataJson => {
                         if (dataJson == 'error') {
-                            alert('No se pudo borrar el usuario')
+                            popup.alert({ content: 'No se pudo borrar el usuario' })
                         } else if (dataJson == 'success') {
                             location.reload();
                         }

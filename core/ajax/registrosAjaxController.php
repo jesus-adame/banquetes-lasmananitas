@@ -18,9 +18,10 @@ switch ($_POST['action']) {
                     $pass = sha1($_POST['pass']);
                     $usu->setPass($pass);
 
-                    $res = $usu->insertarUsuario($_POST['nivel']);
-
-                    if ($res) {
+                    $t = new Tabla('usuarios');
+                    $validar = $t->obtener_datos_donde('username', $_POST['usuario']);
+                    if (!$validar) {
+                        $usu->insertarUsuario($_POST['nivel']);
                         echo json_encode('success');
                     } else {
                         echo json_encode('error');

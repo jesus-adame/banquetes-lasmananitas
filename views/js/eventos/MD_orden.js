@@ -11,7 +11,15 @@
 
   btns_editar.forEach(item => {
     item.addEventListener('click', (e) => {
-      enviarFormulario(e.target, forms, editOrden)
+      popup.confirm({ 
+        content: 'Confirmar cambios',
+        effect: 'bottom'
+      },
+      (clck) => {
+        if (clck.proceed) {
+          enviarFormulario(e.target, forms, editOrden)
+        }
+      })
     });
   });
 
@@ -57,8 +65,7 @@
 })();
 
 function abrirEditarOrden(id) {
-  const md_orden = document.querySelector('#md_orden'),
-  btns_agregar = md_orden.querySelectorAll('.success'),
+  const btns_agregar = md_orden.querySelectorAll('.success'),
   btns_editar = md_orden.querySelectorAll('.atention'),
   btns_mas = md_orden.querySelectorAll('.primary');
   
@@ -110,7 +117,6 @@ function abrirEliminarOrden(id) {
 
 function addOrden(frm, forms) {
   let fecha = document.querySelector('#date_start'),
-  time = document.querySelector('#time'),
   formData = new FormData(frm);
 
   formData.append('accion', 'agregar');
@@ -123,7 +129,7 @@ function addOrden(frm, forms) {
     body: formData
   })
   .then(response => response.json())
-  .catch(error => alert(error))
+  .catch(error => popup.alert({ content: 'No hay conexión\n' + error }))
   .then(dataJson => {
 
     if (dataJson == 'success') {
@@ -145,10 +151,10 @@ function addOrden(frm, forms) {
       forms.forEach(item => item.reset());
 
     } else if (dataJson == 'empty_fields') {
-      mcxDialog.alert('Debe llenar los campos obligatorios (*)');
+      popup.alert({ content: 'Debe llenar los campos obligatorios (*)', effect: 'bottom' });
       
     } else if (dataJson == 'not_user') {
-      mcxDialog.alert('No tiene permiso de editar este usuario');
+      popup.alert({ content: 'No tiene permiso de editar este usuario', effect: 'bottom' });
     }
   })
 }
@@ -169,7 +175,7 @@ function editOrden(frm, forms) {
     body: formData
   })
   .then(response => response.json())
-  .catch(error => alert(error))
+  .catch(error => popup.alert({ content: 'No hay conexión\n' + error }))
   .then(dataJson => {
 
     if (dataJson == 'success') {
@@ -190,10 +196,10 @@ function editOrden(frm, forms) {
       forms.forEach(item => item.reset());
 
     } else if (dataJson == 'empty_fields') {
-      mcxDialog.alert('Debe llenar los campos obligatorios (*)');
+      popup.alert({ content: 'Debe llenar los campos obligatorios (*)', effect: 'bottom' });
       
     } else if (dataJson == 'not_user') {
-      mcxDialog.alert('No tiene permiso de editar este evento');
+      popup.alert({ content: 'No tiene permiso de editar este evento', effect: 'bottom' });
     }
   });
 }
@@ -209,7 +215,7 @@ function borrarOrden(form_orden, modal) {
     body: Datos
   })
   .then(response => response.json())
-  .catch(error => alert(error))
+  .catch(error => popup.alert({ content: 'No hay conexión\n' + error }))
   .then(dataJson => {
     
     if (dataJson == 'success') {
@@ -228,7 +234,7 @@ function borrarOrden(form_orden, modal) {
       modal.style.display = 'none';
       
     } else if (dataJson == 'not_user') {
-      mcxDialog.alert('No tiene permiso de modificar este evento');
+      popup.alert({ content: 'No tiene permiso de modificar este evento', effect: 'bottom' });
     }
   })
 }
@@ -247,7 +253,7 @@ function obtenerDatosOrden(id) {
     body: data
   })
   .then(response => response.json())
-  .catch(error => alert(error))
+  .catch(error => popup.alert({ content: 'No hay conexión\n' + error }))
   .then(dataJson => {
     let id_orden = mdl.querySelectorAll('.id_orden');    
     evento = mdl.querySelectorAll('.o_nombre'),
@@ -386,7 +392,7 @@ function obtenerDatosOrden(id) {
           camposContainer.appendChild(e);
           numeroCampos++;
           
-        } else { alert('Se ha alcanzado el máximo de campos disponibles'); }
+        } else { popup.alert({ content: 'Se ha alcanzado el máximo de campos disponibles', effect: 'bottom' }); }
       })
     }
     return numeroCampos;

@@ -82,7 +82,7 @@ function obtenerLogistica(data)
     body: data
   })
   .then(response => response.json())
-  .catch(error => mcxDialog.alert('No hay conexión\n' + error))
+  .catch(error => popup.alert({ content: 'No hay conexión\n' + error }))
   .then(dataJson => {
     mostrarLogistica(dataJson);
   })

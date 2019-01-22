@@ -47,16 +47,16 @@ form_registro.addEventListener('submit', (e) => {
     ajaxReq(d, 'core/ajax/registrosAjaxController.php')
     .then(dataJson => {
         if (dataJson == 'empty_fields') {
-            mcxDialog.alert('Debes llenar todos los campos');
+            popup.alert({ content: 'Debes llenar todos los campos', effect: 'bottom' });
         } else if (dataJson == 'pass_dont_match') {
-            mcxDialog.alert('Las contraseñas no coinciden');
+            popup.alert({ content: 'Las contraseñas no coinciden', effect: 'bottom' });
         } else if (dataJson == 'dont_length') {
-            mcxDialog.alert('Las contraseñas deben ser de almenos 6 caracteres');
+            popup.alert({ content: 'Las contraseñas deben ser de almenos 6 caracteres', effect: 'bottom' });
         } else if (dataJson == 'success') {
-            mcxDialog.alert('Se ha creado el usuario');
+            popup.alert({ content: 'Se ha creado el usuario', effect: 'bottom' });
             form_registro.reset();
         } else if (dataJson == 'error') {
-            mcxDialog.alert('Ya hay alguen con ese nombre de usuario');
+            popup.alert({ content: 'Ya hay alguen con ese nombre de usuario', effect: 'bottom' });
         }
     })
 })

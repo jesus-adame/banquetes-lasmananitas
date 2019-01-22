@@ -10,12 +10,16 @@ addEventListener('DOMContentLoaded', () => {
 /* Funciones de sesión */
 const iniciarSesion = (event) => {
   event.preventDefault()
+  openLoading();
   enviarFormSesion('iniciar');
 }
 
 const cerrarSesion = () => {
-  mcxDialog.confirm('Se cerrará la sesión', {
-    sureBtnClick: () => {
+  popup.confirm({
+    content: 'Se cerrará la sesión'
+  },
+  (clk) => {
+    if (clk.proceed) {
       enviarFormSesion('cerrar');
     }
   })
@@ -31,16 +35,20 @@ function enviarFormSesion(accion) {
     body: data
   })
   .then(response => response.text())
-  .catch(error => mcxDialog.alert('No hay conexión\n' + error))
+  .catch(error => {
+    closeLoading();
+    popup.alert({ content: 'No hay conexión\n' + error })
+  })
   .then(dataText => {
+    closeLoading();
     if (dataText == 'empty_fields') {
-      mcxDialog.alert('Debe llenar todos los campos');
+      popup.alert({ content: 'Debe llenar todos los campos', effect: 'bottom' });
       
     } else if (dataText == 'no_users') {
-      mcxDialog.alert('Datos incorrectos');
+      popup.alert({content: 'Datos incorrectos'});
 
     } else if (dataText == 'success') {
-      mcxDialog.alert('Has iniciado sesión');
+      popup.alert({ content: 'Has iniciado sesión', effect: 'bottom' });
       M_sesion.style.display = 'none';
       form_sesion.reset();
       location.reload();

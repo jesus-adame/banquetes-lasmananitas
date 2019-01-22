@@ -1,5 +1,4 @@
-const md_logistica = document.querySelector('#md_logistica'),
-mdl_close = md_logistica.querySelector('.close'),
+const mdl_close = md_logistica.querySelector('.close'),
 fondo_mdl = md_logistica.querySelector('.flex');
 
 window.addEventListener('click', (e) => {
@@ -25,22 +24,20 @@ const m_borrar = document.querySelector('#f_eliminar_log');
   })
 })()
 
-function abrirAgregarLogistica()
-{
+function abrirAgregarLogistica() {
   let fecha = document.querySelector('#date_start').value,
   hora = document.getElementById('time').value;
   
   btn_edit.style.display = 'none';
   btn_add.style.display = 'block';
   md_logistica.style.display = 'block';
-  fecha_edit_log.value = fecha
-  fecha_f_edit_log.value = fecha
-  time_start_log.value = hora
+  fecha_edit_log.value = fecha;
+  fecha_f_edit_log.value = fecha;
+  time_start_log.value = hora;
   id_evento.value = e_id.value;
 }
 
-function abrirEditarLogistica(id)
-{
+function abrirEditarLogistica(id) {
   md_logistica.style.display = 'block';
   
   btn_add.style.display = 'none';
@@ -51,10 +48,9 @@ function abrirEditarLogistica(id)
   id_evento.value = e_id;
 }
 
-function abrirEliminarLogistica(id)
-{
-  m_borrar.style.display = 'block'
-  id_elim_log.value = id
+function abrirEliminarLogistica(id) {
+  m_borrar.style.display = 'block';
+  id_elim_log.value = id;
 }
 
 function addLogistica() {
@@ -67,7 +63,7 @@ function addLogistica() {
     body: logDatos
   })
   .then(response => response.json())
-  .catch(error => mcxDialog.alert('No hay conexión\n' + error))
+  .catch(error => popup.alert({ content: 'No hay conexión\n' + error }))
   .then(dataJson => {
     
     if (dataJson == 'success') {
@@ -81,10 +77,10 @@ function addLogistica() {
       form_logistica.reset();
 
     } else if (dataJson == 'empty_fields') {
-      mcxDialog.alert('Debe ingresar un titulo');
+      popup.alert({ content: 'Debe ingresar un titulo' });
 
     } else if (dataJson == 'not_user') {
-      mcxDialog.alert('No tiene permiso de editar este evento');
+      popup.alert({ content: 'No tiene permiso de editar este evento' });
     }
   })
 }
@@ -99,7 +95,7 @@ function editLogistica() {
     body: logDatos
   })
   .then(response => response.json())
-  .catch(error => alert(error))
+  .catch(error => popup.alert({ content: 'No hay conexión\n' + error }))
   .then(dataJson => {
 
     if (dataJson == 'success') {
@@ -112,9 +108,9 @@ function editLogistica() {
       form_logistica.reset();
 
     } else if (dataJson == 'empty_fields') {
-      mcxDialog.alert('Debe ingresar un titulo');
+      popup.alert({ content: 'Debe ingresar un titulo' });
     } else if (dataJson == 'not_user') {
-      mcxDialog.alert('No tiene permiso de editar este evento');
+      popup.alert({ content: 'No tiene permiso de editar este evento' });
     }
   })
 }
@@ -143,7 +139,7 @@ function eliminarLogistica() {
     body: logDatos
   })
   .then(response => response.json())
-  .catch(error => alert(error))
+  .catch(error => popup.alert({ content: 'No hay conexión\n' + error }))
   .then(dataJson => {
 
     if (dataJson == 'success') {
@@ -153,27 +149,26 @@ function eliminarLogistica() {
       log.append('id', e_id.value)
       obtenerLogistica(log)
       m_borrar.style.display = 'none';
+      
     } else if (dataJson == 'not_user') {
-      mcxDialog.alert('No tiene permiso de modificar este evento');
+      popup.alert({ content: 'No tiene permiso de modificar este evento' });
     } 
   })
 }
 
-function ajaxDetalleLogistica(data)
-{
+function ajaxDetalleLogistica(data) {
   fetch('core/ajax/logisticaAjaxController.php', {
     method: 'POST',
     body: data
   })
   .then(response => response.json())
-  .catch(error => alert(error))
+  .catch(error => popup.alert({ content: 'No hay conexión\n' + error }))
   .then(dataJson => {
     mostrarLogistica(dataJson)
   })
 }
 
-function cancelarDetalleLogistica()
-{
+function cancelarDetalleLogistica() {
   form_logistica.reset();
   md_logistica.style.display = 'none'
 }

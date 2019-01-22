@@ -71,7 +71,7 @@ switch ($accion) {
       $res = $event->eliminarEvento($_POST['id']);
 
       if ($res) {
-        echo json_encode($res);
+        echo json_encode('success');
       } else {
         echo json_encode('not_user');
       }

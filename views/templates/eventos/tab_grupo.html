@@ -76,7 +76,7 @@
     <!-- BARRA INFERIOR -->
     <div class="row-right">
         <button form="tab_grupo" class="btn success" type="button">Subir</button>
-        <button form="tab_grupo" class="btn atention" type="button">Editar</button>
+        <button form="tab_grupo" class="btn atention" type="button">Aplicar</button>
         <button id="btnCampoExtra" class="btn primary" type="button" >Mas <strong>+</strong></button>
     </div>
     
@@ -95,6 +95,6 @@
       campos_grupo.appendChild(e)
 
       nc_grupo++;
-    } else { alert('Se ha alcanzado el máximo de campos disponibles'); }    
+    } else { popup.alert({ content: 'Se ha alcanzado el máximo de campos disponibles', effect: 'bottom' }); } 
   })
 </script>

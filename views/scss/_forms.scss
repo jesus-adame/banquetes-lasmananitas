@@ -1,9 +1,6 @@
 .form {
   font-family: 'Roboto', sans-serif;
-  padding: 10px;
   color: #000;
-  box-sizing: border-box;
-  -moz-box-sizing:border-box; /* Firefox */ -webkit-box-sizing:border-box; /* Safari */
   & a {
     font-size: 14px;
   } 
@@ -15,8 +12,10 @@ button, label {
 }
 
 form, fieldset {
-  padding: 20px;
+  padding: 10px 8px;
   line-height: 30px;
+  box-sizing: border-box;
+  -moz-box-sizing:border-box; /* Firefox */ -webkit-box-sizing:border-box; /* Safari */
 }
 
 fieldset {

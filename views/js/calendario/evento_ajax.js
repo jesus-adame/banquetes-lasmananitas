@@ -47,8 +47,8 @@ function enviarInformacion(accion, objEvento) {
         alert('No se pudo realizar la operacion')
       }
     },
-    error: function() {
-      alert('Hay un error')
+    error: () => {
+      popup.alert({ content: 'Hay un error en la conexión' })
     }
 
   })

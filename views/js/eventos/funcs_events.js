@@ -38,8 +38,8 @@ function limpiarDatosEvento(date) {
   e_place.innerHTML = '';
   color.setAttribute('value', '#d7c735')
 
-  let fecha = date_start;
-  let fecha_final = date_end;
+  let fecha = date_start,
+  fecha_final = date_end;
 
   fecha.setAttribute('value', date.format('YYYY-MM-DD'));
   fecha_final.setAttribute('value', date.format('YYYY-MM-DD'))

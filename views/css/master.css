@@ -52,6 +52,159 @@ table {
   border-spacing: 0;
 }
 
+/**
+ * Show the overflow in IE.
+ * 1. Show the overflow in Edge.
+ */
+button,
+input {
+  /* 1 */
+  overflow: visible;
+}
+
+/**
+ * Remove the inheritance of text transform in Edge, Firefox, and IE.
+ * 1. Remove the inheritance of text transform in Firefox.
+ */
+button,
+select {
+  /* 1 */
+  text-transform: none;
+}
+
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+button,
+[type=button],
+[type=reset],
+[type=submit] {
+  -webkit-appearance: button;
+}
+
+/**
+* Remove the inner border and padding in Firefox.
+*/
+button::-moz-focus-inner,
+[type=button]::-moz-focus-inner,
+[type=reset]::-moz-focus-inner,
+[type=submit]::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+/**
+ * Restore the focus styles unset by the previous rule.
+ */
+button:-moz-focusring,
+[type=button]:-moz-focusring,
+[type=reset]:-moz-focusring,
+[type=submit]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * Add the correct vertical alignment in Chrome, Firefox, and Opera.
+ */
+progress {
+  vertical-align: baseline;
+}
+
+/**
+ * Remove the default vertical scrollbar in IE 10+.
+ */
+textarea {
+  overflow: auto;
+}
+
+/**
+* 1. Add the correct box sizing in IE 10.
+* 2. Remove the padding in IE 10.
+*/
+[type=checkbox],
+[type=radio] {
+  box-sizing: border-box;
+  /* 1 */
+  padding: 0;
+  /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+[type=number]::-webkit-inner-spin-button,
+[type=number]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+[type=search] {
+  -webkit-appearance: textfield;
+  /* 1 */
+  outline-offset: -2px;
+  /* 2 */
+}
+
+/**
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+[type=search]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  /* 1 */
+  font: inherit;
+  /* 2 */
+}
+
+/* Interactive
+   ========================================================================== */
+/*
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
+details {
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+summary {
+  display: list-item;
+}
+
+/* Misc
+========================================================================== */
+/**
+ * Add the correct display in IE 10+.
+ */
+template {
+  display: none;
+}
+
+/**
+ * Add the correct display in IE 10.
+ */
+[hidden] {
+  display: none;
+}
+
 @font-face {
   font-family: "Renner";
   src: url("../lib/fonts/renner-400-book.eot") format("embedded-opentype"), url("../lib/fonts/renner-400-book.woff") format("woff"), url("../lib/fonts/renner-400-book.ttf") format("truetype"), url("../lib/fonts/renner-400-book.svg") format("svg");
@@ -431,7 +584,6 @@ body {
 }
 h1, h2, h3, h4 {
   font-family: "Renner", sans-serif;
-  font-weight: 600;
 }
 
 h1 {
@@ -455,17 +607,17 @@ p {
 }
 
 small {
-  font-size: 13px;
+  font-size: 80%;
 }
 
 /* THEMES */
 .default {
   color: #272727;
-  background: #999999;
+  background: #b1b1b1;
 }
 .default:hover {
   color: #272727;
-  background: #7a7a7a;
+  background: #8f8f8f;
 }
 
 .primary {
@@ -692,13 +844,7 @@ footer .legal {
 
 .form {
   font-family: "Roboto", sans-serif;
-  padding: 10px;
   color: #000;
-  box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  /* Firefox */
-  -webkit-box-sizing: border-box;
-  /* Safari */
 }
 .form a {
   font-size: 14px;
@@ -710,8 +856,13 @@ button, label {
 }
 
 form, fieldset {
-  padding: 20px;
+  padding: 10px 8px;
   line-height: 30px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  /* Firefox */
+  -webkit-box-sizing: border-box;
+  /* Safari */
 }
 
 fieldset {
@@ -853,27 +1004,21 @@ textarea {
   animation-name: modalDown;
   animation-duration: 0.6s;
   box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  /* Firefox */
   -webkit-box-sizing: border-box;
   /* Safari */
+  box-shadow: 1px 1px 2px #1f1f1f;
+  -webkit-box-shadow: 1px 1px 2px #1f1f1f;
+  border-radius: 4px;
 }
 
 .modal-header {
-  border-top: solid 1px #125312;
-  border-left: solid 1px #146114;
-  border-right: solid 1px #313131;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 15px;
-  border-radius: 4px 4px 0 0;
   font-size: 20px;
   background: #1c6e1c;
   color: #e0e4ee;
-  box-shadow: 1px 2px 2px #1f1f1f;
-  -webkit-box-shadow: 1px 2px 2px #1f1f1f;
-  -moz-box-shadow: 1px 2px 2px #1f1f1f;
 }
 .modal-header h3 {
   font-size: 24px;
@@ -885,19 +1030,12 @@ textarea {
   max-height: 88vh;
   font-size: 18px;
   padding: 10px 15px;
-  border-radius: 0 0 4px 4px;
-  border-left: solid 1px #838383;
-  border-right: solid 1px #313131;
-  border-bottom: solid 1px #242424;
   background: #fff;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   /* Firefox */
   -webkit-box-sizing: border-box;
   /* Safari */
-  box-shadow: 1px 2px 2px #1f1f1f;
-  -webkit-box-shadow: 1px 2px 2px #1f1f1f;
-  -moz-box-shadow: 1px 2px 2px #1f1f1f;
 }
 
 .modal-footer {
