@@ -5,12 +5,6 @@ main {
   min-height: 70vh;
   padding-top: 20px;
   padding-bottom: 40px;
-  margin-top: 258px;
-  
-  @media screen and (min-width: 394px) {
-    margin-top: 154px;
-  }
-  @media screen and (min-width: 888px) {
-    margin-top: 74px;
-  }
+  box-sizing: border-box;
+  margin-top: 74px;
 }

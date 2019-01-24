@@ -6,6 +6,6 @@ if (!isset($_SESSION['puesto'])) {
 $html = new Smarty();
 
 $html->assign('titulo', 'Calendario');
-$html->assign('subtitulo', 'Registro de Actividades');
+$html->assign('subtitulo', 'Log de Actividades');
 $html->display('./views/calendario.html');
 ?>

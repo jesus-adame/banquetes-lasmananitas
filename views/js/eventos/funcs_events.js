@@ -1,76 +1,78 @@
 
 function extraerDatosEvento(calEvent) {
   
-  e_id.setAttribute('value', calEvent.id_evento)
-  e_title.setAttribute('value', calEvent.title)
-  e_evento.setAttribute('value', calEvent.evento)
-  e_contacto.setAttribute('value', calEvent.contacto)
-  e_cord_resp.setAttribute('value', calEvent.cord_resp)
-  e_cord_apoyo.setAttribute('value', calEvent.cord_apoyo)
-  e_description.innerHTML = calEvent.description
+  e_id.value = calEvent.id_evento;
+  e_title.value = calEvent.title;
+  e_evento.value = calEvent.evento;
+  e_contacto.value = calEvent.contacto;
+  e_cord_resp.value = calEvent.cord_resp;
+  e_cord_apoyo.value = calEvent.cord_apoyo;
+  e_description.innerHTML = calEvent.description;
   e_place.innerHTML = calEvent.lugar
   let select = document.querySelector('#idlugar option:first-child');
-  select.setAttribute('value', calEvent.id_lugar)
+  select.value = calEvent.id_lugar;
 
-  fechaHora = calEvent.start._i.split(" ")
-  date_start.setAttribute('value', fechaHora[0])
-  time.setAttribute('value', fechaHora[1])
+  fechaHora = calEvent.start._i.split(" ");
+  date_start.value = fechaHora[0];
+  time.value = fechaHora[1];
 
-  fechaHora_f = calEvent.end._i.split(" ")
-  date_end.setAttribute('value', fechaHora_f[0])
-  time_f.setAttribute('value', fechaHora_f[1])
+  fechaHora_f = calEvent.end._i.split(" ");
+  date_end.value = fechaHora_f[0];
+  time_f.value = fechaHora_f[1];
 
-  color.setAttribute('value', calEvent.color)
-  old_color.setAttribute('value', calEvent.color)
-  idcategoria.setAttribute('value', calEvent.categoria)
-  txtcategoria.innerHTML = calEvent.categoria
-  personas.setAttribute('value', calEvent.personas)
+  color.value = calEvent.color;
+  old_color.value = calEvent.color;
+  e_folio.value = calEvent.folio;
+  idcategoria.value = calEvent.categoria;
+  txtcategoria.innerHTML = calEvent.categoria;
+  personas.value = calEvent.personas;
 }
 
 function limpiarDatosEvento(date) {
-  e_id.setAttribute('value', '')
-  e_title.setAttribute('value', '')
-  e_evento.setAttribute('value', '')
-  e_contacto.setAttribute('value', '')
-  e_cord_resp.setAttribute('value', '')
-  e_cord_apoyo.setAttribute('value', '')
+  e_id.value = '';
+  e_title.value = '';
+  e_evento.value = '';
+  e_contacto.value = '';
+  e_cord_resp.value = '';
+  e_cord_apoyo.value = '';
   e_description.innerHTML = ''
   e_place.innerHTML = '';
-  color.setAttribute('value', '#d7c735')
+  color.value = '#d7c735';
+  e_folio.value = '';
 
   let fecha = date_start,
   fecha_final = date_end;
 
-  fecha.setAttribute('value', date.format('YYYY-MM-DD'));
-  fecha_final.setAttribute('value', date.format('YYYY-MM-DD'))
+  fecha.value = date.format('YYYY-MM-DD');
+  fecha_final.value = date.format('YYYY-MM-DD');
 
-  time.setAttribute('value', '00:00:00')
-  time_f.setAttribute('value', '23:00:00')
+  time.value = '00:00:00';
+  time_f.value = '23:00:00';
 
-  personas.setAttribute('value', '0')
+  personas.value = '';
 }
 
 function arrastrarEvento(calEvent) {
-  e_id.setAttribute('value', calEvent.id_evento)
-  e_title.setAttribute('value', calEvent.title)
-  e_evento.setAttribute('value', calEvent.evento)
-  e_contacto.setAttribute('value', calEvent.contacto)
-  e_cord_resp.setAttribute('value', calEvent.cord_resp)
-  e_cord_apoyo.setAttribute('value', calEvent.cord_apoyo)
+  e_id.value = calEvent.id_evento;
+  e_title.value = calEvent.title;
+  e_evento.value = calEvent.evento;
+  e_contacto.value = calEvent.contacto;
+  e_cord_resp.value = calEvent.cord_resp;
+  e_cord_apoyo.value = calEvent.cord_apoyo;
   e_description.innerHTML = calEvent.description
   e_place.innerHTML = calEvent.lugar
-  idlugar.setAttribute('value', calEvent.id_lugar)
+  idlugar.value = calEvent.id_lugar;
 
   fechaHora = calEvent.start.format().split('T')
-  date.setAttribute('value', fechaHora[0])
-  time.setAttribute('value', fechaHora[1])
+  date.value = fechaHora[0];
+  time.value = fechaHora[1];
 
   fechaHora_f = calEvent.end.format().split('T')
-  date_f.setAttribute('value', fechaHora_f[0])
-  time_f.setAttribute('value', fechaHora_f[1])
+  date_f.value = fechaHora_f[0];
+  time_f.value = fechaHora_f[1];
 
-  categoria.setAttribute('value', calEvent.categoria)
-  personas.setAttribute('value', calEvent.personas)
+  categoria.value = calEvent.categoria;
+  personas.value = calEvent.personas;
 
   recolectarDatosGUI()
   enviarInformacion('modificar', nuevoEvento)

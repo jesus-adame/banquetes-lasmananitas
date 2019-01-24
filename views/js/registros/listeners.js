@@ -41,7 +41,6 @@ addEventListener('DOMContentLoaded', () => {
         id = e.target.parentElement.parentElement.parentElement.firstElementChild.textContent;
     
         if (btn == 'btn atention') {
-            modal_usuarios.style.display = 'block';
             btn_reg.style.display = 'none';
             btn_act.style.display = 'block';
 
@@ -56,6 +55,7 @@ addEventListener('DOMContentLoaded', () => {
                 select[0].firstElementChild.value = item.nivel
                 select[1].firstElementChild.value = item.estado
                 form_usuario.querySelector('.div-pass').style.display = 'none';
+                modal_usuarios.style.display = 'block';
             })
 
         } else if (btn == 'btn danger') {

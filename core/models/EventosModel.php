@@ -16,11 +16,11 @@ class Evento
     $sql = "INSERT INTO
     eventos (title, evento, contacto,
     cord_resp, cord_apoyo, description, id_lugar,
-    start, end, personas, categoria, color, id_usuario)
+    start, end, personas, categoria, color, folio, id_usuario)
     VALUES (:title, :evento, :contacto,
       :cord_resp, :cord_apoyo, :des, :lugar,
       :start, :end, :personas, :categoria,
-      :color, :id_usuario)";
+      :color, :folio, :id_usuario)";
 
     $exe = $this->db->prepare($sql);
     $exe->execute(array(
@@ -36,6 +36,7 @@ class Evento
       'personas' => $datos[9],
       'categoria' => $datos[10],
       'color' => $datos[11],
+      'folio' => $datos[12],
       'id_usuario' => $_SESSION['id_usuario']
     ));
 
@@ -70,7 +71,8 @@ class Evento
       cord_resp = :cord_resp, cord_apoyo = :cord_apoyo,
       description = :des, id_lugar = :lugar, start = :start,
       end = :end, personas = :personas,
-      categoria = :categoria, color = :color WHERE id_evento = :id";
+      categoria = :categoria, color = :color, folio = :folio
+      WHERE id_evento = :id";
 
       $exe = $this->db->prepare($sql);
       $exe->execute(array(
@@ -86,6 +88,7 @@ class Evento
         'personas' => $datos[9],
         'categoria' => $datos[10],
         'color' => $datos[11],
+        'folio' => $datos[12],
         'id' => $id
       ));
 

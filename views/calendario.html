@@ -5,10 +5,18 @@
   {include file='templates/calendario/MD_logistica.tpl'}
 
   <div class="content m-auto">
-    <hgroup>
-      <h1>{$titulo}</h1>
-      <h2>{$subtitulo}</h2>
-    </hgroup>
+    <div class="row-between" style="padding-bottom: 10px">
+      <hgroup>
+        <h1>{$titulo}</h1>
+        <h2>{$subtitulo}</h2>
+      </hgroup>
+  
+      <div style="color: #272727; background: #c1c1c1; padding-top: 18px; padding-left: 10px; padding-right: 10px; border-radius: 3px">
+        <p><span class="yellow" style="display: inline-block; width: 15px; height: 15px;background: yellow"></span> El evento es tentativo</p>
+        <p><span class="orange" style="display: inline-block; width: 15px; height: 15px;background: orange"></span> El evento está apartado</p>
+        <p><span class="red" style="display: inline-block; width: 15px; height: 15px;background: red"></span> El evento está cerrado</p>
+      </div>
+    </div>    
 
     <div id="calendar" class="col-xs-12 col-md-10 col-xlg-9 m-auto-x"></div>
 

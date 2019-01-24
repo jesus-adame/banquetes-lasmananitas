@@ -13,20 +13,7 @@ switch ($accion) {
   case 'agregar':
     if (!empty($_POST['title']) && !empty($_POST['evento']) && !empty($_POST['contacto'])
     && !empty($_POST['cord_resp']) && !empty($_POST['personas'])) {
-      $datos = array(
-        $_POST['title'],
-        $_POST['evento'],
-        $_POST['contacto'],
-        $_POST['cord_resp'],
-        $_POST['cord_apoyo'],
-        $_POST['description'],
-        $_POST['id_lugar'],
-        $_POST['start'],
-        $_POST['end'],
-        $_POST['personas'],
-        $_POST['categoria'],
-        $_POST['color']
-      );
+      $datos = crearArrayDatos();
 
       $res = $event->agregarEvento($datos);
     } else {
@@ -40,20 +27,7 @@ switch ($accion) {
     if (!empty($_POST['id']) && !empty($_POST['title'])
     && !empty($_POST['evento']) && !empty($_POST['contacto'])
     && !empty($_POST['cord_resp']) && !empty($_POST['personas'])) {
-      $datos = array(
-        $_POST['title'],
-        $_POST['evento'],
-        $_POST['contacto'],
-        $_POST['cord_resp'],
-        $_POST['cord_apoyo'],
-        $_POST['description'],
-        $_POST['id_lugar'],
-        $_POST['start'],
-        $_POST['end'],
-        $_POST['personas'],
-        $_POST['categoria'],
-        $_POST['color']
-      );
+      $datos = crearArrayDatos();
 
       $res = $event->modificarEvento($_POST['id'], $datos);
       if ($res) {
@@ -87,4 +61,23 @@ switch ($accion) {
 
     echo json_encode($res);
     break;
+}
+
+function crearArrayDatos() {
+  $d = array(
+    $_POST['title'],
+    $_POST['evento'],
+    $_POST['contacto'],
+    $_POST['cord_resp'],
+    $_POST['cord_apoyo'],
+    $_POST['description'],
+    $_POST['id_lugar'],
+    $_POST['start'],
+    $_POST['end'],
+    $_POST['personas'],
+    $_POST['categoria'],
+    $_POST['color'],
+    $_POST['folio']
+  );
+  return $d;
 }

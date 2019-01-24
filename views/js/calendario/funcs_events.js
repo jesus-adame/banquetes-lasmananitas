@@ -1,6 +1,6 @@
 
 function extraerDatosEvento(calEvent) {
-  e_id.setAttribute('value', calEvent.id_evento)
+  e_id.value = calEvent.id_evento
   e_title.innerHTML = calEvent.title
   e_evento.innerHTML = calEvent.evento
   e_contacto.innerHTML = calEvent.contacto
@@ -19,7 +19,24 @@ function extraerDatosEvento(calEvent) {
   time_f.innerHTML = fechaHora_f[1]
 
   txtcategoria.innerHTML = calEvent.categoria
-  e_personas.innerHTML = calEvent.personas + 'PX'
+  e_personas.innerHTML = calEvent.personas + ' PX'
+
+  switch (calEvent.color) {
+    case '#d7c735':
+      e_status.innerHTML = 'TENTATIVO';
+    break;
+
+    case '#f98710':
+      e_status.innerHTML = 'APARTADO';
+    break;
+
+    case '#e62424':
+      e_status.innerHTML = 'CERRADO';
+    
+    default:
+      e_status.innerHTML = '';
+    break;
+  }
 }
 
 function limpiarDatosEvento(date) {
@@ -31,6 +48,7 @@ function limpiarDatosEvento(date) {
   e_cord_apoyo.innerHTML = ''
   e_description.innerHTML = ''
   e_place.innerHTML = ''
+  e_status.innerHTML = ''
 
   date.innerHTML = date.format()
   date_f.innerHTML = date.format()

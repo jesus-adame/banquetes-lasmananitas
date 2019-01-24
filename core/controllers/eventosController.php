@@ -4,7 +4,7 @@ if ($_SESSION['puesto'] != 'Ventas' && $_SESSION['puesto'] != 'Supervisor' && $_
 }
 $html = new Smarty();
 
-$html->assign('titulo', 'Gestor de Eventos');
-$html->assign('subtitulo', 'Panel de Administración del Calendario');
+$html->assign('titulo', 'Eventos');
+$html->assign('subtitulo', 'Panel de gestión');
 $html->display('views/eventos.html');
 ?>

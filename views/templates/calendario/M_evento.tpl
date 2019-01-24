@@ -19,13 +19,14 @@
               <span class="etiqueta col-xs-12" id="e_title"></span><br>
 
               Evento:
-              <span class="etiqueta col-xs-12" id="e_evento"></span><br>
-
-              Personas:
-              <span class="etiqueta col-xs-12" id="e_personas"></span><br><br>
+              <span class="etiqueta col-xs-12" id="e_evento"></span><br><br>
               
               <div class="row-between">
+                
                 <div class="col-xs-6">
+                  Personas:
+                  <span class="etiqueta col-xs-11" id="e_personas"></span><br>
+
                   Fecha inicio:
                   <span class="etiqueta col-xs-11" id="date"></span><br>
                       
@@ -34,6 +35,9 @@
                 </div>
 
                 <div class="col-xs-6">
+                  Status:
+                  <span class="etiqueta col-xs-12" id="e_status"></span>
+
                   Fecha final:
                   <span class="etiqueta col-xs-12" id="date_f"></span><br>
                   
@@ -44,10 +48,10 @@
             </div>
 
             <div class="col-xs-12 col-sm-6">
-              Contacto:
+              Cliente:
               <span class="etiqueta col-xs-12" id="e_contacto"></span><br>
               
-              Cord. Responsable:
+              Responsable:
               <span class="etiqueta col-xs-12" id="e_cord_resp"></span><br>
 
               Cord. Apoyo:

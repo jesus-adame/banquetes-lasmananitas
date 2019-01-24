@@ -2,19 +2,44 @@ nav {
   font-family: 'Renner', sans-serif;
   letter-spacing: 0.02rem;
   font-size: 18px;
-  
-  @media only screen and (max-width: 890px) {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 22px;
-    & .btn-h {
-      margin-bottom: 10px;
-      min-width: 100px;
+  & #navbar {
+    display: none;
+  }    
+
+  @media only screen and (min-width: 900px) {
+    & #navbar {
+      display: flex;
     }
   }
-
+  
+  @media only screen and (max-width: 900px) {
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+    //display: none;
+    & .btn-h {
+      display: block;
+      width: 100%;
+      text-align: center;
+    }
+    & ul li {
+      display: block;
+      width: 100%;
+    }
+    & li .btn-login {
+      display: block;
+      margin: auto;
+    }
+    & .btn-h, & li .btn-login {
+      margin-top: 5px;
+    }
+  }
+  
   & ul {
+    display: flex;
     list-style: none;
+    justify-content: flex-end;
     & li {
       margin: auto;
     }    
@@ -46,4 +71,30 @@ nav {
       pointer-events: none;
     }
   }
+}
+
+.btn-menu {
+  border-radius: 4px;
+  position: fixed;
+  display: none;
+  top: 15px;
+  right: 3%;
+  color: #fff;
+  border: none;
+  font-size: 26px;
+  padding: 10px 15px;
+  background: #259e25;
+  cursor: pointer;
+
+  &:hover {
+    background: #043304;
+  }
+
+  @media only screen and (max-width: 900px) {
+    display: block;
+  }
+}
+
+@keyframes slipTop {
+  
 }

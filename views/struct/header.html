@@ -32,7 +32,7 @@
       <img src="storage/thumbs/logo-blanco.png" alt="Las Mañanitas">
         
       <nav>
-        <ul id="navbar" class="row-right">
+        <ul id="navbar">
           <li>
             <a class="btn-h {if !isset($smarty.get.view) || $smarty.get.view == 'index'}active{/if}" href="?view=index">
               <i class="fas fa-home"></i> Inicio</a></li>
@@ -52,15 +52,16 @@
            {/if}
           {/if}
           {if isset($smarty.session.usuario)}
-          <li style="margin:auto">
+          <li>
             <button class="btn-login" onclick="cerrarSesion()">
               <i class="fas fa-sign-out-alt"></i> Logout</button></li>
           {else}
-          <li style="margin:auto">
+          <li>
             <button class="btn-login" onclick="openMSesion()">
               <i class="fas fa-sign-in-alt"></i> Login</button></li>
-          {/if}          
+          {/if}
         </ul>
+        <button id="btn_nav" class="btn-menu"><i class="fas fa-bars"></i></button>        
       </nav>
     </div>
   </header>

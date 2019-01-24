@@ -17,24 +17,25 @@ function modificarEvento() {
 }
 
 function recolectarDatosGUI() {
-  let start = $('#date_start').val() + ' ' + $('#time').val(),
-  end = $('#date_end').val() + ' ' + $('#time_f').val();
+  let start = date_start.value + ' ' + time.value,
+  end = date_end.value + ' ' + time_f.value;
 
   if (start < end) {
     nuevoEvento = {
-      id: $('#e_id').val(),
-      title: $('#e_title').val(),
-      evento: $('#e_evento').val(),
-      contacto: $('#e_contacto').val(),
-      cord_resp: $('#e_cord_resp').val(),
-      cord_apoyo: $('#e_cord_apoyo').val(),
-      description: $('#e_description').val(),
-      id_lugar: $('#idlugar').val(),
+      id: e_id.value,
+      title: e_title.value,
+      evento: e_evento.value,
+      contacto: e_contacto.value,
+      cord_resp: e_cord_resp.value,
+      cord_apoyo: e_cord_apoyo.value,
+      description: e_description.value,
+      id_lugar: idlugar.value,
       start: start,
       end: end,
-      personas: $('#personas').val(),
-      categoria: $('#categoria').val(),
-      color: $('#color').val()
+      personas: personas.value,
+      categoria: categoria.value,
+      color: color.value,
+      folio: e_folio.value
     }
   } else {
     popup.alert({ content: 'La fecha de finalización no puede ser anterior a la fecha de inicio' })
