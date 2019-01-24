@@ -1,5 +1,4 @@
 <?php
-
 class Evento
 {
   private $db;
