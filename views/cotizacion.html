@@ -1,0 +1,30 @@
+{include file='struct/header.html'}
+    <main>
+        <div class="content m-auto-x">
+            <form id="form_cotizacion" class="form-cotizacion col-xs-11 col-sm-6 col-md-4 m-auto-x" action="#">
+                <caption>Verificar disponibilidad</caption>
+                <button onclick="history.back()">Vorver</button><br>
+                Cliente
+                <input class="col-xs-12" type="text" maxlength="20" name="cliente" placeholder="Nombre y apellido">
+                Telefono
+                <input class="col-xs-12" type="text" maxlength="13" name="telefono" placeholder="Número">
+                Correo
+                <input class="col-xs-12" type="text" maxlength="20" name="email" placeholder="correo@email.com">
+                No. Personas
+                <input class="col-xs-12" type="number" name="pax" min="1" max="900">
+                Lugar / Salón
+                <select id="select_lugar" class="col-xs-12" name="id_lugar">
+                    <option value="1">- Elegir -</option>
+                </select>
+                Inicio (Fecha / Hora)
+                <input id="d_init" class="col-xs-12" min="2000-01-02" type="datetime-local" name="fecha_inicio"><br>
+                Final (Fecha / Hora)
+                <input id="d_end" class="col-xs-12" min="2000-01-02" type="datetime-local" name="fecha_final"><br><br>
+                <button class="btn success">Comprobar</button>
+            </form>
+        </div>
+        
+    </main>
+    <script src="views/js/cotizacion/ajax_req.js"></script>
+<script src="views/js/cotizacion/onload.js"></script>
+{include file='struct/footer.html'}

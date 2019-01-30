@@ -8,13 +8,8 @@ addEventListener('DOMContentLoaded', () => {
 
   btnDetalleEvento.addEventListener('click', e => abrirDetalleEvento());
 
-  close.addEventListener('click', () => {
-    form_evento.reset();
-    M_evento.style.display = 'none';
-  })
-
   window.addEventListener('click', (e) => {
-    if (e.target == flex) {
+    if (e.target === flex || e.target === close) {
       form_evento.reset();
       M_evento.style.display = 'none';
     }
@@ -22,7 +17,7 @@ addEventListener('DOMContentLoaded', () => {
 
   btnModificar.addEventListener('click', (e) => {
     popup.confirm({
-      content: 'El evento se modificará',
+      content: '¿Aplicar cambios?',
       effect: 'bottom'
     },
     (click) => {
@@ -34,7 +29,7 @@ addEventListener('DOMContentLoaded', () => {
 
   btnBorrar.addEventListener('click', (e) => {
     popup.confirm({
-      content: 'El evento se borrará',
+      content: 'El evento se eliminará',
       effect: 'bottom'
     },
     (click) => {

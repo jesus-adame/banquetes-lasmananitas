@@ -43,7 +43,6 @@ blockquote, q {
 
 blockquote:before, blockquote:after,
 q:before, q:after {
-  content: "";
   content: none;
 }
 
@@ -478,9 +477,9 @@ body {
   box-sizing: border-box;
   margin: 0 auto;
 }
-@media screen and (min-width: 1000px) {
+@media only screen and (max-width: 800px) {
   .content {
-    max-width: 90%;
+    max-width: 96%;
   }
 }
 
@@ -583,7 +582,7 @@ body {
   }
 }
 h1, h2, h3, h4 {
-  font-family: "Renner", sans-serif;
+  font-family: sans-serif;
 }
 
 h1 {
@@ -689,52 +688,22 @@ nav {
   letter-spacing: 0.02rem;
   font-size: 18px;
 }
-nav #navbar {
-  display: none;
-}
-@media only screen and (min-width: 900px) {
-  nav #navbar {
-    display: flex;
-  }
-}
-@media only screen and (max-width: 900px) {
-  nav {
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10px;
-  }
-  nav .btn-h {
-    display: block;
-    width: 100%;
-    text-align: center;
-  }
-  nav ul li {
-    display: block;
-    width: 100%;
-  }
-  nav li .btn-login {
-    display: block;
-    margin: auto;
-  }
-  nav .btn-h, nav li .btn-login {
-    margin-top: 5px;
-  }
-}
 nav ul {
+  position: relative;
   display: flex;
-  list-style: none;
   justify-content: flex-end;
+  align-items: center;
+  list-style: none;
+  background: none;
 }
-nav ul li {
-  margin: auto;
+nav ul li .btn-login, nav ul .btn-h {
+  display: block;
 }
 nav ul .btn-h {
-  display: inline-block;
-  padding: 0 12px;
   margin-left: 2px;
+  text-align: center;
+  padding: 12px;
   text-decoration: none;
-  line-height: 50px;
   border-radius: 6px;
   height: 90%;
   box-sizing: border-box;
@@ -747,26 +716,51 @@ nav ul .btn-h:hover {
   background: #186818;
   box-shadow: inset 0 0 8px #043304;
 }
-nav ul .btn-h:active {
-  box-shadow: inset 0 0 10px #000;
-}
 nav ul .active {
   color: #fff;
   background: #0e570e;
   box-shadow: inset 0 0 8px #011301;
   pointer-events: none;
 }
+@media only screen and (max-width: 900px) {
+  nav ul {
+    position: absolute;
+    display: block;
+    width: 80%;
+    max-width: 350px;
+    height: calc(100vh - 72px);
+    padding: 8px 0;
+    transform: none;
+    background: #064106;
+    right: -100%;
+    top: 72px;
+    opacity: 0;
+  }
+  nav ul .btn-h {
+    border-radius: 0;
+    margin-bottom: 5px;
+    padding: 15px 40px;
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+  nav ul li .btn-login {
+    position: absolute;
+    bottom: 10%;
+    right: 30%;
+  }
+}
 
 .btn-menu {
   border-radius: 4px;
   position: fixed;
   display: none;
-  top: 15px;
+  top: 10px;
   right: 3%;
   color: #fff;
   border: none;
   font-size: 26px;
-  padding: 10px 15px;
+  padding: 12px 15px;
   background: #259e25;
   cursor: pointer;
 }
@@ -779,7 +773,18 @@ nav ul .active {
   }
 }
 
-@keyframes slipTop {}
+.animate-nav-in {
+  right: 0;
+  opacity: 1;
+  transition: right 0.4s, opacity 0.4s;
+}
+
+.animate-nav-out {
+  transition: right 0.4s, opacity 0.4s;
+  right: -100%;
+  opacity: 0;
+}
+
 aside {
   min-width: 30vw;
 }
@@ -792,7 +797,7 @@ main {
   padding-top: 20px;
   padding-bottom: 40px;
   box-sizing: border-box;
-  margin-top: 74px;
+  margin-top: 72px;
 }
 
 footer {
@@ -848,6 +853,19 @@ footer .legal {
   display: none;
 }
 
+.admin-button {
+  display: inline-block;
+  color: #000;
+  background: #d8d8d8;
+  border: solid 1px #747474;
+  padding: 20px;
+  text-decoration: none;
+  font-family: "Meloche";
+}
+.admin-button:hover {
+  background: #c1c1c1;
+}
+
 .row-between {
   display: flex;
   flex-wrap: wrap;
@@ -887,9 +905,21 @@ footer .legal {
   font-size: 14px;
 }
 
+.form-cotizacion {
+  font-family: "Roboto", sans-serif;
+  background: #dadada;
+  padding: 15px 20px;
+  border-radius: 4px;
+}
+.form-cotizacion caption {
+  font-family: monospace;
+  font-size: 14px;
+}
+
 button, label {
   font-size: 16px;
   line-height: 24px;
+  outline: none;
 }
 
 form, fieldset {
@@ -904,12 +934,14 @@ form, fieldset {
 
 fieldset {
   border: solid 1px #c1c1c1;
+  border-radius: 3px;
 }
 
 input, select, textarea {
   font-family: sans-serif;
   padding: 8px 6px;
   font-size: 14px;
+  outline: none;
   border-radius: 4px;
   border: solid #c1c1c1 1px;
   box-sizing: border-box;
@@ -920,7 +952,7 @@ input, select, textarea {
 }
 input:focus, select:focus, textarea:focus {
   border: solid #19B4E8 1px;
-  box-shadow: 0px 0px 4px 4px #A6DAED;
+  box-shadow: 0px 0px 4px 3px #A6DAED;
 }
 input:focus option, select:focus option, textarea:focus option {
   min-width: 50px;
@@ -961,7 +993,7 @@ textarea {
 .table thead th {
   color: #333333;
   background: #cbc7c7;
-  border: solid 1px #a1a1a1;
+  border: solid 1px #a3a3a3;
   padding: 10px 8px;
 }
 .table tbody {
@@ -980,7 +1012,7 @@ textarea {
   padding: 6px 8px;
   box-sizing: border-box;
   vertical-align: middle;
-  border: solid 1px #aaaaaa;
+  border: solid 1px #a7a7a7;
 }
 .table button {
   padding: 3px 5px;
@@ -1039,7 +1071,7 @@ textarea {
   color: #383d42;
   overflow: hidden;
   animation-name: modalDown;
-  animation-duration: 0.6s;
+  animation-duration: 0.7s;
   box-sizing: border-box;
   -webkit-box-sizing: border-box;
   /* Safari */
@@ -1076,16 +1108,16 @@ textarea {
 }
 
 .modal-footer {
-  background: #d8dde7;
+  background: #e3e8f1;
   display: flex;
   flex-direction: row-reverse;
   width: 100%;
-  margin-top: 10px;
+  margin: 10px 0;
   max-height: 70px;
   font-size: 18px;
   border-radius: 4px;
   border: solid 1px #b7becf;
-  padding: 15px 20px;
+  padding: 14px 10px;
   box-sizing: border-box;
 }
 @media screen and (max-width: 400px) {
@@ -1127,11 +1159,11 @@ textarea {
 
 @keyframes modalDown {
   from {
-    top: -330px;
+    transform: translateY(-100%);
     opacity: 0;
   }
   to {
-    top: 0;
+    transform: translateY(0%);
     opacity: 1;
   }
 }
@@ -1141,7 +1173,7 @@ textarea {
     opacity: 1;
   }
   to {
-    top: -330px;
+    top: -100%;
     opacity: 0;
   }
 }
@@ -1178,6 +1210,18 @@ span {
   font-family: sans-serif;
 }
 
+.event-msg {
+  font-family: monospace;
+  font-size: 14px;
+  color: #272727;
+  background: #c1c1c1;
+  padding: 10px;
+  border-radius: 3px;
+  display: block;
+  box-sizing: border-box;
+  height: 100%;
+}
+
 .calendar a {
   font-family: sans-serif;
 }
@@ -1204,23 +1248,32 @@ span {
   }
 }
 .tabs .tab {
-  color: #000;
-  background: #cccccc;
+  color: #3f3f3f;
+  background: #d8d8d8;
   display: inline-block;
   text-decoration: none;
   padding: 10px 20px;
-  border: solid 1px #c1c1c1;
+  border: solid 1px #d1d1d1;
   border-bottom: 0;
   position: relative;
   top: 1px;
 }
 .tabs .tab:hover {
-  background: #bbbbbb;
+  background: #e4e4e4;
 }
 @media screen and (max-width: 500px) {
   .tabs .tab {
     padding: 5px 10px;
   }
+}
+.tabs li:not(:last-child) .tab {
+  border-right-width: 0;
+}
+.tabs li:first-child .tab {
+  border-radius: 3px 0 0 0;
+}
+.tabs li:last-child .tab {
+  border-radius: 0 3px 0 0;
 }
 .tabs .active {
   background: #f1f1f1;
@@ -1237,7 +1290,7 @@ span {
   display: none;
   padding: 12px 15px;
   background: #f1f1f1;
-  border: solid 1px #c1c1c1;
+  border: solid 1px #d1d1d1;
   border-radius: 0 0 4px 4px;
 }
 

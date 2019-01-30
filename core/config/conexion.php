@@ -8,5 +8,21 @@ class Conexion
 
     return $base;
   }
+
+  static function query($sql, $data = array(), $select, $one) {
+    $stmt = self::conectar();
+    $exec = $stmt->prepare($sql);
+    $exec->execute($data);
+
+    if ($select) {
+      if ($one) {
+        return $exec->fetch(PDO::FETCH_ASSOC);
+      } else {
+        return $exec->fetchAll(PDO::FETCH_ASSOC);
+      }
+    } else {
+      return true;
+    }
+  }
 }
 ?>

@@ -5,6 +5,7 @@
         method: 'POST'
     }).then(response => response.json())
     .then(dataJson => {
+        select.innerHTML += `<option value="0"> - Elegir - </option>`;
         if (dataJson != 'fail') {
             for (let i in dataJson) {
                 let item = dataJson[i];

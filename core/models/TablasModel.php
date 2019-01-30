@@ -122,6 +122,7 @@ class Tabla
 
   public function setName($tabla)
   {
+    $this->datos = array();
     $this->nombre = $tabla;
   }
 

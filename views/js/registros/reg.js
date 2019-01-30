@@ -56,6 +56,7 @@ addEventListener('DOMContentLoaded', () => {
     
     window.addEventListener('click', (e) => {
         if (e.target == modalUsu.fondo || e.target == modalUsu.btn_close) {
+            form_usuario.reset();
             modal_usuarios.style.display = 'none';
         }
     });
@@ -76,6 +77,7 @@ addEventListener('DOMContentLoaded', () => {
                 popup.alert({ content: 'Ya hay un registro con ese nombre de usuario' });
             } else if (dataJson == 'success') {
                 popup.alert({ content: 'Se ha creado el usuario' });
+                form_usuario.reset();
                 location.reload();
                 modal_usuarios.style.display = 'none';
             }
@@ -87,10 +89,9 @@ addEventListener('DOMContentLoaded', () => {
         id = e.target.parentElement.parentElement.parentElement.firstElementChild.textContent;
     
         if (btn == 'btn atention') {
-            modal_usuarios.style.display = 'block';
             btn_reg.style.display = 'none';
             btn_act.style.display = 'block';
-
+            
             obtenerDatosDonde('usuarios', 'id_usuario', id)
             .then(dataJson => {
                 let item = dataJson[0],
@@ -99,9 +100,10 @@ addEventListener('DOMContentLoaded', () => {
                 // Se cargan los datos al formulario
                 m_input[0].value = item.id_usuario;
                 m_input[1].value = item.username;
-                select[0].firstElementChild.value = item.nivel
-                select[1].firstElementChild.value = item.estado
+                select[0].firstElementChild.value = item.nivel;
+                select[1].firstElementChild.value = item.estado;
                 form_usuario.querySelector('.div-pass').style.display = 'none';
+                modal_usuarios.style.display = 'block';
             })
 
         } else if (btn == 'btn danger') {

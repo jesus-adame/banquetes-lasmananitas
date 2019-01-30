@@ -15,37 +15,37 @@
 
           <div class="row-between">
             <div class="col-xs-12 col-sm-6">
-              Titulo: *<br>
+              Titulo *<br>
               <input id="e_title" class="col-xs-11" type="text" name="titulo">
 
               <div class="row-between col-xs-11">
                 <div class="col-xs-6">
-                  Evento: *<br>
+                  Evento *<br>
                   <input id="e_evento" class="col-xs-11" type="text" name="evento">
                 </div>
 
                 <div class="col-xs-6">
-                  Personas: *<br>
+                  Personas *<br>
                   <input id="personas" class="col-xs-12" type="number" name="personas">
                 </div>
 
                 <div class="col-xs-6">
-                  Fecha:<br>
+                  Fecha<br>
                   <input id="date_start" class="col-xs-11 line-block" type="date" 
                   min="1900-04-01" name="fecha"><br>
-                  Hora inicio:<br>
+                  Hora inicio<br>
                   <input id="time" class="col-xs-11 line-block" type="time" name="hora"><br>
                 </div>
 
                 <div class="col-xs-6">
-                  Fecha final:<br>
+                  Fecha final<br>
                   <input id="date_end" class="col-xs-12" type="date" name="fecha"><br>
-                  Hora final:<br>
+                  Hora final<br>
                   <input id="time_f" class="col-xs-12" type="time" name="hora"><br>
                 </div>
 
                 <div class="col-xs-6">
-                  Status:<br>
+                  Status <a id="e_status"></a><br>
                   <select id="color" class="col-xs-11" name="color">
                     <option id="old_color" value="#d7c735">- Elegir -</option>
                     <option value="#d7c735">Tentativo</option>
@@ -57,39 +57,39 @@
                 </div>
 
                 <div class="col-xs-6">
-                  Categoria: <a id="txtcategoria"></a><br>
+                  Categoria <a id="txtcategoria"></a><br>
                   <select id="categoria" class="col-xs-12" name="categoria">
                     <option id="idcategoria" value="Privado">- Seleccionar -</option>
                     <option value="Social"> Social </option>
-                    <option value="Privado"> Empresarial </option>
-                    <option value="Privado"> Casa </option>
+                    <option value="Empresarial"> Empresarial </option>
+                    <option value="Casa"> Casa </option>
                   </select>
                 </div>                
               </div>
             </div>
 
             <div class="col-xs-12 col-sm-6">
-              Cliente: *<br>
+              Cliente *<br>
               <input id="e_contacto" class="col-xs-12" type="text" name="contacto">
 
               <div class="row-between">
                 <div class="col-xs-6">
-                  Responsable: *<br>
+                  Responsable *<br>
                   <input id="e_cord_resp" class="col-xs-11" type="text" name="titulo">
                 </div>
 
                 <div class="col-xs-6">
-                  Cord. Apoyo:<br>
+                  Cord. Apoyo<br>
                   <input id="e_cord_apoyo" class="col-xs-12" type="text" name="titulo">
                 </div>
               </div>
 
-              Descripción:<br>
+              Descripción<br>
               <textarea id="e_description" class="col-xs-12" name="descrip" rows='3'></textarea>
 
               <div class="row-between">
                 <div class="col-xs-6">
-                  Salón: <a id="e_place"></a><br>
+                  Salón <a id="e_place"></a><br>
                   <select id="idlugar" class="col-xs-11" name="idlugar">
                     <!-- <option value="0">- Cambiar -</option>
                     <option value="1">Casa Nueva</option>
@@ -107,11 +107,11 @@
         </form>
 
         <div class="modal-footer">
-            <button class="btn default cerrar">Cancel</button>
-            <button id="btnModificar" class="btn atention">Modificar</button>
-            <button id="btnBorrar" class="btn danger">Borrar</button>
-            <button id="btnAgregarEvento" class="btn primary" onclick="addEvento()">Agregar</button>
-          </div>
+          <button class="btn default cerrar">Cancel</button>
+          <button id="btnModificar" class="btn atention">Modificar</button>
+          <button id="btnBorrar" class="btn danger">Borrar</button>
+          <button id="btnAgregarEvento" class="btn primary" onclick="addEvento()">Agregar</button>
+        </div>
       </div>
       
     </div>

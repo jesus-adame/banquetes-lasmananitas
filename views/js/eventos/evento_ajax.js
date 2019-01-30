@@ -3,7 +3,11 @@ let nuevoEvento
 
 function addEvento() {
   recolectarDatosGUI()
-  enviarInformacion('agregar', nuevoEvento)
+  if (nuevoEvento === '') {
+    popup.alert({ content: 'La fecha de finalización no puede ser anterior a la fecha de inicio' })
+  } else {
+    enviarInformacion('agregar', nuevoEvento)
+  }
 }
 
 function eliminarEvento() {
@@ -13,7 +17,12 @@ function eliminarEvento() {
 
 function modificarEvento() {
   recolectarDatosGUI()
-  enviarInformacion('modificar', nuevoEvento)
+  if (nuevoEvento === '') {
+    popup.alert({ content: 'La fecha de finalización no puede ser anterior a la fecha de inicio' })
+    return 0;
+  } else {
+    enviarInformacion('modificar', nuevoEvento)
+  }
 }
 
 function recolectarDatosGUI() {
@@ -38,7 +47,7 @@ function recolectarDatosGUI() {
       folio: e_folio.value
     }
   } else {
-    popup.alert({ content: 'La fecha de finalización no puede ser anterior a la fecha de inicio' })
+    nuevoEvento = '';
   }
 }
 

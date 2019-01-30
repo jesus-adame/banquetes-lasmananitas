@@ -14,3 +14,17 @@
     display: none;
   }
 }
+
+.admin-button {
+  display: inline-block;
+  color: #000;
+  background: #d8d8d8;
+  border: solid 1px #747474;
+  padding: 20px;
+  text-decoration: none;
+  font-family: 'Meloche';
+
+  &:hover {
+    background: #c1c1c1;
+  }
+}

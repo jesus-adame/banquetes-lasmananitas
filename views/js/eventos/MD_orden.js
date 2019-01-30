@@ -160,7 +160,6 @@ function addOrden(frm, forms) {
 }
 
 function editOrden(frm, forms) {
-  const md_orden = document.querySelector('#md_orden');
   let fecha = document.querySelector('#date_start'),
   time = document.querySelector('#time'),
   formData = new FormData(frm);
@@ -321,6 +320,7 @@ function obtenerDatosOrden(id) {
           observaciones[0].value = val.observaciones;         
           contabilidad[0].value = val.contabilidad;
           chief_steward[0].value = val.chief_steward;
+          bebidas[0].value = val.bebidas;
 
           getCamposExtra().then(res => {
             nc_grupo = pintarCampos(res, campos_grupo, nc_grupo); md_orden.style.display = 'block';
@@ -336,7 +336,7 @@ function obtenerDatosOrden(id) {
           contabilidad[1].value = val.contabilidad;
           chief_steward[1].value = val.chief_steward;
           cocteleria[0].value = val.cocteleria;
-          bebidas[0].value = val.bebidas;
+          bebidas[1].value = val.bebidas;
           mezcladores[0].value = val.mezcladores;
 
           getCamposExtra().then(res => {
@@ -354,8 +354,8 @@ function obtenerDatosOrden(id) {
           proveedores[2].value = val.proveedores;
           contabilidad[2].value = val.contabilidad;
           chief_steward[2].value = val.chief_steward;
-          bebidas[0].value = val.bebidas;
-          mezcladores[0].value = val.mezcladores;
+          bebidas[2].value = val.bebidas;
+          mezcladores[1].value = val.mezcladores;
           observaciones[2].value = val.observaciones;          
 
           getCamposExtra().then(res => {

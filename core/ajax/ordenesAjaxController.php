@@ -154,7 +154,7 @@ function crearArrayDatos($formato)
         '',
         '',
         '',
-        '',
+        $_POST['bebidas'],
         '',
         '',
         $_POST['detalle_montaje'],

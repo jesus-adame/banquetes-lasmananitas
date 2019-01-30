@@ -8,7 +8,8 @@ function extraerDatosEvento(calEvent) {
   e_cord_resp.value = calEvent.cord_resp;
   e_cord_apoyo.value = calEvent.cord_apoyo;
   e_description.innerHTML = calEvent.description;
-  e_place.innerHTML = calEvent.lugar
+  e_place.innerHTML = calEvent.lugar;
+  idlugar.value = calEvent.id_lugar;
   let select = document.querySelector('#idlugar option:first-child');
   select.value = calEvent.id_lugar;
 
@@ -26,6 +27,19 @@ function extraerDatosEvento(calEvent) {
   idcategoria.value = calEvent.categoria;
   txtcategoria.innerHTML = calEvent.categoria;
   personas.value = calEvent.personas;
+  switch (calEvent.color) {
+    case '#d7c735':
+    e_status.innerHTML = 'Tentativo';
+    break;
+
+    case '#f98710':
+    e_status.innerHTML = 'Apartado';
+    break;
+
+    case '#e62424':
+    e_status.innerHTML = 'Confirmado';
+    break;
+  }
 }
 
 function limpiarDatosEvento(date) {
@@ -35,16 +49,16 @@ function limpiarDatosEvento(date) {
   e_contacto.value = '';
   e_cord_resp.value = '';
   e_cord_apoyo.value = '';
-  e_description.innerHTML = ''
+  e_description.innerHTML = '';
   e_place.innerHTML = '';
+  e_status.innerHTML = '';
+  idlugar.value = '0';
   color.value = '#d7c735';
   e_folio.value = '';
+  txtcategoria.innerHTML = '';
 
-  let fecha = date_start,
-  fecha_final = date_end;
-
-  fecha.value = date.format('YYYY-MM-DD');
-  fecha_final.value = date.format('YYYY-MM-DD');
+  date_start.value = date.format('YYYY-MM-DD');
+  date_end.value = date.format('YYYY-MM-DD');
 
   time.value = '00:00:00';
   time_f.value = '23:00:00';
