@@ -28,3 +28,15 @@
     background: #c1c1c1;
   }
 }
+
+.button {
+  color: #242424;
+  background: linear-gradient(#f0f0f0, #dddddd);
+  outline: none;
+  border: solid 1px #b4b4b4;
+  cursor: pointer;
+  border-radius: 3px;
+  &:hover {
+    background: linear-gradient(#ebebeb, #dadada);
+  }
+}

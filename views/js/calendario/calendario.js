@@ -4,8 +4,16 @@ $('#calendar').fullCalendar({
     center: 'title',
     right: 'today, btnAgregar, prev,next'
   },
+  views: {
+    agendaWeek: {
+      titleFormat: 'D MMM YYYY',
+      columnHeaderFormat: 'ddd D'
+    }
+  },
   defaultView: 'month',
   eventLimit: true,
+  allDaySlot: false,
+  showNonCurrentDates: false,
   events: 'core/ajax/eventosAjaxController.php',
   eventClick: function(calEvent, jsEvent, view) {
     

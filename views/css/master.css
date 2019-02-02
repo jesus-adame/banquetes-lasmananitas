@@ -785,6 +785,34 @@ nav ul .active {
   opacity: 0;
 }
 
+/** BARRA DE HERRAMIENTAS */
+.tools-bar {
+  font-family: "Roboto", sans-serif;
+  background: linear-gradient(#f5f5f5, #e4e4e4);
+  color: #242424;
+  padding: 4px 15px;
+  border: solid 1px #c5c5c5;
+  width: 90%;
+  box-sizing: border-box;
+  margin: auto;
+  align-items: center;
+  border-radius: 4px;
+}
+
+.btn-tools {
+  font-size: 14px;
+  display: block;
+  text-decoration: none;
+  color: #313131;
+  background: linear-gradient(#f5f5f5, #e0e0e0);
+  border: solid 1px #c5c5c5;
+  border-radius: 4px;
+  padding: 5px;
+}
+.btn-tools:hover {
+  background: linear-gradient(#e9e9e9, #d8d8d8);
+}
+
 aside {
   min-width: 30vw;
 }
@@ -866,6 +894,18 @@ footer .legal {
   background: #c1c1c1;
 }
 
+.button {
+  color: #242424;
+  background: linear-gradient(#f0f0f0, #dddddd);
+  outline: none;
+  border: solid 1px #b4b4b4;
+  cursor: pointer;
+  border-radius: 3px;
+}
+.button:hover {
+  background: linear-gradient(#ebebeb, #dadada);
+}
+
 .row-between {
   display: flex;
   flex-wrap: wrap;
@@ -907,7 +947,8 @@ footer .legal {
 
 .form-cotizacion {
   font-family: "Roboto", sans-serif;
-  background: #dadada;
+  background: #e0e0e0;
+  border: solid 1px #c5c5c5;
   padding: 15px 20px;
   border-radius: 4px;
 }
@@ -1193,12 +1234,11 @@ svg {
 .etiqueta {
   font-family: sans-serif;
   padding: 2px 8px;
-  background: #d0d5df;
+  background: #d7dce6;
   border-radius: 5px;
   font-weight: 400;
   font-size: 15px;
   display: inline-block;
-  margin: 2px 4px;
   box-sizing: border-box;
   -moz-box-sizing: border-box;
   /* Firefox */

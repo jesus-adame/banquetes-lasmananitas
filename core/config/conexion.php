@@ -9,10 +9,11 @@ class Conexion
     return $base;
   }
 
-  static function query($sql, $data = array(), $select, $one) {
+  static function query($sql, $data = array(), $select = false, $one = false) {
     $stmt = self::conectar();
     $exec = $stmt->prepare($sql);
     $exec->execute($data);
+    $stmt = null;
 
     if ($select) {
       if ($one) {
