@@ -1,6 +1,6 @@
 <?php session_start();
-include '../models/SesionModel.php';
-require '../config/conexion.php';
+include_once '../models/SesionModel.php';
+require_once '../config/conexion.php';
 
 switch ($_POST['accion']) {
   case 'iniciar':

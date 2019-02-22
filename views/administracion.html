@@ -1,24 +1,42 @@
 {include file='struct/header.html'}
+<style>
+.panel-left li {
+   margin-top: 10px;
+}
+.fa-lg {
+   display: inline-block;
+   margin-right: 10px;
+}
+</style>
 <main>
 
-  <div class="content m-auto">
-    <hgroup style="text-align: center">
-      <h2>{$titulo}</h2>
-    </hgroup>
+   <div class="content m-auto-x">
+      <hgroup style="text-align: center">
+         <h2>{$titulo}</h2>
+      </hgroup>
 
-    <div class="row-between">
-      <div class="item">
-        <h3>Eventos</h3><br>
-        <a class="admin-button" href="?view=cotizacion">
-          <i class="fas fa-tasks"></i> Cotizaciones</a>
+      <div class="row-between">
+         <div class="item">
+            <ul class="panel-left">
+               <li>
+               <a class="admin-button col-xs-12" href="?view=cotizacion">
+                  <i class="fas fa-list-ul fa-lg"></i> Cotizaciones</a></li>
+               <li>
+               <a class="admin-button col-xs-12" href="?view=ventas">
+                  <i class="fas fa-chart-line fa-lg"></i> Ventas</a></li>
+               <li>
+               <a class="admin-button col-xs-12" href="?view=configuracion-global">
+                  <i class="fas fa-cogs fa-lg"></i> Configuracion del sistema</a></li>             
+            </ul>
+         </div>
+
+         <div class="item">
+            <h3>Eventos totales</h3>
+         </div>
       </div>
 
-      <div class="item">
-        <h3>Eventos totales</h3>
-      </div>
-    </div>
-
-  </div>
+   </div>
 </main>
 
-{include file='struct/footer.html'}
+</body>
+</html>

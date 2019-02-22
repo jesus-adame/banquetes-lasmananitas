@@ -120,6 +120,18 @@ class Tabla
     return $this->datos;
   }
 
+  public function obtener_datos_join_join($tabla2, $on, $tabla3, $on2)
+  {
+    $sql = "SELECT * FROM $this->nombre
+    INNER JOIN $tabla2 ON $this->nombre.$on = $tabla2.$on
+    INNER JOIN $tabla3 ON $this->nombre.$on2 = $tabla3.$on2
+    ORDER BY lugar ASC";  // Quitar
+
+    $res = Conexion::query($sql, array(), true, false);
+
+    return $res;
+  }
+
   public function setName($tabla)
   {
     $this->datos = array();

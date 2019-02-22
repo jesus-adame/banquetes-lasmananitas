@@ -1,4 +1,12 @@
 {include file='struct/header.html'}
+<style>
+@media screen and (max-width: 440px) {
+  .head-bar {
+    justify-content: center;
+  }
+}
+</style>
+
 <main>
   {include file='templates/M_evento.html'}
   {include file='templates/MD_evento.html'}
@@ -8,18 +16,19 @@
   {include file='templates/eventos/form_eliminar_orden.html'}
 
   <div class="content m-auto">
-    <div class="row-between" style="padding-bottom: 10px">
+    <div class="row-between head-bar" style="padding-bottom: 10px; align-items: center;">
       <hgroup>
-        <h1>{$titulo} <i class="fas fa-cogs" style="font-size:36px;color:#9e9e9e;"></i></h1>
+        <h1>{$titulo} <i class="fas fa-cogs" style="font-size:36px; color:#9e9e9e;"></i></h1>
         <h2>{$subtitulo}</h2>
       </hgroup>
-
+      
       <div class="event-msg">
         <span class="yellow" style="display: inline-block; width: 15px; height: 15px;background: #ebda49"></span> Evento TENTATIVO <br>
         <span class="orange" style="display: inline-block; width: 15px; height: 15px;background: orange"></span> Evento APARTADO <br>
-        <span class="red" style="display: inline-block; width: 15px; height: 15px;background: red"></span> Evento CERRADO
+        <span class="red" style="display: inline-block; width: 15px; height: 15px; background: red"></span> Evento CERRADO <br><br>
+        <a href="?view=cotizacion" class="button" style="display: block; text-decoration: none; text-align: center; padding: 5px"><i class="fas fa-list-ul fa-sm"></i> Cotizar</a>
       </div>
-    </div>    
+    </div>
 
     <div id="calendar" class="col-xs-12 col-md-10 col-xlg-9 m-auto-x"></div>
   </div>

@@ -17,7 +17,7 @@ class Sesion
   public function iniciarSesion()
   {
     $sql = "SELECT * FROM usuarios
-    WHERE username = :user AND pass = :pass AND estado = :estado";
+    WHERE username COLLATE utf8_bin = :user AND pass = :pass AND estado = :estado";
 
     $statement = $this->db->prepare($sql);
     $statement->execute(array(

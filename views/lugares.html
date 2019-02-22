@@ -1,0 +1,66 @@
+{include file='views/struct/header.html'}
+<style>
+</style>
+
+<main>
+<div id="m_lugares" class="modal">
+   <div class="flex">
+      <div class="modal-content m-sesion col-xs-10 col-sm-7 col-md-5 col-lg-3">
+         <div class="modal-header">
+            <p class="title">Agregar</p>
+            <a class="close">&times;</a>
+         </div>
+
+         <div class="modal-body">
+            <form id="form_lugares" class="form" action="javascript:void(0)" method="post">
+               Lugar:
+               <select id="select_lugar" class="col-xs-12" name="lugar">
+                  <!-- <option value="">- Elegir -</option> -->
+               </select>
+
+               Tipo evento:
+               <select id="select_t_evento" class="col-xs-12" name="tipo_evento">
+                  <option value="1">- Elegir -</option>
+               </select>
+
+               Precio alta (MX):
+               <input class="col-xs-12" type="number" placeholder="Pesos" name="precio_alta">
+               Precio baja (MX):
+               <input class="col-xs-12" type="number" placeholder="Pesos" name="precio_baja">
+               <br><br>
+
+               <button class="btn primary" type="submit" name="button">Ingresar</button>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+<div class="content m-auto-x">
+
+   <h4>LUGARES</h4><br>
+   <div class="table-container">
+      <table class="table">
+         <thead>
+            <tr>
+               <th>SALÓN</th>
+               <th>EVENTO</th>
+               <th>TEMP. ALTA</th>
+               <th>TEMP. BAJA</th>
+               <th class="opt">
+                  <button id="add_lugar" class="primary"><i class="fas fa-plus-circle"></i></button>
+               </th>
+            </tr>
+         </thead>
+         <tbody id="tbody_precios">
+            <!-- <tr> <td>CASANUEVA</td> <td>BODA</td> <td>$ 70000</td> <td>$ 50 000</td> <td><button class="atention"><i class="fas fa-pen-alt"></i></button> <button class="danger"><i class="fas fa-trash-alt"></i></button></td> </tr> -->
+         </tbody>
+      </table>
+   </div>
+</div>
+</main>
+
+<script src="views/js/ajax_request.js"></script>
+<script src="views/js/lugares/loader.js"></script>
+<script src="views/js/Modal.js"></script>
+{include file='views/struct/footer.html'}

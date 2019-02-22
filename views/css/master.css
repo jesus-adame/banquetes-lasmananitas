@@ -223,7 +223,7 @@ template {
   font-style: normal;
 }
 body {
-  background: #323131;
+  background: #2b2b2b;
 }
 
 .col-xs-1 {
@@ -792,7 +792,6 @@ nav ul .active {
   color: #242424;
   padding: 4px 15px;
   border: solid 1px #c5c5c5;
-  width: 90%;
   box-sizing: border-box;
   margin: auto;
   align-items: center;
@@ -831,7 +830,7 @@ main {
 footer {
   color: #e3e0e3;
   font-family: sans-serif;
-  background: #323131;
+  background: #2c2c2c;
   overflow: hidden;
   width: 100%;
   padding-top: 15px;
@@ -839,8 +838,7 @@ footer {
 }
 footer .btn {
   color: #e3e0e3;
-  background: #323131;
-  border: solid 1px #323131;
+  border: solid 1px #32313100;
   margin-bottom: 5px;
 }
 footer .btn:hover {
@@ -883,7 +881,7 @@ footer .legal {
 
 .admin-button {
   display: inline-block;
-  color: #000;
+  color: #181818;
   background: #d8d8d8;
   border: solid 1px #747474;
   padding: 20px;
@@ -1035,7 +1033,7 @@ textarea {
   color: #333333;
   background: #cbc7c7;
   border: solid 1px #a3a3a3;
-  padding: 10px 8px;
+  padding: 8px 5px;
 }
 .table tbody {
   font-family: sans-serif;
@@ -1274,6 +1272,10 @@ span {
   font-size: 28px;
   padding: 0%;
   margin: 0%;
+}
+
+.fc-head {
+  font-family: sans-serif;
 }
 
 .tabs {

@@ -118,33 +118,39 @@
   </table>
 
   <table class="tabla2">
-    <tr class="thead">
+   <tr class="thead">
       <td>HORARIO</td>
       <td>SALÓN</td>
       <td>EVENTO</td>
       <td>MONTAJE</td>
       <td>GARANTIA</td>
+      <td>FRONT 2 GO</td>
       <td></td>
-      <td>CLAVE EVENTO</td>
-    </tr>
-    <tr class="thead">
+   </tr>
+   <tr class="thead">
       <td>{$hora}</td>
       <td>{$data.lugar}</td>
       <td>{$data.orden}</td>
       <td>{$data.montaje}</td>
       <td>{$data.garantia}</td>
+      <td>
+         {if $data.folio != ''}
+         $data.folio
+         {else}
+         PENDIENTE
+         {/if}
+      </td>
       <td></td>
-      <td>PENDIENTE</td>
-    </tr>
+   </tr>
 
-    <tr class="thead">
+   <tr class="thead">
       <td colspan="3">ALIMENTOS</td>
       <td colspan="4">COORDINACIÓN OPERATIVA</td>
-    </tr>
-    <tr class="thead">
+      </tr>
+      <tr class="thead">
       <td colspan="3">{$data.orden}</td>
       <td colspan="4">MONTAJE</td>
-    </tr>
+   </tr>
 
     <tr>
       <td id="alimentos_bebidas" colspan="2" rowspan="3">

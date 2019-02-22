@@ -1,0 +1,30 @@
+{include file="views/struct/header.html"}
+<style>
+.panel-left li {
+   margin-top: 10px;
+}
+.fa-lg {
+   display: inline-block;
+   margin-right: 10px;
+}
+</style>
+
+<main>
+   <div class="content m-auto-x row-between">
+      <ul class="panel-left">
+         <caption>Base de datos</caption>
+         <li>
+            <a class="admin-button col-xs-12" href="?view=precios">
+               <i class="fas fa-money-bill fa-lg"></i> Precios</a></li>
+               
+         <li>
+            <a class="admin-button col-xs-12" href="?view=lugares">
+            <i class="fas fa-map fa-lg"></i> Lugares</a></li>
+
+         <li>
+            <a class="admin-button col-xs-12" href="?view=cotizacion">
+               <i class="fas fa-user-tag fa-lg"></i> Roles de usuario</a></li>
+      </ul>
+   </div>
+</main>
+{include file='views/struct/footer.html'}

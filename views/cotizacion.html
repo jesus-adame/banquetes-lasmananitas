@@ -1,110 +1,115 @@
 {include file='struct/header.html'}
 <style>
 .graph {
-    display: inline-block;
-    width: 600px;
-    max-width: 49%;
-    height: auto;
+   display: inline-block;
+   width: 600px;
+   max-width: 49%;
+   height: auto;
 }
 .img-cont {
-    text-align: center;
+   text-align: center;
 }
 .form-cotizacion {
-    display: inline-block;
+   display: inline-block;
+   margin-bottom: 20px;
+   min-width: 330px;
 }
 .calendar {
-    padding-top: 20px;
-    display: inline-block;
+   padding-top: 20px;
+   display: inline-block;
 }
 </style>
-    <main>
-        <div class="content m-auto-x row-between">
-                        
-            <form id="form_cotizacion" class="form-cotizacion col-xs-11 col-sm-6 col-md-4" action="javascript:void(0)">
-                <div class="col-xs-12 row-between">
-                    <caption>Verificar disponibilidad</caption>
-                    <button class="button" onclick="history.back()" type="button"><i class="fas fa-arrow-left"></i> Vorver</button>
-                </div>
 
-                Cliente
-                <input class="col-xs-12" type="text" maxlength="20" name="cliente" placeholder="Nombre y apellido">
-                Telefono
-                <input class="col-xs-12" type="text" maxlength="13" name="telefono" placeholder="Número">
-                Correo
-                <input class="col-xs-12" type="text" maxlength="20" name="email" placeholder="correo@email.com">
-                
-                <div class="row-between">
-                    <div class="col-xs-6" style="display:inline-block">
-                        No. Personas
-                        <input class="col-xs-11" type="number" name="pax" min="1" max="900">
-                    </div>
-    
-                    <div class="col-xs-6" style="display:inline-block">
-                        Tipo de Evento
-                        <select id="select_evento" class="col-xs-12" name="tipo_evento">
-                            <option value="1">- Elegir -</option>
-                        </select>
-                    </div>
-                </div>            
-                
-                Lugar / Salón
-                <select id="select_lugar" class="col-xs-12" name="id_lugar">
-                    <option value="1">- Elegir -</option>
-                </select>
+<main>
+   <div class="content m-auto-x row-between">
+          
+      <form id="form_cotizacion" class="form-cotizacion col-xs-11 col-sm-6 col-md-4 m-auto-x" action="javascript:void(0)">
+         <div class="col-xs-12 row-between">
+            <caption>Verificar disponibilidad</caption>
+            <button class="button" onclick="history.back()" type="button"><i class="fas fa-arrow-left"></i> Vorver</button>
+         </div>
 
-                <div class="row-between"><br>
-                    <label class="col-xs-12" for="">Inicio (Fecha / Hora)</label><br>
-                    <input id="d_init" class="col-xs-5" min="2000-01-02" type="date" name="fecha_inicio">
-                    <input id="t_init" class="col-xs-5" type="time" name="tiempo_inicio">
-                </div>
-
-                <div class="row-between">
-                    <label class="col-xs-12" for="">Final (Fecha / Hora)</label><br>
-                    <input id="d_end" class="col-xs-5" min="2000-01-02" type="date" name="fecha_final">
-                    <input id="t_end" class="col-xs-5" type="time" name="tiempo_final">
-                </div><br>
-
-                <button class="btn success">Comprobar</button>
-            </form>
-            <div class="img-cont col-xs-11 col-md-8">
-                <div class="tools-bar row-between col-xs-12">
-                    Herramientas
-                    <ul class="tools-menu row-right">
-                        <li><a id="cot_ajustes" class="btn-tools" href=""><i class="fas fa-wrench"></i> Ajustes</a></li>
-                    </ul>
-                </div>
-                <!-- <img class="graph" src="storage/thumbs/temporadas.png" alt="temporadas">
-                <img class="graph" src="storage/thumbs/teporada_semana.png" alt="temporadas semana"> -->
-
-                <div id="calendar" class="calendar col-xs-10 col-md-9"></div>
+         Cliente
+         <input class="col-xs-12" type="text" maxlength="20" name="cliente" placeholder="Nombre y apellido">
+         Telefono
+         <input class="col-xs-12" type="text" maxlength="13" name="telefono" placeholder="Número">
+         Correo
+         <input class="col-xs-12" type="text" maxlength="20" name="email" placeholder="correo@email.com">
+         
+         <div class="row-between">
+            <div class="col-xs-6" style="display:inline-block">
+               No. Personas
+               <input class="col-xs-11" type="number" name="pax" min="1" max="900">
             </div>
-        </div>      
-    </main>
+
+            <div class="col-xs-6" style="display:inline-block">
+               Tipo de Evento
+               <select id="select_evento" class="col-xs-12" name="tipo_evento">
+                     <option value="1">- Elegir -</option>
+               </select>
+            </div>
+         </div>            
+         
+         Lugar / Salón
+         <select id="select_lugar" class="col-xs-12" name="id_lugar">
+            <option value="1">- Elegir -</option>
+         </select>
+
+         <div class="row-between"><br>
+            <label class="col-xs-12" for="">Inicio (Fecha / Hora)</label><br>
+            <input id="d_init" class="col-xs-5" min="2000-01-02" type="date" name="fecha_inicio">
+            <input id="t_init" class="col-xs-5" type="time" name="tiempo_inicio">
+         </div>
+
+         <div class="row-between">
+            <label class="col-xs-12" for="">Final (Fecha / Hora)</label><br>
+            <input id="d_end" class="col-xs-5" min="2000-01-02" type="date" name="fecha_final">
+            <input id="t_end" class="col-xs-5" type="time" name="tiempo_final">
+         </div><br>
+
+         <button class="btn success">Comprobar</button>
+      </form>
+
+      <div class="img-cont col-xs-12 col-md-8">
+         <div class="tools-bar row-between col-xs-12 col-md-10">
+            Herramientas
+            <ul class="tools-menu row-right">
+               <li><a id="cot_ajustes" class="btn-tools" href="?view=precios"><i class="fas fa-wrench"></i> Ajustes</a></li>
+            </ul>
+         </div>
+         <!-- <img class="graph" src="storage/thumbs/temporadas.png" alt="temporadas">
+         <img class="graph" src="storage/thumbs/teporada_semana.png" alt="temporadas semana"> -->
+
+         <div id="calendar" class="calendar col-xs-12 col-md-10"></div>
+      </div>
+   </div>      
+</main>
+
 <script src="views/js/cotizacion/ajax_req.js"></script>
 <script src="views/js/cotizacion/onload.js"></script>
 <script>
 $('#calendar').fullCalendar({
-  header: {
-    left: 'month,agendaWeek,agendaDay',
-    center: 'title',
-    right: 'today, prevYear, prev,next, nextYear'
-  },
-  defaultView: 'month',
-  allDaySlot: false,
-  eventLimit: true,
-  events: 'core/ajax/eventosAjaxController.php',
-  navLinks: true,
-  nowIndicator: true,
-  showNonCurrentDates: false,
-  eventClick: function(calEvent, jsEvent, view) {
+   header: {
+      left: 'month,agendaWeek,agendaDay',
+      center: 'title',
+      right: 'today, prev,next'
+   },
+   defaultView: 'month',
+   allDaySlot: false,
+   eventLimit: true,
+   events: 'core/ajax/eventosAjaxController.php',
+   navLinks: true,
+   nowIndicator: true,
+   showNonCurrentDates: false,
+   eventClick: function(calEvent, jsEvent, view) {
 
-  },
-  views: {
-    agendaWeek: { // name of view
+   },
+   views: {
+      agendaWeek: { // name of view
       titleFormat: 'D MMM YYYY',
       columnHeaderFormat: 'ddd D'
-    }
-  }
+      }
+   }
 })
 </script>
 {include file='struct/footer.html'}

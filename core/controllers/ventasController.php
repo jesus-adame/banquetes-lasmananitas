@@ -5,5 +5,5 @@ if (!isset($_SESSION['puesto'])) {
 }
 $html = new Smarty();
 
-$html->assign('titulo', 'Cotización');
-$html->display('views/cotizacion.html');
+$html->assign('titulo', 'Ventas');
+$html->display('views/ventas.html');

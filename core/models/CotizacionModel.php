@@ -52,7 +52,7 @@ class Cotizacion
     function crearLog($tipo_evento) {
         $res = 0;
         $sql1 = 'SELECT cliente FROM cot_renta
-        WHERE cliente = :cliente AND email = :email, AND tipo_evento = :tipo_evento AND lugar = :lugar AND fecha_inicio LIKE :fecha_inicio AND fecha_final LIKE :fecha_final;';
+        WHERE cliente = :cliente AND email = :email AND tipo_evento = :tipo_evento AND lugar = :lugar AND fecha_inicio LIKE :fecha_inicio AND fecha_final LIKE :fecha_final;';
 
         $data1 = array(
             'cliente' => $this->data['cliente'],
@@ -63,9 +63,9 @@ class Cotizacion
             'fecha_final' => $this->data['fecha_final'].'%'
         );
 
-        $validacion = Conexion::query($sql1, $data1, true, true);
+        $validacion = Conexion::query($sql1, $data1, true);
 
-        if ($validacion === '') {
+        if (sizeof($validacion) <= 0) {
             $sql = 'INSERT INTO cot_renta (cliente, telefono, email, pax, tipo_evento, lugar, fecha_inicio, fecha_final) VALUES (:cliente, :telefono, :email, :pax, :tipo_evento, :lugar, :fecha_inicio, :fecha_final);';
 
             $new_data = array(
@@ -80,8 +80,8 @@ class Cotizacion
             );
 
             $res = Conexion::query($sql, $new_data, false, false);
-        }        
+        }    
 
-        echo $validacion;
+        return $validacion;
     }
 }
