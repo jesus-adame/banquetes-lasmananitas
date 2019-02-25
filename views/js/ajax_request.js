@@ -5,7 +5,8 @@ async function peticionAjax(url, accion, formData) {
       method: 'POST',
       body: formData
    })
-   .then(response => response.json()).catch(error => {
+   .then(response => response.json())
+   .catch(error => {
       console.log('Hubo un error ', error.message);
    })
 }
@@ -32,6 +33,20 @@ function obtenerDatosDonde(tabla, campo, valor) {
       body: data
    })
    .then(response => response.json())
+}
+
+function obtenerDatosOrden(tabla, campo, valor = 'ASC') {
+   let data = new FormData();
+   data.append('tabla', tabla);
+   data.append('campo', campo);
+   data.append('valor', valor);
+   data.append('orden', true);
+
+   return res = fetch('core/ajax/verRegistro.php', {
+      method: 'POST',
+      body: data
+   })
+      .then(response => response.json())
 }
 
 function obtenerDatosJoinJoin(tabla, tabla2, on, tabla3 = '', on2 = '') {

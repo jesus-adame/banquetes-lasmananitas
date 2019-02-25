@@ -8,7 +8,7 @@ $res = array(
 );
 
 // if ($_SESSION['puesto'] != 'Administrador') {  // Bloquea el permiso a personal no autorizado
-//   $res['msg'] = 'not_access';
+//   $res['msg'] = 'No tiene permiso para realizar esa operación';
 //   $res['error'] = true;
 // } else {
 
@@ -19,7 +19,7 @@ $res = array(
       $res['msg'] = 'No se pudo eliminar';
       $res['error'] = true;
    }
-      
+
    } else if (empty($_POST['lugar']) || empty($_POST['tipo_evento'])
    || empty($_POST['precio_alta']) || empty($_POST['precio_baja'])) {
 
@@ -27,21 +27,21 @@ $res = array(
    $res['error'] = true;
 
    } else {
-      
+
       $data = array(
          'lugar' => $_POST['lugar'],
          'evento' => $_POST['tipo_evento'],
          'precio_alta' => $_POST['precio_alta'],
          'precio_baja' => $_POST['precio_baja']
       );
-         
+
       switch ($_POST['action']) {
          case 'insertar':
             $sqlSelect = "SELECT id_precio FROM precios_renta WHERE id_tipo_evento = :e AND id_lugar = :l";
 
             $validate = Conexion::query($sqlSelect, array('e' => $data['evento'], 'l' => $data['lugar']), true);
 
-            if (sizeof($validate) > 0) {
+            if (sizeof($validate, 0) > 0) {
                $res['msg'] = 'Ese precio ya ha sido registrado';
                $res['error'] = true;
 
@@ -58,7 +58,7 @@ $res = array(
                }
             }
          break;
-         
+
          case 'editar':
             $sql = "UPDATE precios_renta (id_tipo_evento, id_lugar, precio_alta, precio_baja)
             VALUES (:evento, :lugar, :precio_alta, :precio_baja)";

@@ -90,6 +90,14 @@ class Tabla
     return $this->datos;
   }
 
+  public function obtener_datos_orden($campo, $valor) {
+     $sql = "SELECT * FROM $this->nombre ORDER BY $campo $valor";
+
+     $res = Conexion::query($sql, array(), true);
+
+     return $res;
+  }
+
   public function obtener_datos_left_join($tabla2, $on, $campo = '', $value = '')
   {
     if ($campo == '' || $value == '') {

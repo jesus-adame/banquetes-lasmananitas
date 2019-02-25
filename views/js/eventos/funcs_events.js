@@ -43,27 +43,26 @@ function extraerDatosEvento(calEvent) {
 }
 
 function limpiarDatosEvento(date) {
-  e_id.value = '';
-  e_title.value = '';
-  e_evento.value = '';
-  e_contacto.value = '';
-  e_cord_resp.value = '';
-  e_cord_apoyo.value = '';
-  e_description.innerHTML = '';
-  e_place.innerHTML = '';
-  e_status.innerHTML = '';
-  idlugar.value = '0';
-  color.value = '#d7c735';
-  e_folio.value = '';
-  txtcategoria.innerHTML = '';
+   e_id.value = '';
+   e_title.value = '';
+   e_evento.value = '';
+   e_contacto.value = '';
+   e_cord_resp.value = '';
+   e_cord_apoyo.value = '';
+   e_description.innerHTML = '';
+   e_place.innerHTML = '';
+   e_status.innerHTML = '';
+   color.value = '#d7c735';
+   e_folio.value = '';
+   txtcategoria.innerHTML = '';
 
-  date_start.value = date.format('YYYY-MM-DD');
-  date_end.value = date.format('YYYY-MM-DD');
+   date_start.value = date.format('YYYY-MM-DD');
+   date_end.value = date.format('YYYY-MM-DD');
 
-  time.value = '00:00:00';
-  time_f.value = '23:00:00';
+   time.value = '00:00:00';
+   time_f.value = '23:00:00';
 
-  personas.value = '';
+   personas.value = '';
 }
 
 function arrastrarEvento(calEvent) {

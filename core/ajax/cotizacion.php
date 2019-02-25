@@ -1,6 +1,7 @@
 <?php
 
    include '../config/conexion.php';
+   include '../models/tablasModel.php';
    include '../models/CotizacionModel.php';
 
    /** CAPTURA DE DATOS */
@@ -17,6 +18,7 @@
    /** RESPUESTA DEL SERVIDOR */
    $res = array(
       'msg' => '',
+      'event' => '',
       'error' => false
    );
 
@@ -29,7 +31,7 @@
       $reservaciones = $cot->verificarEspacio();
 
       /** VERIFICA QUE NO ESTÉ RESERVADO EL LUGAR */
-      if (sizeof($reservaciones) >= 1) {
+      if (sizeof($reservaciones, 0) >= 1) {
          $res['msg'] = 'El salón está ocupado en la fecha solicitada';
          $res['error'] = true;
 
@@ -70,9 +72,14 @@
       $res['error'] = true;
    }
    
-   /** SI NO HAY ERRORES, GUARDA EL LOG */
+   /** SE EJECUTA SI NO HAY ERRORES, GUARDA EL LOG */
    if (!$res['error']) {
       $cot->crearLog($evento);
+
+      /** SE OBTIENE EL EVENTO SELECCIONADO */
+      $t = new Tabla('tipo_eventos');
+      $event_reg = $t->obtener_datos_donde('id_tipo_evento', $evento);
+      $res['event'] = strtoupper($event_reg[0]['nombre_tevento']);
    }
 
    header('Content-type:aplication/json');

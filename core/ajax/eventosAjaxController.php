@@ -1,5 +1,4 @@
 <?php header('Content-type: application/json');
-header('Access-Control-Allow-Origin: *');
 session_start();
 include '../models/EventosModel.php';
 include '../models/TablasModel.php';
@@ -7,7 +6,7 @@ require_once '../config/conexion.php';
 $event = new Evento();
 $tabla_event = new Tabla('eventos');
 
-$accion = isset($_GET['accion']) ? $_GET['accion'] : 'leer';
+$accion = isset($_REQUEST['accion']) ? $_REQUEST['accion'] : 'leer';
 
 switch ($accion) {
   case 'agregar':
@@ -69,15 +68,15 @@ function crearArrayDatos() {
     $_POST['evento'],
     $_POST['contacto'],
     $_POST['cord_resp'],
-    $_POST['cord_apoyo'],
-    $_POST['description'],
+    isset($_POST['cord_apoyo']) ? $_POST['cord_apoyo'] : '',
+    isset($_POST['description']) ? $_POST['description'] : '',
     $_POST['id_lugar'],
     $_POST['start'],
     $_POST['end'],
     $_POST['personas'],
     $_POST['categoria'],
     $_POST['color'],
-    $_POST['folio']
+    isset($_POST['folio']) ? $_POST['folio'] : ''
   );
   return $d;
 }

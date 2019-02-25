@@ -1,21 +1,26 @@
-(function obtenerLugares(select) {
-    select.innerHTML = '';
+function obtenerLugares(select) {
+   select.innerHTML = '';
 
-    fetch('core/ajax/obtenerLugares.php', {
-        method: 'POST'
-    }).then(response => response.json())
-    .then(dataJson => {
-        select.innerHTML += `<option value="0"> - Elegir - </option>`;
-        if (dataJson != 'fail') {
-            for (let i in dataJson) {
-                let item = dataJson[i];
-                select.innerHTML += `<option value="${item.id_lugar}"> ${item.lugar} </option>`;
-            }            
-        } else {
-            select.innerHTML = `<option value="2"> No se han registrado lugares </option>`;
-        }
-    })
-    .catch(error => {
-        consonle.log(`Surgió un error: ${error.message}`);
-    })
-})(idlugar);
+   fetch('core/ajax/obtenerLugares.php', {
+      method: 'POST'
+   }).then(response => response.json())
+   .then(dataJson => {
+      let rowHTML = `<option value="${dataJson[0].id_lugar}"> - Elegir - </option>`;
+
+      if (dataJson != 'fail') {
+         for (let i in dataJson) {
+            let item = dataJson[i];
+
+            rowHTML += `<option value="${item.id_lugar}"> ${item.lugar} </option>`;
+         }            
+      } else {
+         rowHTML = `<option value="2"> No se han registrado lugares </option>`;
+      }
+      select.innerHTML = rowHTML;
+   })
+   .catch(error => {
+      consonle.log(`Surgió un error: ${error.message}`);
+   })
+}
+
+obtenerLugares(idlugar);
