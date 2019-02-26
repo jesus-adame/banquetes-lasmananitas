@@ -1,7 +1,7 @@
 <?php
 
    include '../config/conexion.php';
-   include '../models/tablasModel.php';
+   include '../models/TablasModel.php';
    include '../models/CotizacionModel.php';
 
    /** CAPTURA DE DATOS */

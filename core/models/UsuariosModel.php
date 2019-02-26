@@ -23,7 +23,7 @@ class Usuario
         $this->pass = $pass;
     }
 
-    public function insertarUsuario($nivel)
+    public function insertarUsuario($nivel, $estado)
     {
         if ($this->usuario == '' || $this->pass == '') {
             return 0;
@@ -32,15 +32,18 @@ class Usuario
         $sql = "INSERT INTO usuarios (
             username,
             pass,
+            estado,
             nivel) VALUES (
             :usuario,
             :pass,
+            :estado,
             :nivel)";
 
         $exe = $this->db->prepare($sql);
         $exe->execute(array(
             'usuario' => $this->usuario,
             'pass' => $this->pass,
+            'estado' => $estado,
             'nivel' => $nivel
         ));
 

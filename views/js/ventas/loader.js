@@ -1,6 +1,5 @@
 sellyear = 2019;
 cargarVentaSem1();
-cargarVentaSem2();
 sellYear.innerHTML = sellyear;
 
 addEventListener('DOMContentLoaded', () => {
@@ -13,14 +12,12 @@ addEventListener('DOMContentLoaded', () => {
          sellyear++;
          sellYear.innerHTML = sellyear;
          cargarVentaSem1();
-         cargarVentaSem2();
          break;
 
          case 'prevyear':
          sellyear--;
          sellYear.innerHTML = sellyear;
          cargarVentaSem1();
-         cargarVentaSem2();
          break;
       }
    })

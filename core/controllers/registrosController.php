@@ -15,7 +15,7 @@ $tabla->setName('usuario_empleado');
 $validados = $tabla->obtener_datos_join('empleados', 'id_empleado');
 
 
-$html->assign('titulo', '');
+$html->assign('titulo', 'Personal');
 $html->assign('subtitulo', 'Control de Usuarios');
 $html->assign('usuarios', $usuarios);
 $html->assign('empleados', $empleados);

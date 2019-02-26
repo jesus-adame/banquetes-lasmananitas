@@ -21,7 +21,7 @@ switch ($_POST['action']) {
                     $t = new Tabla('usuarios');
                     $validar = $t->obtener_datos_donde('username', $_POST['usuario']);
                     if (!$validar) {
-                        $usu->insertarUsuario($_POST['nivel']);
+                        $usu->insertarUsuario($_POST['nivel'], $_POST['estado']);
                         echo json_encode('success');
                     } else {
                         echo json_encode('error');
@@ -98,7 +98,7 @@ switch ($_POST['action']) {
                 $validar = $t->obtener_datos_donde('username', $_POST['usuario']);
                 
                 if (!$validar) {
-                    $res = $usu->insertarUsuario($nivel);
+                    $res = $usu->insertarUsuario($nivel, 0);
                     echo json_encode('success');
                 } else {
                     echo json_encode('error');
