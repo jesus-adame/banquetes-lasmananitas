@@ -18,7 +18,7 @@ class Cotizacion
 
         $res1 = Conexion::query($sql, $new_data, true, false);
 
-        if (sizeof($res1) >= 1) {
+        if (sizeof($res1, 0) >= 1) {
             return $res1;
         } else {
             $sql = "SELECT * FROM eventos WHERE :final BETWEEN start and end AND id_lugar = :id_lugar AND color != '#d7c735'";
@@ -30,7 +30,7 @@ class Cotizacion
 
             $res2 = Conexion::query($sql, $new_data, true, false);
 
-            if (sizeof($res2) >= 1) {
+            if (sizeof($res2, 0) >= 1) {
                 return $res2;
             } else {
                 $sql = "SELECT * FROM eventos WHERE ((start between :inicio and :final) OR 
@@ -65,7 +65,7 @@ class Cotizacion
 
         $validacion = Conexion::query($sql1, $data1, true);
 
-        if (sizeof($validacion) <= 0) {
+        if (sizeof($validacion, 0) <= 0) {
             $sql = 'INSERT INTO cot_renta (cliente, telefono, email, pax, tipo_evento, lugar, fecha_inicio, fecha_final) VALUES (:cliente, :telefono, :email, :pax, :tipo_evento, :lugar, :fecha_inicio, :fecha_final);';
 
             $new_data = array(

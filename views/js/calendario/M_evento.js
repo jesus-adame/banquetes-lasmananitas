@@ -1,15 +1,9 @@
 const m_evento = document.querySelector('#M_evento');
 
-cerrar.addEventListener('click', () => {
-  form_evento.reset()
-  m_evento.style.display = 'none'
-})
-
 window.addEventListener('click', (e) => {
-  if (e.target == flex) {
-    form_evento.reset()
-    m_evento.style.display = 'none'
-  }
+   if (e.target === flex || e.target === cerrar) {
+      cerrarEvent();
+   }
 })
 
 function abrirEvent()

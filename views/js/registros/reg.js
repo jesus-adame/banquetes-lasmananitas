@@ -108,7 +108,11 @@ addEventListener('DOMContentLoaded', () => {
 
         } else if (btn == 'btn danger') {
             popup.confirm({
-                content: 'El usuario se borrará'
+               content: '<b>Eliminar</b><br><br>¿Está seguro?',
+               default_btns: {
+                  ok: 'SÍ',
+                  cancel: 'NO'
+               }
             },
             (clk) => {
                 if (clk.proceed) {

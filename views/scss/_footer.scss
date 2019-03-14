@@ -6,15 +6,17 @@ footer {
   width: 100%;
   padding-top: 15px;
   padding-bottom: 10px;
-  & .btn {
-    color: #e3e0e3;
-    border: solid 1px #00000000;
-    margin-bottom: 5px;
-    &:hover {
-      background: #1b1b1b;
-      border: solid 1px;      
-    }
-  }
+  
+   & .btn {
+      color: #e3e0e3;
+      border: solid 1px #00000000;
+      margin-bottom: 5px;
+      &:hover {
+         background: #1b1b1b;
+         border: solid 1px;      
+      }
+   }
+   
   & a {
     color: #e3e0e3;
     text-decoration: underline;

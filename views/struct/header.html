@@ -38,8 +38,10 @@
               <i class="fas fa-home"></i> Inicio</a></li>
           {if isset($smarty.session.puesto)}
           <li>
+            {if $smarty.session.puesto != 'Ventas'}
             <a class="btn-h {if $smarty.get.view == 'calendario'}active{/if}" href="?view=calendario">
               <i class="far fa-calendar-alt"></i> Calendario</a></li>
+            {/if}
             {if $smarty.session.puesto eq 'Ventas' || $smarty.session.puesto eq 'Supervisor' || $smarty.session.puesto eq 'Administrador'}
           <li>
             <a class="btn-h {if $smarty.get.view == 'eventos'}active{/if}" href="?view=eventos">

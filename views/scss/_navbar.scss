@@ -51,6 +51,7 @@ nav {
       right: -100%;
       top: 72px;
       opacity: 0;
+      box-sizing: border-box;
 
       & .btn-h {
         border-radius: 0;

@@ -2,54 +2,28 @@
 
 .default {
   color: #272727;
-  background: #b1b1b1;
-
-  &:hover {
-    color: #272727;
-    background: #8f8f8f;
-  }
+  background: $default;
 }
 
 .primary {
-  color: #d9e6f1;
+  color: #e1eef8;
   border: none;
   background: $primary;
-
-  &:hover {
-    color: #fff;
-    background: $primary_hover;
-    border: none;
-  }
 }
 
 .success {
   color: #eef0ef;
   background: $success;
-
-  &:hover {
-    color: #fff;
-    background: $success_hover;
-  }
 }
 
 .atention {
   color: #282727;
   background: $atention;
-
-  &:hover {
-   color: #000;
-   background: $atention_hover;
- }
 }
 
 .danger {
  color: #f5dbdb;
  background: $danger;
-
- &:hover {
-   color: $blanco;
-   background: $danger_hover;
- }
 }
 
 /*------------------------- end color -------------------------*/

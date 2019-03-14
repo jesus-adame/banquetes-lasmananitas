@@ -1,42 +1,49 @@
 .btn {
-  cursor: pointer;
-  letter-spacing: 0.4px;
-  padding: 6px 10px;
-  display: block;
-  text-decoration: none;
-  border-radius: 4px;
-  text-align: center;
-  transition: 0.2s;
-  margin: 0 5px;
-  min-width: 90px;
-  border: none;
-  &:disabled {
-    display: none;
-  }
+   cursor: pointer;
+   letter-spacing: 0.4px;
+   padding: 6px 10px;
+   display: block;
+   text-decoration: none;
+   border-radius: 4px;
+   text-align: center;
+   transition: 0.2s;
+   margin: 0 5px;
+   min-width: 90px;
+   border: none;
+
+   &:disabled {
+      display: none;
+   }
+
+   &:hover {
+      box-shadow: inset 0px 0px 4px #000;
+   }
 }
 
 .admin-button {
-  display: inline-block;
-  color: #181818;
-  background: #d8d8d8;
-  border: solid 1px #747474;
-  padding: 20px;
-  text-decoration: none;
-  font-family: 'Meloche';
+   cursor: pointer;
+   display: inline-block;
+   color: #181818;
+   background: #d8d8d8;
+   border: solid 1px #747474;
+   padding: 20px;
+   text-decoration: none;
+   font-family: 'Meloche';
 
-  &:hover {
-    background: #c1c1c1;
-  }
+   &:hover {
+      background: #c1c1c1;
+   }
 }
 
 .button {
-  color: #242424;
-  background: linear-gradient(#f0f0f0, #dddddd);
-  outline: none;
-  border: solid 1px #b4b4b4;
-  cursor: pointer;
-  border-radius: 3px;
-  &:hover {
-    background: linear-gradient(#ebebeb, #dadada);
-  }
+   cursor: pointer;
+   color: #242424;
+   background: linear-gradient(#f0f0f0, #dddddd);
+   outline: none;
+   border: solid 1px #b4b4b4;
+   border-radius: 3px;
+
+   &:hover {
+      background: linear-gradient(#ebebeb, #dadada);
+   }
 }

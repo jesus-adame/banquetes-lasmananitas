@@ -1,6 +1,6 @@
 <div id="M_evento" class="modal">
   <div id="flex" class="flex">
-    <div class="modal-content col-xs-11 col-md-9">
+    <div class="modal-content modal-up col-xs-11 col-md-9">
       <div class="modal-header">
         <h3>Evento</h3>
         <ul class="tabs">

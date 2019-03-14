@@ -1,56 +1,121 @@
+
+<!-- CABECERA DE LA PÁGINA -->
 {include file='views/struct/header.html'}
+<style>
+   .img-user {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: solid 3px #c1c1c1;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+   }
+   .img-user img {
+      width: 98%;
+   }
+   .t-detalle {
+      border: solid 1px #c1c1c1;
+   }
+   .t-detalle td {
+      font-family: sans-serif;
+      border: solid 1px #c1c1c1;
+      padding: 6px 10px;
+   }
+   .t-detalle td:first-child {
+      font-weight: 600;
+   }
+   .detalle button {
+      margin-top: 10px;
+      margin-bottom: 20px;
+   }
+   td {
+      width: 100%;
+      overflow: hidden;
+   }
+</style>
+
+<!-- MODAL DETALLE USUARIO -->
+{include file='views/templates/mi_perfil/m_detalle.html'}
+
 <main>
-    <div class="content m-auto">
-        <h1>Mi perfil</h1>
-        
-        <form id="form_pass" class="form col-xs-11 col-sm-6 col-md-4 m-auto-x" action="#">
-            <h3>Username: {$usuario}</h3><br>
-            <caption>Cambiar contraseña</caption>
-            <fieldset>
-                Contraseña actual: <br>
-                <input class="col-xs-12" type="password" name="pass">
-                Nueva Contraseña: <br>
-                <input class="col-xs-12" type="password" name="pass1">
-                Repetir Contraseña: <br>
-                <input class="col-xs-12" type="password" name="pass2"><br><br>
-                <button class="btn atention">Cambiar</button>
-            </fieldset>            
-        </form>
-    </div>
+   <!-- CONTENEDOR PRINCIPAL -->
+   <div class="content m-auto">
+      <h1>Mi perfil</h1><br>
+
+      <div class="row-between">
+         <div class="col-xs-12 col-md-6 row-between">
+
+            <!-- IMAGEN DEL USUARIO -->
+            <div class="img-user col-xs-6">
+               <img src="storage/thumbs/user-png-1.png" alt="user">
+            </div>
+
+            <div class="detalle col-xs-12 col-sm-5">
+
+               <!-- TABLA DETALLE USUARIO -->
+               <table class="t-detalle col-xs-12">
+                  <tr>
+                     <td>Usuario</td>
+                     <td id="user">{$usuario}</td>
+                  </tr>
+                  <tr>
+                     <td>Nombre</td>
+                     <td id="u_nombre"></td>
+                  </tr>
+                  <tr>
+                     <td>Apellidos</td>
+                     <td id="u_apellidos"></td>
+                  </tr>
+                  <tr>
+                     <td>Correo</td>
+                     <td id="u_email"></td>
+                  </tr>
+                  <tr>
+                     <td>Teléfono</td>
+                     <td id="u_telefono"></td>
+                  </tr>
+               </table>
+
+               <div class="row-between col-xs-12">
+                  <div></div>
+                  <!-- BOTÓN EDITAR DETALLE USUARIO -->
+                  <button id="btn_detalle" class="btn atention">
+                     <i class="fas fa-pencil-alt"></i> Editar
+                  </button>
+               </div>
+                 
+            </div>
+            
+         </div>
+         
+         <div class="col-xs-11 col-sm-9 col-lg-5">
+            <p style="text-align: center"><b>Cambiar contraseña</b></p>
+
+            <!-- FORMULARIO CAMBIO DE CONTRASEÑA -->
+            <form id="form_pass" class="form col-xs-11" action="#">            
+               <fieldset>
+                  Contraseña actual: <br>
+                  <input class="col-xs-12" type="password" name="pass">
+                  Nueva Contraseña: <br>
+                  <input class="col-xs-12" type="password" name="pass1">
+                  Repetir Contraseña: <br>
+                  <input class="col-xs-12" type="password" name="pass2"><br><br>
+
+                  <!-- BOTÓN ACTUALIZAR CONTRASEÑA -->
+                  <button class="btn success">
+                     <i class="fas fa-chevron-up"></i> Actualizar
+                  </button>
+               </fieldset>
+            </form>
+         </div>
+         
+      </div>
+   </div>
 </main>
 
-<script>
-form_pass.addEventListener('submit', (e) => {
-    e.preventDefault();
-    let d = new FormData(form_pass);
-    d.append('action', 'cambiar_pass');
-
-    ajaxReq(d, 'core/ajax/registrosAjaxController.php')
-    .then(dataJson => {
-        if (dataJson == 'empty_fields') {
-            popup.alert({ content: 'No se ingresaron datos', effect: 'bottom' });
-        } else if (dataJson == 'pass_dont_match') {
-            popup.alert({ content: 'Las nuevas contraseñas no coinciden', effect: 'bottom' });
-
-        } else if (dataJson == 'error') {
-            popup.alert({ content: 'Se equivocó en la contraseña actual', effect: 'bottom' });
-
-        } else if (dataJson == 'dont_length') {
-            popup.alert({ content: 'La contraseña debe ser de al menos 6 caracteres', effect: 'bottom' });
-
-        } else if (dataJson == 'success') {
-            popup.alert({ content: 'Su contraseña se ha actualizado', effect: 'bottom' });
-            form_pass.reset();
-        }
-    })
-})
-
-const ajaxReq = (formData, url) => {
-    return res = fetch(url, {
-        method: 'POST',
-        body: formData
-    }).then(response => response.json());
-}
-
-</script>
+<!-- PIÉ DE PÁGINA -->
 {include file='views/struct/footer.html'}
+<script src="views/js/Modal.js"></script>
+<script src="views/js/mi-perfil/print-functions.js"></script>
+<script src="views/js/mi-perfil/onload.js"></script>

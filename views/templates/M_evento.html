@@ -49,8 +49,8 @@
                   <select id="color" class="col-xs-11" name="color">
                     <option id="old_color" value="#d7c735">- Elegir -</option>
                     <option value="#d7c735">Tentativo</option>
-                    <option value="#f98710">Apartado</option>
                     {if $smarty.session.puesto eq 'Supervisor' || $smarty.session.puesto eq 'Administrador'}
+                    <option value="#f98710">Apartado</option>
                     <option value="#e62424">Cerrado</option>
                     {/if}
                   </select>

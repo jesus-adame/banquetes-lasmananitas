@@ -17,8 +17,11 @@ addEventListener('DOMContentLoaded', () => {
 
   btnModificar.addEventListener('click', (e) => {
     popup.confirm({
-      content: '¿Aplicar cambios?',
-      effect: 'bottom'
+      content: '<b>Modificar</b><br><br>¿Aplicar cambios?',
+      default_btns: {
+         ok: 'SÍ',
+         cancel: 'NO'
+      }
     },
     (click) => {
       if (click.proceed) {
@@ -29,8 +32,11 @@ addEventListener('DOMContentLoaded', () => {
 
   btnBorrar.addEventListener('click', (e) => {
     popup.confirm({
-      content: 'El evento se eliminará',
-      effect: 'bottom'
+      content: '<strong>Eliminar</strong><br><br>¿Está seguro?',
+      default_btns: {
+         ok: 'SÍ',
+         cancel: 'NO'
+      }
     },
     (click) => {
       if (click.proceed) {

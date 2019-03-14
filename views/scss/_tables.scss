@@ -1,52 +1,54 @@
 .table {
-  background: #fff;
-  border-collapse: collapse;
-  overflow: hidden;
-  width: 100%;
-  box-sizing: border-box;
-  & thead {
-    font-family: 'Roboto', sans-serif;
-    font-size: 1rem;
-    & tr {
-    border-radius: 4px;
-    }
-    & th {
-      color: #333333;
-      background: #cbc7c7;
-      border: solid 1px #a3a3a3;
-      padding: 8px 5px;
-    }
-  }
-  & tbody {
-    font-family: sans-serif;
-    font-size: 14px;
-    text-align: center;
-    & tr {
+   background: #fff;
+   border-collapse: collapse;
+   overflow: hidden;
+   width: 100%;
+   box-sizing: border-box;
+   & thead {
+      font-family: 'Roboto', sans-serif;
+      font-size: 1rem;
+      & tr {
       border-radius: 4px;
-      &:nth-child(even) {
-        background-color: #e8e8e8;
       }
-    }
-    & td {
-      height: 20px;
-      padding: 6px 8px;
-      box-sizing: border-box;
-      vertical-align: middle;
-      border: solid 1px #a7a7a7;
-    }
-  }
-  & button {
-    padding: 3px 5px;
-    width: 45%;
-    display: inline-block;
-    border-radius: 4px;
-    box-sizing: border-box;
-    transition: 0.2s;
-    border: none;
-    &:hover {
+      & th {
+         color: #333333;
+         background: #cbc7c7;
+         border: solid 1px #a3a3a3;
+         padding: 6px 0px;
+      }
+   }
+   & tbody {
+      font-family: sans-serif;
+      font-size: 14px;
+      text-align: center;
+      & tr {
+         border-radius: 4px;
+         &:nth-child(even) {
+         background-color: #e8e8e8;
+         }
+      }
+      & td {
+         height: 20px;
+         padding: 6px 8px;
+         box-sizing: border-box;
+         vertical-align: middle;
+         border: solid 1px #a7a7a7;
+      }
+   }
+   & button {
       cursor: pointer;
-    }
-  }
+      padding: 3px 5px;
+      width: 45%;
+      display: inline-block;
+      border-radius: 4px;
+      box-sizing: border-box;
+      transition: 0.2s;
+      border: none;
+      &:hover {
+         letter-spacing: 1px;
+         box-shadow: inset 0px 0px 4px #000;
+      }
+   }
 }
 
 .t-scroll {
