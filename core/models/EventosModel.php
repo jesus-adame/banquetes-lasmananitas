@@ -10,45 +10,52 @@ class Evento
     $this->datos = array();
   }
 
-  public function agregarEvento($datos)
+  /** CREA UN ARRAY DE LOS DATOS */
+  private function getArrayData()
   {
-    $sql = "INSERT INTO
-    eventos (title, evento, contacto,
-    cord_resp, cord_apoyo, description, id_lugar,
-    start, end, personas, categoria, color, folio, id_usuario)
-    VALUES (:title, :evento, :contacto,
-      :cord_resp, :cord_apoyo, :des, :lugar,
-      :start, :end, :personas, :categoria,
-      :color, :folio, :id_usuario)";
+    $cord_resp = isset($_POST['cord_resp']) ? $_POST['cord_resp'] :
+    $_SESSION['usuario']['nombre'].  ' ' .$_SESSION['usuario']['apellidos'];
 
-    $exe = $this->db->prepare($sql);
-    $exe->execute(array(
-      'title' => $datos[0],
-      'evento' => $datos[1],
-      'contacto' => $datos[2],
-      'cord_resp' => $datos[3],
-      'cord_apoyo' => $datos[4],
-      'des' => $datos[5],
-      'lugar' => $datos[6],
-      'start' => $datos[7],
-      'end' => $datos[8],
-      'personas' => $datos[9],
-      'categoria' => $datos[10],
-      'color' => $datos[11],
-      'folio' => $datos[12],
-      'id_usuario' => $_SESSION['id_usuario']
-    ));
-
-    return $exe;
+    return array(
+      'title' => $_POST['title'],
+      'evento' => $_POST['evento'],
+      'folio' => isset($_POST['folio']) ? $_POST['folio'] : '',
+      'contacto' => $_POST['contacto'],
+      'cord_resp' => strtoupper($cord_resp),
+      'cord_apoyo' => isset($_POST['cord_apoyo']) ? $_POST['cord_apoyo'] : '',
+      'des' => isset($_POST['description']) ? $_POST['description'] : '',
+      'lugar' => $_POST['id_lugar'],
+      'start' => $_POST['start'],
+      'end' => $_POST['end'],
+      'personas' => $_POST['personas'],
+      'categoria' => $_POST['categoria'],
+      'color' => $_POST['color']
+    );
   }
 
+  /**---------------- INSERTA EL EVENTO */
+  public function agregarEvento()
+  {
+    $data = $this->getArrayData();
+    $data['id_usuario'] = $_SESSION['usuario']['id_usuario'];
+
+    $sql = "INSERT INTO eventos VALUES (
+      null, :title, :evento, :folio, :contacto, :cord_resp,
+      :cord_apoyo, :des, :lugar, :start, :end, :personas,
+      :categoria, :color, :id_usuario)";
+
+    $agregar = Conexion:: query($sql, $data);
+
+    return $agregar;
+  }
+
+  /**--------------------- ELIMINA EL EVENTO */
   public function eliminarEvento($id)
   {
-    if ($this->obtenerValidacionEvento($_SESSION['id_usuario'], $id)
-    || $_SESSION['puesto'] == 'Administrador' || $_SESSION['puesto'] == 'Supervisor') {
+    if ($this->obtenerValidacionEvento($_SESSION['usuario']['id_usuario'], $id) ||
+      $_SESSION['usuario']['rol'] == 'Administrador' || $_SESSION['usuario']['rol'] == 'Supervisor') {
 
-      $sql = "DELETE FROM
-      eventos WHERE id_evento = :id";
+      $sql = "DELETE FROM eventos WHERE id_evento = :id";
 
       $exe = $this->db->prepare($sql);
       $exe->execute(array(
@@ -60,42 +67,29 @@ class Evento
     
   }
 
-  public function modificarEvento($id, $datos)
+  /**------------------- MODIFICA EL EVENTO */
+  public function modificarEvento($id)
   {
-    if ($this->obtenerValidacionEvento($_SESSION['id_usuario'], $id) == 1
-    || $_SESSION['puesto'] == 'Administrador' || $_SESSION['puesto'] == 'Supervisor') {
+    $data = $this->getArrayData();
+    $data['id'] = $id;
+
+    if ($this->obtenerValidacionEvento($_SESSION['usuario']['id_usuario'], $id) == 1 ||
+      $_SESSION['usuario']['rol'] == 'Administrador' || $_SESSION['usuario']['rol'] == 'Supervisor') {
 
       $sql = "UPDATE eventos SET
       title = :title, evento = :evento, contacto = :contacto,
       cord_resp = :cord_resp, cord_apoyo = :cord_apoyo,
       description = :des, id_lugar = :lugar, start = :start,
-      end = :end, personas = :personas,
-      categoria = :categoria, color = :color, folio = :folio
-      WHERE id_evento = :id";
+      end = :end, personas = :personas, categoria = :categoria,
+      color = :color, folio = :folio WHERE id_evento = :id";
 
-      $exe = $this->db->prepare($sql);
-      $exe->execute(array(
-        'title' => $datos[0],
-        'evento' => $datos[1],
-        'contacto' => $datos[2],
-        'cord_resp' => $datos[3],
-        'cord_apoyo' => $datos[4],
-        'des' => $datos[5],
-        'lugar' => $datos[6],
-        'start' => $datos[7],
-        'end' => $datos[8],
-        'personas' => $datos[9],
-        'categoria' => $datos[10],
-        'color' => $datos[11],
-        'folio' => $datos[12],
-        'id' => $id
-      ));
+      $editar = Conexion::query($sql, $data);
+      return $editar;
 
-      return $exe;
-
-    } else { return 0; }
+    } else { return false; }
   }
 
+  /**----------------- VALIDA LOS DATOS DEL FORMULARIO */
   private function obtenerValidacionEvento($id_usu, $id_evento)
   {
     $sql = "SELECT id_usuario FROM eventos

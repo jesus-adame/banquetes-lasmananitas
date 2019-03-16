@@ -13,11 +13,8 @@ switch ($accion) {
     if (!empty($_POST['id_evento']) && !empty($_POST['nombre'])
     && !empty($_POST['lugar']) && !empty($_POST['montaje'])
     && !empty($_POST['garantia'])) {
-
       
-      $datos = crearArrayDatos($_POST['tipo_formato']);
-      
-      $lastInsertId = $orden->agregarOrden($datos);
+      $lastInsertId = $orden->agregarOrden();
       
       if (isset($_POST['tag'])) {
         $tag = $_POST['tag'];
@@ -52,11 +49,9 @@ switch ($accion) {
   case 'modificar':
     if (!empty($_POST['id']) && !empty($_POST['nombre'])
     && !empty($_POST['lugar']) && !empty($_POST['montaje'])
-    && !empty($_POST['garantia'])) {      
+    && !empty($_POST['garantia'])) {
       
-      $datos = crearArrayDatos($_POST['tipo_formato']);
-      
-      $res = $orden->modificarOrden($_POST['id'], $datos);
+      $res = $orden->modificarOrden($_POST['id']);
       
       if (isset($_POST['id_campo']) && isset($_POST['tag'])) {
         $id_campo = $_POST['id_campo'];
@@ -106,155 +101,4 @@ switch ($accion) {
 
     echo json_encode($res);
     break;
-}
-
-/**
- * Creardor de array de datos enviados por POST
- */
-
-function crearArrayDatos($formato)
-{
-  switch ($formato) {
-    case 'banquete':
-      $datos = array(
-        $_POST['id_evento'],
-        $_POST['fecha']. ' ' .$_POST['time'],
-        $_POST['nombre'],
-        $_POST['lugar'],
-        $_POST['montaje'],
-        '',
-        $_POST['entrada'],
-        $_POST['fuerte'],
-        $_POST['postre'],
-        $_POST['bebidas'],
-        '',
-        $_POST['mezcladores'],
-        $_POST['detalle_montaje'],
-        $_POST['ama_llaves'],
-        $_POST['mantenimiento'],
-        $_POST['seguridad'],
-        $_POST['recursos_humanos'],
-        $_POST['proveedores'],
-        $_POST['contabilidad'],
-        $_POST['garantia'],
-        $_POST['chief_steward'],
-        $_POST['observaciones'],
-        $_POST['tipo_formato']
-      );
-    break;
-
-    case 'grupo':
-      $datos = array(
-        $_POST['id_evento'],
-        $_POST['fecha']. ' ' .$_POST['time'],
-        $_POST['nombre'],
-        $_POST['lugar'],
-        $_POST['montaje'],
-        $_POST['canapes'],
-        '',
-        '',
-        '',
-        $_POST['bebidas'],
-        '',
-        '',
-        $_POST['detalle_montaje'],
-        $_POST['ama_llaves'],
-        $_POST['mantenimiento'],
-        '',
-        '',
-        '',
-        $_POST['contabilidad'],
-        $_POST['garantia'],
-        $_POST['chief_steward'],
-        $_POST['observaciones'],
-        $_POST['tipo_formato']
-      );
-    break;
-
-    case 'ceremonia':
-      $datos = array(
-        $_POST['id_evento'],
-        $_POST['fecha']. ' ' .$_POST['time'],
-        $_POST['nombre'],
-        $_POST['lugar'],
-        $_POST['montaje'],
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        '',
-        $_POST['detalle_montaje'],
-        $_POST['ama_llaves'],
-        $_POST['mantenimiento'],
-        $_POST['seguridad'],
-        $_POST['recursos_humanos'],
-        $_POST['proveedores'],
-        '',
-        $_POST['garantia'],
-        '',
-        $_POST['observaciones'],
-        $_POST['tipo_formato']
-      );
-    break;
-
-    case 'coctel':
-      $datos = array(
-        $_POST['id_evento'],
-        $_POST['fecha']. ' ' .$_POST['time'],
-        $_POST['nombre'],
-        $_POST['lugar'],
-        $_POST['montaje'],
-        $_POST['canapes'],
-        '',
-        '',
-        '',
-        $_POST['bebidas'],
-        $_POST['cocteleria'],
-        $_POST['mezcladores'],
-        $_POST['detalle_montaje'],
-        $_POST['ama_llaves'],
-        $_POST['mantenimiento'],
-        $_POST['seguridad'],
-        $_POST['recursos_humanos'],
-        $_POST['proveedores'],
-        $_POST['contabilidad'],
-        $_POST['garantia'],
-        $_POST['chief_steward'],
-        '',
-        $_POST['tipo_formato']
-      );
-    break;
-
-    case 'torna':
-      $datos = array(
-        $_POST['id_evento'],
-        $_POST['fecha']. ' ' .$_POST['time'],
-        $_POST['nombre'],
-        $_POST['lugar'],
-        $_POST['montaje'],
-        '',
-        '',
-        $_POST['fuerte'],
-        '',
-        '',
-        '',
-        '',
-        $_POST['detalle_montaje'],
-        $_POST['ama_llaves'],
-        $_POST['mantenimiento'],
-        $_POST['seguridad'],
-        $_POST['recursos_humanos'],
-        $_POST['proveedores'],
-        $_POST['contabilidad'],
-        $_POST['garantia'],
-        $_POST['chief_steward'],
-        '',
-        $_POST['tipo_formato']
-      );
-    break;
-  }
-
-  return $datos;
 }

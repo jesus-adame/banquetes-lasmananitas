@@ -12,8 +12,8 @@ class Logistica
 
   public function agregarLogistica($datos)
   {
-    if ($this->obtenerValidacionEvento($_SESSION['id_usuario'], $datos[0])
-    || $_SESSION['puesto'] == 'Administrador') {
+    if ($this->obtenerValidacionEvento($_SESSION['usuario']['id_usuario'], $datos[0])
+    || $_SESSION['usuario']['rol'] == 'Administrador') {
       $sql = "INSERT INTO
       sub_evento (id_evento, start, end,
       title, lugar)
@@ -36,8 +36,8 @@ class Logistica
 
   public function eliminarLogistica($id, $id_evento)
   {
-    if ($this->obtenerValidacionEvento($_SESSION['id_usuario'], $id_evento)
-    || $_SESSION['puesto'] == 'Administrador') {
+    if ($this->obtenerValidacionEvento($_SESSION['usuario']['id_usuario'], $id_evento)
+    || $_SESSION['usuario']['rol'] == 'Administrador') {
       $sql = "DELETE FROM
       sub_evento WHERE id_sub_evento = :id";
 
@@ -53,8 +53,9 @@ class Logistica
 
   public function modificarLogistica($id, $datos)
   {
-    if ($this->obtenerValidacionEvento($_SESSION['id_usuario'], $datos[0])
-    || $_SESSION['puesto'] == 'Administrador') {
+    
+    if ($this->obtenerValidacionEvento($_SESSION['usuario']['id_usuario'], $datos[0])
+    || $_SESSION['usuario']['rol'] == 'Administrador') {
       $sql = "UPDATE sub_evento SET
       id_evento = :id_evento, start = :start,
       end = :end, title = :title,

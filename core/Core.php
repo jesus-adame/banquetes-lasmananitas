@@ -1,5 +1,9 @@
 <?php
 
+if (!isset($_SESSION)) {
+   session_start();
+}
+
 /** SE REQUIERE LA CONEXION A LA BASE DE DATOS Y MANEJO RÁPIDO DE QUERYS */
 require_once 'config/conexion.php';
 

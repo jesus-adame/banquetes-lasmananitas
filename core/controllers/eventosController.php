@@ -1,10 +1,8 @@
 <?php
-if ($_SESSION['puesto'] != 'Ventas' && $_SESSION['puesto'] != 'Supervisor' && $_SESSION['puesto'] != 'Administrador') {
+
+if ($_SESSION['usuario']['rol'] != 'Ventas' && $_SESSION['usuario']['rol'] != 'Supervisor'
+    && $_SESSION['usuario']['rol'] != 'Administrador') {
     header('location:index.php?view=index');
 }
-$html = new Smarty();
 
-$html->assign('titulo', 'Eventos');
-$html->assign('subtitulo', 'Panel de gestión');
-$html->display('views/eventos.html');
 ?>

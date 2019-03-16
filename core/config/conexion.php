@@ -13,8 +13,7 @@ class Conexion
     $stmt = self::conectar();
     $exec = $stmt->prepare($sql);
     $exec->execute($data);
-    $stmt = null;
-
+    
     if ($select) {
       if ($one) {
         return $exec->fetch(PDO::FETCH_ASSOC);
@@ -22,7 +21,7 @@ class Conexion
         return $exec->fetchAll(PDO::FETCH_ASSOC);
       }
     } else {
-      return true;
+      return $stmt;
     }
   }
 }

@@ -1,0 +1,67 @@
+{include file=$inc|cat:'header.html'}
+<style>
+@media screen and (max-width: 440px) {
+  .head-bar {
+      justify-content: center;
+      align-items: center;
+  }
+}
+.btn-tools {
+   display: block; text-decoration: none; text-align: center; padding: 6px 18px;
+   letter-spacing: 1px;
+}
+.tools-bar {
+   margin-bottom: 10px;
+   position: relative;
+}
+.tools-bar::before {
+   content: 'Opciones';
+   position: absolute;
+   left: 10px;
+   opacity: 0.8;
+}
+</style>
+
+{include file=$temp|cat:'eventos/M_evento.html'}
+{include file=$temp|cat:'eventos/MD_evento.html'}
+{include file=$temp|cat:'eventos/MD_logistica.html'}
+{include file=$temp|cat:'eventos/form_eliminar_log.html'}
+{include file=$temp|cat:'eventos/MD_orden.html'}
+{include file=$temp|cat:'eventos/form_eliminar_orden.html'}
+
+<main>
+  <div class="content m-auto">   
+     <div class="row-between head-bar">         
+        <hgroup>
+           <h1>Eventos</h1>
+           <h2>Panel de registro</h2>
+         </hgroup>         
+         
+         <div class="event-msg">
+            <span class="yellow" style="display: inline-block; width: 15px; height: 15px;background: #ebda49"></span> Evento TENTATIVO <br>
+            <span class="orange" style="display: inline-block; width: 15px; height: 15px;background: orange"></span> Evento APARTADO <br>
+            <span class="red" style="display: inline-block; width: 15px; height: 15px; background: red"></span> Evento CERRADO
+         </div>
+      </div>
+
+      <div class="tools-bar row-right col-xs-12">
+         <a href="?view=cotizacion" class="btn-tools">
+         <i class="fas fa-list-ul fa-sm"></i> Cotizar</a>
+      </div>
+    <div id="calendar" class="col-xs-12 col-md-10 col-xlg-9 m-auto-x"></div>
+  </div>
+</main>
+
+<script src="public/js/obtener_lugares.js"></script>
+<script src="public/js/eventos/events-orden.js"></script>
+<script src="public/js/eventos/print-functions.js"></script>
+<script src="public/js/tabs.js"></script>
+<script src="public/js/eventos/funcs_events.js"></script>
+<script src="public/js/eventos/M_evento.js"></script>
+<script src="public/js/eventos/MD_evento.js"></script>
+<script src="public/js/eventos/MD_orden.js"></script>
+<script src="public/js/eventos/MD_logistica.js"></script>
+<script src="public/js/eventos/evento_ajax.js"></script>
+<script src="public/js/calendario.js"></script>
+<script>tabs('#tabs_ordenes');</script>
+{include file=$inc|cat:'footer.html'}

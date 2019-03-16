@@ -1,0 +1,77 @@
+<div id="modal_info" class="win-modal">
+   <div class="m-bg">
+      <div class="m-content" style="min-width: 400px;">
+         <div class="m-head">
+            <p>Cotizaciones</p>
+            <button class="m-close">
+               <i class="fas fa-times"></i>
+            </button>
+         </div>
+
+         <div class="m-body">
+            <h3>Información básica</h3><br>
+            <p>
+               <b>Cliente</b> - <span id="cliente"></span> <br>
+               <b>Título</b> - <span id="titulo"></span> <br>
+               <b>Tipo</b> - <span id="tipo"></span> <br>
+               <b>Invitados</b> - <span id="pax"></span> <br>
+               <b>Lugar</b> - <span id="lugar"></span>
+            </p><br>
+
+            <div class="tools-bar">
+               <ul class="tools-menu row-right">
+                  <li>
+                     <button class="btn-tools">
+                        <i class="fas fa-print"></i> Imprimir
+                     </button>
+                  </li>
+                  <li>
+                     <button id="send_mail" class="btn-tools">
+                        <i class="far fa-envelope"></i> Enviar
+                     </button>
+                  </li>   
+               </ul>
+            </div><br>
+
+            <h3>Resumen de las cotizaciones</h3><br>
+
+            <table id="table_cotizacion" class="table col-xs-12">
+               <thead>
+                  <tr>
+                     <th>ID</th>
+                     <th>EVENTO</th>
+                     <th>Renta</th>
+                     <th>Registró</th>
+                     <th>Estado</th>
+                     <th>Total</th>
+                     <th>
+                        <button class="btn primary">
+                        <i class="fas fa-plus-square"></i>
+                        </button>
+                     </th>
+                  </tr>
+               </thead>
+               <tbody id="tbody_cotizaciones">
+                  <tr>
+                     <td><button class="btn default">1</button></td>
+                     <td>14/03/2019</td>
+                     <td>menu</td>
+                     <td>Juan</td>
+                     <td>Autorizada</td>
+                     <td>
+                        <div class="row">
+                           <button class="btn atention">
+                              <i class="fas fa-pen-alt"></i>
+                           </button>
+                           <button class="btn danger">
+                              <i class="fas fa-trash-alt"></i>
+                           </button>
+                        </div>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+</div>

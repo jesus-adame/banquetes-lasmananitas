@@ -14,31 +14,30 @@ class Sesion
     $this->db = Conexion::conectar();
   }
 
-  public function iniciarSesion()
+  private function getArrayUser()
   {
-    $sql = "SELECT * FROM usuarios
-    WHERE username COLLATE utf8_bin = :user AND pass = :pass AND estado = :estado";
-
-    $statement = $this->db->prepare($sql);
-    $statement->execute(array(
+    return array(
       'user' => $this->user,
       'pass' => $this->pass,
       'estado' => '1'
-    ));
+    );
+  }
 
-    $res = $statement->fetchAll(PDO::FETCH_ASSOC);
+  public function iniciarSesion()
+  {
+    $data = $this->getArrayUser();
 
-    if (count($res) > 0) {
-      foreach ($res as $key) {
-        $_SESSION['id_usuario'] = $key['id_usuario'];
-        $_SESSION['usuario'] = $key['username'];
-        $_SESSION['puesto'] = $key['nivel'];
-      }
+    $sql = "SELECT u.id_usuario, u.username, u.pass, u.nivel as 'rol', d.nombre, d.apellidos
+    FROM usuarios u LEFT JOIN detalle_usuario d ON u.id_usuario = d.id_usuario
+    WHERE username COLLATE utf8_bin = :user AND pass = :pass AND estado = :estado";
 
-      return 1;
+    $session = Conexion::query($sql, $data, true);
+
+    if (count($session) > 0) {
+      $_SESSION['usuario'] = $session[0];
+      return true;
     } else {
-      return 0;
+      return false;
     }
   }
 }
-?>

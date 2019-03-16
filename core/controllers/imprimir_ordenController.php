@@ -1,14 +1,13 @@
 <?php
-if (!isset($_SESSION['puesto'])) {
+if (!isset($_SESSION['usuario'])) {
     unset($_GET['view']);
     header('location:index.php?view=index');
 }
 
-require 'core/lib/vendor/autoload.php';
-include 'core/models/TablasModel.php';
 use Spipu\Html2Pdf\Html2Pdf;
 
-$html = new Smarty();
+include 'core/models/TablasModel.php';
+
 $html2pdf = new Html2Pdf('L', '', 'es', 'true', 'UTF-8');
 $orden = new Tabla('ordenes_servicio');
 

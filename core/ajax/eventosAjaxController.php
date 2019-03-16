@@ -10,11 +10,10 @@ $accion = isset($_REQUEST['accion']) ? $_REQUEST['accion'] : 'leer';
 
 switch ($accion) {
   case 'agregar':
-    if (!empty($_POST['title']) && !empty($_POST['evento']) && !empty($_POST['contacto'])
-    && !empty($_POST['cord_resp']) && !empty($_POST['personas'])) {
-      $datos = crearArrayDatos();
+    if (!empty($_POST['title']) && !empty($_POST['evento']) &&
+      !empty($_POST['contacto']) && !empty($_POST['personas'])) {
 
-      $res = $event->agregarEvento($datos);
+      $res = $event->agregarEvento();
     } else {
       $res = 'empty_fields';
     }
@@ -23,12 +22,11 @@ switch ($accion) {
     break;
 
   case 'modificar':
-    if (!empty($_POST['id']) && !empty($_POST['title'])
-    && !empty($_POST['evento']) && !empty($_POST['contacto'])
-    && !empty($_POST['cord_resp']) && !empty($_POST['personas'])) {
-      $datos = crearArrayDatos();
+    if (!empty($_POST['id']) && !empty($_POST['title']) &&
+      !empty($_POST['evento']) && !empty($_POST['contacto']) &&
+      !empty($_POST['personas'])) {
 
-      $res = $event->modificarEvento($_POST['id'], $datos);
+      $res = $event->modificarEvento($_POST['id']);
       if ($res) {
         echo json_encode($res);
       } else {
@@ -60,23 +58,4 @@ switch ($accion) {
 
     echo json_encode($res);
     break;
-}
-
-function crearArrayDatos() {
-  $d = array(
-    $_POST['title'],
-    $_POST['evento'],
-    $_POST['contacto'],
-    $_POST['cord_resp'],
-    isset($_POST['cord_apoyo']) ? $_POST['cord_apoyo'] : '',
-    isset($_POST['description']) ? $_POST['description'] : '',
-    $_POST['id_lugar'],
-    $_POST['start'],
-    $_POST['end'],
-    $_POST['personas'],
-    $_POST['categoria'],
-    $_POST['color'],
-    isset($_POST['folio']) ? $_POST['folio'] : ''
-  );
-  return $d;
 }

@@ -1,0 +1,61 @@
+{include file=$inc|cat:'header.html'}
+<style>
+</style>
+
+<main>
+   <div class="content">
+      <h2>Cargar cotización</h2><br>
+
+      <form id="form_carga_cot" class="form-cotizacion" action="#" method="post">
+         <label for="folio">Folio</label><br>
+         <input type="text" name="folio" id="folio" required>
+
+         <fieldset>
+            <legend>Lista de perceptos</legend>
+
+            <table id="table_carga_cot" class="table-form">
+               <thead>
+                  <tr>
+                     <th><label for="descripcion[]">Descripcion del producto</label></th>
+                     <th><label for="precio[]">Precio unitario</label></th>
+                     <th><label for="cantidad[]">Cantidad</label></th>
+                     <th><label for="subtotal[]">Subtotal</label></th>
+                     <th>
+                        <button class="btn primary" type="button"><i class="fas fa-plus-circle"></i></button>
+                     </th>
+                  </tr>
+               </thead>
+               <tbody id="tbody_cargar_cot">
+                  <tr>
+                     <td><input type="text" name="descripcion[]"></td>
+                     <td><input type="number" name="precio[]"></td>
+                     <td><input type="number" name="cantidad[]"></td>
+                     <td><input type="text" name="subtotal[]" disabled></td>
+                     <td>
+                        <button class="btn danger" type="button"><i class="fas fa-times"></i></button>
+                     </td>
+                  </tr>
+               </tbody>
+            </table>
+         </fieldset><br>
+
+         <div class="flex">
+            <button class="btn success" type="submit">Enviar Datos</button>
+            <button class="button" type="reset"><i class="fas fa-eraser"></i> Limpiar</button>
+         </div>
+      </form>
+   </div>
+</main>
+
+<script src="public/js/cargar-cotizacion/onload.js"></script>
+<script>
+
+   tbody_cargar_cot.addEventListener('keydown', e => {
+      result = e.target.parentElement.parentElement.lastElementChild.previousElementSibling.firstElementChild
+
+      val = e.target.value
+      result.value = 15 + val
+      console.log('cambia', result)
+   })
+</script>
+{include file=$inc|cat:'footer.html'}

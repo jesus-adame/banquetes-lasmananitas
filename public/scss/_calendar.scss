@@ -1,0 +1,25 @@
+.calendar {
+   & a {
+      font-family: sans-serif;
+   }
+}
+
+.fc-unthemed td {
+   font-family: sans-serif;
+   background: #fff;
+
+}
+
+.fc-event-container a {
+   cursor: pointer;
+}
+
+.fc-toolbar h2 {
+   font-size: 28px;
+   padding: 0%;
+   margin: 0%;
+}
+
+.fc-head {
+   font-family: sans-serif;
+}

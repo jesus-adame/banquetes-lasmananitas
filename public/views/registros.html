@@ -1,0 +1,27 @@
+{include file=$inc|cat:'header.html'}
+{include file=$temp|cat:'registros/M_usuarios.html'}
+<main>
+  <div class="content m-auto">
+    <hgroup>
+      <h1>Registros</h1>
+      <h2>Control de usuarios</h2>
+    </hgroup>
+
+    <div id="tabs_menu">
+
+      <ul class="tabs">
+        <li><a href="#tab1" class="tab active"><i class="fas fa-users"></i></a></li>
+      </ul>
+
+      <div class="tabs_content">
+        <section id="tab1" class="tab_content show">
+          {include file=$temp|cat:'registros/TB_usuarios.html'}
+        </section>
+      </div>   
+    </div>
+  </div>
+</main>
+
+<script src="public/js/tabs.js"></script>
+<script src="public/js/registros/reg.js"></script>
+{include file=$inc|cat:'footer.html'}

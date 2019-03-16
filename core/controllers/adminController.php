@@ -1,5 +1,5 @@
 <?php
-$html = new Smarty();
 
-$html->assign('titulo', 'Administración');
-$html->display('views/administracion.html');
+ if ($_SESSION['usuario']['rol'] != 'Administrador') {
+   header('location:index.php?view=index');
+}
