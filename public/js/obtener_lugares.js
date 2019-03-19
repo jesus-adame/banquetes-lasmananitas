@@ -19,7 +19,7 @@ function obtenerLugares(select) {
       select.innerHTML = rowHTML;
    })
    .catch(error => {
-      consonle.log(`Surgió un error: ${error.message}`);
+      console.log(`Surgió un error: ${error.message}`);
    })
 }
 

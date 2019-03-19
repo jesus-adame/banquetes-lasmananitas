@@ -5,3 +5,4 @@ define('VIEWS_PATH', 'public/views/', true);
 define('STORAGE_PATH', 'storage/', true);
 define('IMAGE_PATH', 'storage/images/', true);
 define('THUMBS_PATH', 'storage/thumbs/', true);
+define('TEMP_PDF', 'public/views/templates/pdf/', true);

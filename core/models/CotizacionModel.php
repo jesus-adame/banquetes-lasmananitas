@@ -1,12 +1,16 @@
 <?php
 class Cotizacion
 {
+    /**--------------- OBTENER TODAS LA COTIZACIONES ----*/
     public function getAll($evento_id)
     {
-        $sql = "SELECT CONCAT(cl.nombre, ' ', cl.apellido) as 'cliente', CONCAT(u.username) as 'usuario', co.folio, co.fecha, co.renta, co.personas, co.estado, co.costo_total 
+        $sql = "SELECT co.folio, CONCAT(cl.nombre, ' ', cl.apellido) as 'cliente', CONCAT(u.username) as 'usuario',
+        co.fecha, co.renta, co.personas, co.estado, co.renta + SUM(d.subtotal) as 'total' 
         FROM cotizaciones co INNER JOIN clientes cl ON co.cliente_id = cl.id
         INNER JOIN usuarios u ON co.usuario_id = u.id_usuario
-        WHERE evento_id = :evento_id";
+        LEFT JOIN detalle_cotizacion d ON co.id = d.cotizacion_id
+        WHERE co.evento_id = :evento_id
+        GROUP BY co.id;";
 
         $select = Conexion::query($sql, array('evento_id' => $evento_id), true);
         return $select;
@@ -36,6 +40,32 @@ class Cotizacion
             'estado' => 0,
             'costo_total' => $_POST['renta']
         );
+    }
+
+    private function getArrayDetalleCot() {
+        $array = array();
+        $count = count($_POST['descripcion']);
+
+        foreach ($_POST['descripcion'] as $d) {
+            if (empty($d)) { return null; }
+        }
+        
+        for ($i = 0; $i < $count; $i++) {
+            $descripcion = $_POST['descripcion'][$i];
+            $cantidad = isset($_POST['cantidad'][$i]) ? (int) $_POST['cantidad'][$i] : 0;
+            $precio = isset($_POST['precio'][$i]) ? (float) $_POST['precio'][$i] : 0;
+            $subtotal = $cantidad * $precio;
+
+            array_push($array, array(
+                'descripcion' => $descripcion,
+                'precio_unitario' => $precio,
+                'cantidad' => $cantidad,
+                'servicio' => 0,
+                'iva' => 0,
+                'subtotal' => $subtotal
+            ));
+        }
+        return $array;
     }
 
     private function getArrayCliente() {
@@ -127,6 +157,32 @@ class Cotizacion
         return $insert->lastInsertId();
     }
 
+    /**---------------------- INSERT DETALLE COTIZACIÓN ------------------*/
+
+    public function insertDetalleCotizacion($cotizacion_id) {
+        $data = $this->getArrayDetalleCot();
+
+        if ($data == null) { return false; }
+
+        $sql = "INSERT INTO detalle_cotizacion VALUES
+        (null, :cotizacion_id, :descripcion, :precio_unitario, :cantidad, :servicio, :iva, :subtotal)";
+
+        foreach ($data as $detalle) {
+            $detalle['cotizacion_id'] = $cotizacion_id;
+
+            try {
+                $insert = Conexion::query($sql, $detalle);
+
+            } catch (PDOExeption $e) {
+                if ($insert->errorCode() !== 0) {
+                    return "Syntax Error: ". $e->getMessage();
+                }
+
+            }
+        }
+        return true;
+    }
+
     /**----------------------- OBTENER PRECIO RENTA ----------------*/
     public function getPrecioRenta($dia, $mes, $id_tevento, $id_lugar) {
         $precio = 0;
@@ -182,6 +238,17 @@ class Cotizacion
         return $cliente_id;
     }
 
+    /**---------------------- OBTENER USUARIO ----------------------*/
+    public function getUsuario($usuario_id)
+    {
+        $sql = "SELECT nombre, apellidos FROM usuarios u
+        INNER JOIN detalle_usuario d ON d.id_usuario = u.id_usuario
+        WHERE u.id_usuario = :usuario_id";
+
+        $usuario = Conexion::query($sql, array('usuario_id' => $usuario_id), true, true);
+        return $usuario;
+    }
+
     /**------------------------ OBTENER EVENTO --------------------*/
     public function getEvento($evento_id) {
         $sql = "SELECT title, evento, personas, categoria FROM eventos
@@ -189,6 +256,41 @@ class Cotizacion
 
         $evento = Conexion::query($sql, array('evento_id' => $evento_id));
         return $evento;
+    }
+
+    /**------------------------- OBTENER COTIZACIÓN -------------------*/
+
+    public function getCotizacion($cotizacion_folio, $usuario_id) {
+        $sql = "SELECT c.id, c.folio, c.fecha, e.title as 'evento', e.contacto, c.usuario_id, c.renta, e.personas as 'pax' FROM cotizaciones c
+        INNER JOIN eventos e ON c.evento_id = e.id_evento
+        WHERE c.folio = :folio AND c.usuario_id = :usuario";
+
+        $cotizacion = Conexion::query($sql, array('folio' => $cotizacion_folio, 'usuario' => $usuario_id), true);
+        return $cotizacion;
+    }
+
+    /**------------------------- OBTENER DETALLE COTIZACIÓN -------------------*/
+
+    public function getDetalleCotizacion($cotizacion_id)
+    {
+        $sql = "SELECT id, descripcion, precio_unitario, cantidad, subtotal FROM
+        detalle_cotizacion WHERE cotizacion_id = :cotizacion_id";
+
+        $detalle = Conexion::query($sql, array('cotizacion_id' => $cotizacion_id), true);
+        return $detalle;
+    }
+
+    /**----------------------- OBTENER EL TOTAL DE LA COTIZACION --------------*/
+    public function getTotalCotizacion($folio) {
+        $sql = "SELECT c.renta, SUM(d.subtotal) as 'alimentos', c.costo_total + SUM(d.subtotal) as 'total' FROM detalle_cotizacion d INNER JOIN cotizaciones c ON d.cotizacion_id = c.id
+        WHERE c.folio = :folio;";
+
+        $select = Conexion::query($sql, array('folio' => $folio), true);
+        if (count($select) > 0) {
+            return $select[0];
+        } else {
+            return null;
+        }
     }
 
     /**------------------------ OBTENER VALIDACION --------------------*/
@@ -209,6 +311,18 @@ class Cotizacion
             $validacion = false;
         }
         return $validacion;
+    }
+
+    /**------------------------ OBTENER ID COTIZACION --------------------*/
+    public function getCotId($folio)
+    {
+        $sql = "SELECT id FROM cotizaciones WHERE folio = :folio";
+        $cotizacion = Conexion::query($sql, array('folio' => $folio), true);
+
+        if (count($cotizacion) > 0) {
+            return (int) $cotizacion[0]['id'];
+        }
+        return false;
     }
 
     /**-------------------- VALIDA SI EXISTE UN CLIENTE -----------*/
@@ -236,6 +350,21 @@ class Cotizacion
             return $folio + 1;
         } else {
             return 1;
+        }
+    }
+
+    /**-------------------- BORRAR DETALLE COTIZACIÓN ----------*/
+    public function deleteDetalleCot($detalle_id) {
+        $sql = "DELETE FROM detalle_cotizacion WHERE id = :id";
+
+        try {
+           $delete = Conexion::query($sql, array('id' => $detalle_id));
+           return true;
+
+        } catch (PDOException $e) {
+            if ($delete->errorCode() !== 0) {
+            return "Syntax Error: ". $e->getMessage();
+            }
         }
     }
 }

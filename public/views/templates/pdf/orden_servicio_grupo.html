@@ -76,7 +76,6 @@
   </page_header>
 
   <table class="content tabla" style="padding-top:10mm;padding-bottom: 5mm">
-
     <tr>
       <th rowspan="2" style="background: #fff; border-top:0;border-bottom:0;border-left:0">
       <img src="storage/thumbs/lms.png" style="width: 25mm;margin-right:8mm">
@@ -134,11 +133,11 @@
       <td>{$data.montaje}</td>
       <td>{$data.garantia}</td>
       <td>
-         {if $data.folio != ''}
-         $data.folio
-         {else}
-         PENDIENTE
-         {/if}
+        {if $data.folio != ''}
+        $data.folio
+        {else}
+        PENDIENTE
+        {/if}
       </td>
       <td></td>
    </tr>

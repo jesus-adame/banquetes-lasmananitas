@@ -14,23 +14,24 @@ function printTableCotizacion(dataCot) {
       for (let i in dataCot) {
          cot = dataCot[i];
          estado = 'No autorizada'
-         if (cot.estado == 1) {
-            estado = 'Autorizada'
-         }
+         btn_imprimir.dataset.folio = cot.folio
 
-         table_rows += `<tr data-item="${cot.id}">
+         if (cot.estado == 1)
+            estado = 'Autorizada'
+
+         if (cot.total === null)
+            cot.total = cot.renta
+
+         table_rows += `<tr data-item="${cot.folio}">
          <td><button class="btn default">${cot.folio}</button></td>
          <td>${cot.fecha}</td>
          <td>${cot.renta}</td>
          <td>${cot.cliente}</td>
          <td>${estado}</td>
-         <td>${cot.costo_total}</td><td>
+         <td>${cot.total}</td><td>
          <div class="row">
          <button class="btn atention">
-         <i class="fas fa-pen-alt"></i>
-         </button>
-         <button class="btn danger">
-         <i class="fas fa-trash-alt"></i>
+         <i class="fas fa-ellipsis-v"></i>
          </button></div></td></tr>`
       }
    }

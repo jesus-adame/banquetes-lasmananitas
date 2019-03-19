@@ -1,37 +1,35 @@
 
 addEventListener('DOMContentLoaded', () => {
 
-   /**--------------- ESCUCHA LA TABLA CARGAR COTIZACION ------------*/
-   table_carga_cot.addEventListener('click', e => {
-      let btnClass = e.target.className
+   let dataCot = new FormData;
+   let cot = location.search.split('&')[1].split('=')
+   
+   dataCot.append(cot[0], cot[1])
+   dataCot.append('action', 'obtener_cotizacion')
 
-      if (btnClass == 'btn primary') {
-         let row = document.createElement('tr')
-         row.innerHTML = `<td><input type="text" name="descripcion[]"></td>
-         <td><input type="number" name="precio[]"></td>
-         <td><input type="number" name="cantidad[]"></td>
-         <td><input type="number" name="iva[]"></td>
-         <td><input type="number" name="subtotal[]"></td>
-         <td>
-         <button class="btn danger" type="button"><i class="fas fa-times"></i></button>
-         </td>`
-         tbody_cargar_cot.appendChild(row)
-      }
-
-      if (btnClass == 'btn danger') {
-         e.target.parentElement.parentElement.remove()
+   /**-------------- CARGA LA TABLA DETALLE COTIZACIÓN -------------*/
+   ajaxRequest('cargar_cotizacion', dataCot)
+   .then(dataJson => {
+      if (dataJson.error) {
+         popup.alert({content: dataJson.msg})
+      } else {
+         let cot = dataJson.cotizacion,
+         det = dataJson.detalle
+         
+         if (Object.keys(cot).length > 0) {
+            pintarCotizacion(cot)
+         }
+         
+         if (det.length > 0) {
+            tbody_detalle_cot.innerHTML = pintarDetalle(det)
+         }
       }
    })
 
-   /**----------------ESCUCHA EL FORMULARIO CARGAR COTIZACION ----------*/
-   form_carga_cot.addEventListener('submit', e => {
-      e.preventDefault()
-      const dataF = new FormData(form_carga_cot)
-      dataF.append('action', 'insertar_cotizacion')
+   /**----------- CARGA LOS TOTALES DE LA TABLA DETALLE COTIZACIÓN -----*/
+   let dataTotales = new FormData;
+   dataTotales.append(cot[0], cot[1])
+   dataTotales.append('action', 'obtener_totales')
 
-      ajaxRequest('cargar_cotizacion', dataF)
-      .then(dataJson => {
-         console.log(dataJson)
-      })
-   })
+   getTotales(dataTotales)
 })

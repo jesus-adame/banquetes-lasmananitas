@@ -27,7 +27,7 @@ class Sesion
   {
     $data = $this->getArrayUser();
 
-    $sql = "SELECT u.id_usuario, u.username, u.pass, u.nivel as 'rol', d.nombre, d.apellidos
+    $sql = "SELECT u.id_usuario, u.username, u.nivel as 'rol', d.nombre, d.apellidos
     FROM usuarios u LEFT JOIN detalle_usuario d ON u.id_usuario = d.id_usuario
     WHERE username COLLATE utf8_bin = :user AND pass = :pass AND estado = :estado";
 

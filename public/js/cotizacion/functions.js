@@ -44,3 +44,15 @@ function insertEvent(formData, dataEvent) {
 
    return ajaxRequest('cotizacion', formData)
 }
+
+function getTotales(formData) {
+   ajaxRequest('cotizacion', formData)
+   .then(dataJson => {
+      if (dataJson.error) {
+         popup.alert({ content: dataJson.msg })
+      } else {
+         let totales = dataJson.data
+         t_total.innerHTML = '$ ' + totales.total
+      }
+   })
+}

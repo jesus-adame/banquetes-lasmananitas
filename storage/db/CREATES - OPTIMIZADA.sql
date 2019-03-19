@@ -133,12 +133,11 @@ CREATE TABLE cotizaciones (
 -- DETALLE COTIZACION ---------
 
 CREATE TABLE detalle_cotizacion (
-	`id` 					INT(11) NOT NULL,
+	`id` 					INT(11) NOT NULL AUTO_INCREMENT,
 	`cotizacion_id` 	INT(11) NOT NULL,
 	`descripcion` 		VARCHAR(200) NOT NULL,
 	`precio_unitario` FLOAT(11,2) NOT NULL,
 	`cantidad` 			INT(11) NOT NULL,
-	`sub_sin_iva` 		FLOAT(11,2) NOT NULL,
 	`iva` 				FLOAT(11,2) NOT NULL,
 	`servicio` 			FLOAT(11,2) NOT NULL,
 	`subtotal` 			FLOAT(11,2) NOT NULL,

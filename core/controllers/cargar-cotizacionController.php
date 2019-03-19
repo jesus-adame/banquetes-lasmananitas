@@ -6,3 +6,7 @@ if ($_SESSION['usuario']['rol'] != 'Ventas' && $_SESSION['usuario']['rol'] != 'S
 
    header('location:index.php?view=index');
 }
+
+if (isset($_GET['cot'])) {
+   $html->assign('folio', $_GET['cot']);
+}

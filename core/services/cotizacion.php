@@ -7,6 +7,7 @@ if (isset($_POST['action'])) {
 
    /** MENÚ DEL SERVICIO EVENTOS */
    switch ($_POST['action']) {
+      /** INSERT */
       case 'insert_event':
          $res['msg'] = 'Insertar Evento';
 
@@ -47,8 +48,8 @@ if (isset($_POST['action'])) {
          }
          break;
       
+      /** SELECT */
       case 'obtener_cotizaciones':
-
          $cotizaciones = $c->getAll($_POST['evento_id']);
 
          if (count($cotizaciones) > 0) {
@@ -58,6 +59,20 @@ if (isset($_POST['action'])) {
 
          } else {
             $res['msg'] = 'No hay cotizaciones';
+            $res['error'] = true;
+         }
+         break;
+
+      /** SELECT */
+      case 'obtener_totales':
+         $totales = $c->getTotalCotizacion($_POST['cot']);
+
+         if ($totales != null) {
+            $res['data'] = $totales;
+            $res['error'] = false;
+            $res['msg'] = 'Totales de la cotizacion folio: '. $_POST['cot'];
+         } else {
+            $res['msg'] = 'No se encontraron datos';
             $res['error'] = true;
          }
          break;

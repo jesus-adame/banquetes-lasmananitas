@@ -1,0 +1,80 @@
+
+<style media="screen">
+   page {
+      font-family: arial;
+      font-size: 18px;
+      line-height: 28px;
+   }
+   table {
+      width: 100%;
+      border-collapse: collapse;
+   }
+   table th {
+      background: #c1c1c1;
+   }
+   table th, td {
+      width: 100px;
+      padding: 15px 20px;
+      box-sizing: border-box;
+   }
+   table tbody tr:nth-child(even) {
+      background: #c4c4c4;
+   }
+   .container h1 {
+      text-align: center;
+   }
+   .fecha {
+      position: absolute;
+      right: 0%;
+   }
+</style>
+
+<page>
+   <page_header backtop="20mm" backbottom="20mm" backleft="20mm" backright="20mm">
+   </page_header>
+
+   <div class="container">
+      <h1>Cotización</h1>
+      <p class="fecha">Fecha: {$cotizacion.fecha}</p><br>
+
+      <b>FOLIO:</b> {$folio} <br>
+      <b>TITULO DEL EVENTO:</b> {$cotizacion.evento} <br>
+      <b>CLIENTE / CONTÁCTO:</b> {$cotizacion.contacto} <br>
+      <b>VENDEDOR:</b> {$usuario} <br>
+      <b>RENTA:</b> $ {$cotizacion.renta} <br>
+      <b>NO. PERSONAS:</b> {$cotizacion.pax} <br><br>
+      {$total = $cotizacion.renta}
+      
+      <table>
+         <thead>
+            <tr>
+               <th>Descripción</th>
+               <th>P.U.</th>
+               <th>Cantidad</th>
+               <th>Subtotal</th>
+            </tr>
+         </thead>
+      
+         <tbody>
+            {foreach $detalle item=item}
+            {$subtotal = $item.cantidad * $item.precio_unitario}
+            <tr>
+               <td>{$item.descripcion}</td>
+               <td>$ {$item.precio_unitario}</td>
+               <td>{$item.cantidad}</td>
+               <td>$ {$subtotal}</td>
+            </tr>
+            {$total = $total + $subtotal}
+            {/foreach}
+         </tbody>
+      
+         <tfoot>
+            <tr>
+               <td colspan="2"></td>
+               <td><b>TOTAL</b></td>
+               <td>$ {$total}</td>
+            </tr>
+         </tfoot>
+      </table>
+   </div>
+</page>
