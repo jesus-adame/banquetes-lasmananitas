@@ -3,15 +3,15 @@
  */
 (() => {
   const forms = md_orden.querySelectorAll('form'),
-  fondo = md_orden.querySelector('.flex'),
-  cerrar = md_orden.querySelector('.close');
+  fondo       = md_orden.querySelector('.flex'),
+  cerrar      = md_orden.querySelector('.close');
 
   /**---------------------- ESCUCHA EL MODAL ORDENES ----------------*/
   md_orden.addEventListener('click', e => {
     e.preventDefault()
     let formOrden = e.target.parentElement.parentElement,
-    formClass = formOrden.className.split(' '),
-    btnClass = e.target.className
+    formClass     = formOrden.className.split(' '),
+    btnClass      = e.target.className
 
     /**--------------- BOTÓN AGREGAR --------------*/
     if (btnClass == 'btn success') {
@@ -51,7 +51,7 @@
   /**-------------- ENVÍA EL FORM ORDENES ---------------*/
   let enviarFormulario = (btn, frms, callback) => {
     let form_id = btn.getAttribute('form');
-    form = md_orden.querySelector('#' + form_id);
+    form        = md_orden.querySelector('#' + form_id);
     callback(form, frms);
   }
 
@@ -66,9 +66,9 @@
 
   /**-------------- MODAL BORRAR ORDEN ------------*/
   const modal_borrar = document.querySelector('#frm_eliminar_orden'),
-  fondo_borrar = modal_borrar.querySelector('.flex'),
-  frm_borrar = modal_borrar.querySelector('form'),
-  cerrar_borrar = modal_borrar.querySelector('#cerrar');
+  fondo_borrar       = modal_borrar.querySelector('.flex'),
+  frm_borrar         = modal_borrar.querySelector('form'),
+  cerrar_borrar      = modal_borrar.querySelector('#cerrar');
   
   /**--- CIERRA EL MODAL ---*/
   window.addEventListener('click', (e) => {
@@ -91,7 +91,7 @@
 /*-----------------------------AGREGAR ORDEN DE SERVICIO------------------*/
 function addOrden(frm, forms) {
   let fecha = document.querySelector('#date_start'),
-  formData = new FormData(frm);
+  formData  = new FormData(frm);
 
   formData.append('accion', 'agregar');
   formData.append('id_evento', e_id.value);
@@ -136,8 +136,8 @@ function addOrden(frm, forms) {
 /*----------------- EDITAR ORDEN --------------------------*/
 function editOrden(frm, forms) {
   let fecha = document.querySelector('#date_start'),
-  time = document.querySelector('#time'),
-  formData = new FormData(frm);
+  time      = document.querySelector('#time'),
+  formData  = new FormData(frm);
 
   formData.append('accion', 'modificar');
   formData.append('id_evento', e_id.value);

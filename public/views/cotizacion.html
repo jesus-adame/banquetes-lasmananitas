@@ -18,17 +18,25 @@
    padding-top: 20px;
    display: inline-block;
 }
+.table_info_cot {
+   font-family: sans-serif;
+   width: 100%;
+}
+.table_info_cot td {
+   box-sizing: border-box;
+   padding: 2px;
+}
 </style>
 
 <!-- FORMULARIO MENU -->
-{include file=$temp|cat:'cotizacion/m_menu.html'}
 {include file=$temp|cat:'cotizacion/modal-info.html'}
+{include file=$temp|cat:'cotizacion/modal_correo.html'}
 {include file=$temp|cat:'cotizacion/modal_options.html'}
 
 <main>
    <div class="content m-auto-x row-between">
-
       <!-- FORMULARIO DE COTIZACIÓN -->
+      {include file=$temp|cat:'cotizacion/modal_add_cot.html'}
       {include file=$temp|cat:'cotizacion/form_cot.html'}
 
       <!-- LADO DERECHO -->

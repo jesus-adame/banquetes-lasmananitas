@@ -31,6 +31,7 @@
   /** MUESTRA LA PÁGINA EN EL NAVEGADOR */
   if (is_file(VIEWS_PATH . $view . '.html')) {
     $html->display(VIEWS_PATH . $view . '.html');
+    
   } else {
     $html->display(VIEWS_PATH .'error-404.html');
   }

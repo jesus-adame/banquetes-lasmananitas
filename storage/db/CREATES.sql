@@ -132,19 +132,6 @@ CREATE TABLE menus (
    CONSTRAINT pk_menu PRIMARY KEY(id)
 ) ENGINE=InnoDB;
 
--------------------------- COTIZACIONES-------------------------
-
-CREATE TABLE cotizaciones (
-   `id`            INT(11) NOT NULL AUTO_INCREMENT,
-   `menu_id`		 INT(11) NOT NULL,
-   `evento_id`		 INT(11) NOT NULL,
-   `costo_total`	 FLOAT(11,2),
-   `fecha` 			 DATE NOT NULL,
-   CONSTRAINT pk_cotizacion PRIMARY KEY(id),
-   CONSTRAINT fk_cotizacion_menu  FOREIGN KEY(menu_id) REFERENCES menus(id),
-   CONSTRAINT fk_cotizacion_evento FOREIGN KEY(evento_id) REFERENCES eventos(id_evento)
-) ENGINE=InnoDB;
-
 -------------------------ORDENES DE SERVICIO----------------------
 
 CREATE TABLE ordenes_servicio (

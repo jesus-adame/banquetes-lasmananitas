@@ -15,15 +15,15 @@ let tabs = (element) => {
             getHash = tab_selected.getAttribute('href');
 
             /* Se obtienen todos los contenidos de los tabs y el contenido seleccionado */
-            let tab_content = tabs.querySelectorAll('.tab_content'),
+            let tab_content      = tabs.querySelectorAll('.tab_content'),
             tab_content_selected = tabs.querySelector(getHash);
             
             /* Se recorren las tabs y se cambia su atributo class */
             for ( let i in tab ) {
-                tab[i].className = 'tab';
+                tab[i].className         = 'tab';
                 tab_content[i].className = 'tab_content';           
             }            
-            tab_selected.className = 'tab active';
+            tab_selected.className         = 'tab active';
             tab_content_selected.className = 'tab_content show';
         }
     })

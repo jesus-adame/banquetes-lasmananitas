@@ -14,7 +14,7 @@ $('#calendar').fullCalendar({
    showNonCurrentDates: false,
    dayClick: function (date) {
       d_init.value = date.format()
-      d_end.value = date.format()
+      d_end.value  = date.format()
    },
    eventClick: function (calEvent) {
       data = new FormData;
@@ -25,12 +25,21 @@ $('#calendar').fullCalendar({
 
       /**---- OBTIENE TODAS LAS COTIZACIONES -----*/
       ajaxRequest('cotizacion', data)
-         .then(dataJson => {
+      .then(dataJson => {
+         if (typeof dataJson.data == 'undefined') {
+            btn_imprimir.style.display   = 'none'
+            btn_autorizar.style.display  = 'none'
+            tbody_cotizaciones.innerHTML = `<tr><td colspan="7"><button class="btn primary">Crear Cotización</botton></td></tr>`
+
+         } else {
+            btn_imprimir.style.display  = 'block'
+            btn_autorizar.style.display = 'block'
             printTableCotizacion(dataJson.data)
-         })
-         .then(() => {
-            modal_info.style.display = 'block'
-         })
+         }
+      })
+      .then(() => {
+         modal_info.style.display = 'block'
+      })
    },
    views: {
       agendaWeek: { // name of view

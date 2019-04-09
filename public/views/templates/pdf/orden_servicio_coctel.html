@@ -5,10 +5,12 @@
   }
   pre {
     font-family: 'arial';
-    font-size: 9;
+    font-size: 8px;
     letter-spacing: 2px;
     line-height: 2.4mm;
-    padding-left: 2mm;
+    padding-left: 1mm;
+    padding-top: -5px;
+    padding-bottom: -20px;
   }
   p {
     padding-left: 4mm;
@@ -21,6 +23,11 @@
   table {
     border-collapse: collapse;
   }
+  .tabla1 th, .tabla1 td, .tabla2 th, .tabla2 td, tr, th, td {
+    padding: 0px;
+    box-sizing: border-box;
+    margin: 0;
+  }
   .tabla {
     text-align: center;
     font-size: 9;
@@ -29,6 +36,7 @@
     border: solid 1 #3b3b3b;
   }
   .tabla td {
+    padding: 0;
     width: 20%;
   }
   .tabla2 {
@@ -39,6 +47,7 @@
     border: solid 1 #3b3b3b;
   }
   .tabla2 td {
+    margin: 0;
     width: 13%;
   }
   .thead td, th {
@@ -51,7 +60,6 @@
   .th, th {
     text-align: center;
     font-weight: bold;
-    padding: 0;
     background: #dadada;
     font-size: 2mm;
   }
@@ -72,13 +80,12 @@
       </table>
    </page_header>
 
-  <table class="content tabla" style="padding-top:10mm;padding-bottom: 5mm">
-
+  <table class="content tabla" style="padding-top:10mm;margin-bottom: 4mm">
     <tr>
       <th rowspan="2" style="background: #fff; border-top:0;border-bottom:0;border-left:0">
       <img src="storage/thumbs/lms.png" style="width: 25mm;margin-right:8mm">
       </th>
-      <th style="line-height:2mm;padding-top:-3mm" colspan="4">
+      <th style="line-height:0mm;padding-top:-4mm" colspan="4">
         <h3 style="margin: auto;">{$fecha}</h3>
       </th>
       <th rowspan="2" style="background:#fff; border-top:0;border-bottom:0;border-right:0">
@@ -138,9 +145,9 @@
       <td colspan="3">ALIMENTOS Y BEBIDAS</td>
       <td colspan="4">COORDINACIÓN OPERATIVA</td>
     </tr>
-    <tr class="thead">
-      <td colspan="3">CANAPES</td>
-      <td colspan="4">MONTAJE</td>
+    <tr>
+      <th colspan="3">CANAPES</th>
+      <th colspan="4">MONTAJE</th>
     </tr>
 
     <tr>
@@ -173,10 +180,10 @@ N/A
     <tr>
       <td id="aguas_frescas" colspan="3">
         <pre>
-{if $data.ama_llaves eq ''}
+{if $data.aguas_frescas eq ''}
 N/A
 {else}
-{$data.ama_llaves}  
+{$data.aguas_frescas}  
 {/if}
           </pre>
         </td>
@@ -205,7 +212,7 @@ N/A
 {else}
 {$data.cocteleria}
 {/if}
-          </pre>
+        </pre>
       </td>
 
       <td id="chief_steward" colspan="4">
@@ -279,7 +286,7 @@ N/A
     </tr>
     <tr>
       <td id="logistica" colspan="3" rowspan="14">
-        <table class="tabla2" style="height: 100mm; margin-top:0; text-align:center">
+        <table class="tabla2" style="height: 100mm; margin-top:0; text-align:center;padding: -1px;box-sizing: border-box">
           <tr>
             <th style="width: 22mm">FECHA</th>
             <th style="width: 22mm">HORA</th>
@@ -291,7 +298,7 @@ N/A
           <tr style="line-height: 0;">
             <td>{$inicio.0}</td>
             <td>{$inicio.1}</td>
-            <td>{$row.title}</td>
+            <td>{$row.title|truncate:35:""}</td>
             <td>{$row.lugar}</td>
           </tr>
           {/foreach}
@@ -322,7 +329,7 @@ N/A
 {/if}
 
     <tr>
-      <th colspan="4">CONTABILIDAD Y RESTAURANTE</th>
+      <th colspan="4">CONTABILIDAD</th>
     </tr>
     <tr>
       <td id="contabilidad_restaurante" colspan="4">
@@ -335,9 +342,9 @@ N/A
         </pre>
       </td>
     </tr>
-
+  
+    {if $d_data[0]['tag'] != ''}
     {foreach from=$d_data item=row}
-    {if $row != ''}
     <tr>
       <th colspan="4">{$row.tag}</th>
     </tr>
@@ -348,7 +355,7 @@ N/A
         </pre>
       </td>
     </tr>
-    {/if}
     {/foreach}
+    {/if}
   </table>
 </page>

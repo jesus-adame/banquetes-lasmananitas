@@ -25,6 +25,7 @@ function loadSelectTiposEvento() {
          eventoHTML += `<option value="${val.id_tipo_evento}">${val.nombre_tevento}</option>`;
       }
       select_evento.innerHTML = eventoHTML;
+      select_evento_2.innerHTML = eventoHTML;
    })
 }
 
@@ -53,6 +54,23 @@ function getTotales(formData) {
       } else {
          let totales = dataJson.data
          t_total.innerHTML = '$ ' + totales.total
+      }
+   })
+}
+
+function cargarTablaCot(evento_id) {
+   data = new FormData;
+   data.append('evento_id', evento_id)
+   data.append('action', 'obtener_cotizaciones')
+
+   /**---- OBTIENE TODAS LAS COTIZACIONES -----*/
+   ajaxRequest('cotizacion', data)
+   .then(dataJson => {
+      if (typeof dataJson.data == 'undefined') {
+         tbody_cotizaciones.innerHTML = `<tr><td colspan="7"><button class="btn primary">Crear Cotización</botton></td></tr>`
+
+      } else {
+         printTableCotizacion(dataJson.data)
       }
    })
 }

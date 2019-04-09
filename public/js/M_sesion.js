@@ -1,5 +1,5 @@
 const ms_flex = M_sesion.querySelector('.flex'),
-ms_close = M_sesion.querySelector('.close');
+ms_close      = M_sesion.querySelector('.close');
 
 window.addEventListener('click', (e) => {
   if (e.target == ms_flex || e.target == ms_close) {

@@ -7,32 +7,41 @@
    display: inline-block;
    margin-right: 10px;
 }
+.panel-control {
+   display: grid;
+   grid-template-columns: 32% 32% 32%;
+   justify-content: space-between;
+}
+.panel-control .item a {
+   display: block;
+   text-align: center;
+   box-sizing: border-box;
+}
 </style>
 
 <main>
    <div class="content m-auto-x">
       <hgroup style="text-align: center">
-         <h2>Administración</h2>
+         <h2>Panel de Control</h2>
       </hgroup>
 
-      <div class="row-between">
+      <div class="panel-control">
          <div class="item">
-            <ul class="panel-left">
-               <li>
-               <a class="admin-button col-xs-12" href="?view=ventas">
-                  <i class="fas fa-chart-line fa-lg"></i> Ventas</a></li>
-               <li>
-                  <a class="admin-button col-xs-12" href="?view=r-eventos">
-                     <i class="far fa-calendar-check fa-lg"></i> Resumen de Eventos</a></li>
-               <li>
-               <a class="admin-button col-xs-12" href="?view=configuracion-global">
-                  <i class="fas fa-cogs fa-lg"></i> Configuracion del sistema</a></li>             
-            </ul>
+            <a class="admin-button" href="?view=ventas">
+            <i class="fas fa-chart-line fa-lg"></i> Ventas</a>
          </div>
 
          <div class="item">
-            <h3>Eventos totales</h3>
+            <a class="admin-button" href="?view=r-eventos">
+            <i class="far fa-calendar-check fa-lg"></i> Resumen de Eventos</a>
          </div>
+
+         <div class="item">
+            <a class="admin-button" href="?view=configuracion-global">
+            <i class="fas fa-cogs fa-lg"></i> Configuracion del sistema</a>
+         </div>
+      </div>
+         
       </div>
    </div>
 </main>

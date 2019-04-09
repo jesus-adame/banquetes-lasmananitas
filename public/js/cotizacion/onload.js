@@ -53,7 +53,7 @@ addEventListener('DOMContentLoaded', () => {
             })
 
          } else {
-            popup.alert({ content: 'La fecha final debe ser posterior a la fecha de inicio' });
+            popup.alert({ content: 'La fecha final debe ser posterior a la fecha de inicio'});
          }
       } else { popup.alert({ content: 'Debe llenar todos los campos' }); }
    })

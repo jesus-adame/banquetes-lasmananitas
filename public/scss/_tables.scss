@@ -1,16 +1,25 @@
+table td, table th {
+   cursor: default;
+}
+
 .table {
    background: #fff;
    border-collapse: collapse;
    overflow: hidden;
    width: 100%;
    box-sizing: border-box;
+   &:hover {
+      cursor: default;
+   }
    & thead {
       font-family: 'Roboto', sans-serif;
       font-size: 1rem;
       & tr {
-      border-radius: 4px;
+         border-radius: 4px;
       }
       & th {
+         -moz-user-select: none;
+         user-select: none;
          color: #333333;
          background: #cbc7c7;
          border: solid 1px #a3a3a3;

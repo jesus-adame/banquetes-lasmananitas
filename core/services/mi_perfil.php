@@ -14,8 +14,8 @@ if (isset($_POST['action'])) {
          $sql = 'SELECT * FROM usuarios as u LEFT JOIN detalle_usuario as d
          ON u.id_usuario = d.id_usuario WHERE u.username = :username';
 
-         $res['data'] = Conexion::query($sql, $data, true, true);
-         $res['msg'] = 'Obtienes los datos';
+         $res['data']  = Conexion::query($sql, $data, true, true);
+         $res['msg']   = 'Obtienes los datos';
          $res['error'] = false;
          break;
 
@@ -23,11 +23,11 @@ if (isset($_POST['action'])) {
       case 'actualizar_datos':
          
          $data = array(
-            'id_user' => $_POST['id_user'],
-            'name' => $_POST['name'],
+            'id_user'   => $_POST['id_user'],
+            'name'      => $_POST['name'],
             'last_name' => $_POST['last-name'],
-            'email' => $_POST['email'],
-            'tel' => $_POST['number']
+            'email'     => $_POST['email'],
+            'tel'       => $_POST['number']
          );
 
          $is_usuario = validaUsuario($data['id_user']);
@@ -37,12 +37,14 @@ if (isset($_POST['action'])) {
 
             if ($is_data) {
                $sql = "UPDATE detalle_usuario SET
-               nombre = :name, apellidos = :last_name, correo = :email,
-               telefono = :tel
+               nombre           = :name,
+               apellidos        = :last_name,
+               correo           = :email,
+               telefono         = :tel
                WHERE id_usuario = :id_user";
 
                $res['data'] = Conexion::query($sql, $data);
-               $res['msg'] = 'Se actualizarón los datos';
+               $res['msg']  = 'Se actualizarón los datos';
 
             } else {
                $sql = "INSERT INTO detalle_usuario
@@ -51,13 +53,12 @@ if (isset($_POST['action'])) {
                (:id_user, :name, :last_name, :email, :tel)";
 
                $res['data'] = Conexion::query($sql, $data);
-               $res['msg'] = 'Se insertaron los datos';
+               $res['msg']  = 'Se insertaron los datos';
             }
-
             $res['error'] = false;
 
          } else {
-            $res['msg'] = 'El usuario ingresado no existe';
+            $res['msg']   = 'El usuario ingresado no existe';
             $res['error'] = true;
          }
          break;

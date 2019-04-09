@@ -9,6 +9,7 @@
     letter-spacing: 2px;
     line-height: 2.4mm;
     padding-left: 2mm;
+    padding-bottom: -20px;
   }
   p {
     padding-left: 4mm;
@@ -61,6 +62,11 @@
   .image {
     overflow: hidden;
     width: 10px;
+  }
+  .tabla1 th, .tabla1 td, .tabla2 th, .tabla2 td, tr, th, td {
+    padding: 0px;
+    box-sizing: border-box;
+    margin: 0;
   }
 </style>
 
@@ -238,7 +244,7 @@ N/A
           <tr style="line-height: 0;">
             <td>{$inicio.0}</td>
             <td>{$inicio.1}</td>
-            <td>{$row.title}</td>
+            <td>{$row.title|truncate:35:""}</td>
             <td>{$row.lugar}</td>
           </tr>
           {/foreach}

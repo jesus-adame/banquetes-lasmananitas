@@ -1,133 +1,86 @@
 <?php
-/*
-  Clase de tabla.
-  Esta clase contiene tres atributo que son:
-    - db (conexion)
-    - datos (registros)
-    - nombre (nombre de la tabla)
-
-  Tambien contiene tres métodos que son:
-    - obtener_datos()
-    - obtener_datos_join($str[tabla2], $str[union], !str[campo], !str[valor])
-    - obtener_registro($str[campo], $str[valor])
-
-  Cada método tiene 0 o mas atributo obligatorios y 0 o mas
-  atributos opcionales.
-
-  $str[dato] = Atributo obligatorio de tipo cadena
-  y el nombre del dato esperado.
-  !str[datos] = Aributo opcional de tipo cadena.
-*/
+/**
+ * TABLA DE BASE DE DATOS
+ */
 class Tabla
 {
-  private $db;
-  private $datos;
   private $nombre;
 
   public function __construct($nombre = '')
   {
-    $this->db = Conexion::conectar();
-    $this->datos = array();
     $this->nombre = $nombre;
   }
 
+  /** OBTIENE TODOS LOS REGISTROS */
   public function obtener_datos()
   {
     $sql = "SELECT * FROM $this->nombre";
-
-    $exe = $this->db->prepare($sql);
-    $exe->execute();
-
-    while ($row = $exe->fetchAll(PDO::FETCH_ASSOC)) {
-      $this->datos = $row;
-    }
-
-    return $this->datos;
+    return Conexion::query($sql, array(), true);
   }
 
+  /**----- OBTIENE LOS REGISTROS CON EL CAMPO Y VALOR RECIBIDOS -----*/
   public function obtener_datos_donde($campo, $valor)
   {
+    $data = array("$campo" => $valor);
+    
     $sql = "SELECT * FROM $this->nombre
     WHERE $campo = :$campo";
 
-    $exe = $this->db->prepare($sql);
-    $exe->execute(array("$campo" => $valor));
-
-    while ($row = $exe->fetchAll(PDO::FETCH_ASSOC)) {
-      $this->datos = $row;
-    }
-
-    return $this->datos;
+    return Conexion::query($sql, $data, true);
   }
 
+  /**-------- OBTIENE LOS REGISTROS DE DOS TABLAS CON INNER JOIN ---------*/
   public function obtener_datos_join($tabla2, $on, $campo = '', $value = '')
   {
     if ($campo == '' || $value == '') {
-
       $sql = "SELECT * FROM $this->nombre
       INNER JOIN $tabla2 ON $this->nombre.$on = $tabla2.$on";
 
-      $exe = $this->db->prepare($sql);
-      $exe->execute();
-    } else if (!empty($campo) && !empty($value)) {
+      $data = array();
 
+    } else if (!empty($campo) && !empty($value)) {
       $sql = "SELECT * FROM $this->nombre
       INNER JOIN $tabla2 ON $this->nombre.$on = $tabla2.$on
       WHERE $this->nombre.$campo = :$campo";
-
-      $exe = $this->db->prepare($sql);
-      $exe->execute(array(
-        $campo => $value
-      ));
-    } else {
-      return 0;
+      
+      $data = array($campo => $value);
     }
-
-    while ($row = $exe->fetchAll(PDO::FETCH_ASSOC)) {
-      $this->datos = $row;
-    }
-
-    return $this->datos;
+    return Conexion::query($sql, $data, true);
   }
 
+  /**-------- OBTIENE LOS REGISTROS ORDENADOS ---------*/
   public function obtener_datos_orden($campo, $valor) {
-     $sql = "SELECT * FROM $this->nombre ORDER BY $campo $valor";
+    $sql = "SELECT * FROM $this->nombre ORDER BY $campo $valor";
 
-     $res = Conexion::query($sql, array(), true);
-
-     return $res;
+    $res = Conexion::query($sql, array(), true);
+    return $res;
   }
 
+  /**-------- OBTIENE LOS REGISTROS DE DOS TABLAS CON LEFT JOIN ---------*/
   public function obtener_datos_left_join($tabla2, $on, $campo = '', $value = '')
   {
+    $data = array();
+    
     if ($campo == '' || $value == '') {
-
+      /** SI TIENE CAMPOS OPCIONALES */
       $sql = "SELECT * FROM $this->nombre
       LEFT JOIN $tabla2 ON $this->nombre.$on = $tabla2.$on";
 
-      $exe = $this->db->prepare($sql);
-      $exe->execute();
     } else if (!empty($campo) && !empty($value)) {
+      /** SI NI TIENE CAMPOS OPCIONALES */
+      $data = array(
+        $campo => $value
+      );
 
       $sql = "SELECT * FROM $this->nombre
       LEFT JOIN $tabla2 ON $this->nombre.$on = $tabla2.$on
       WHERE $this->nombre.$campo = :$campo";
-
-      $exe = $this->db->prepare($sql);
-      $exe->execute(array(
-        $campo => $value
-      ));
-    } else {
-      return 0;
     }
-
-    while ($row = $exe->fetchAll(PDO::FETCH_ASSOC)) {
-      $this->datos = $row;
-    }
-
-    return $this->datos;
+    /** EJECUTA LA CONSULTA */
+    return Conexion::query($sql, $data, true);
   }
 
+  /**------ OBTIENE LOS REGISTROS DE TRES TABLAS CON INNER JOIN ---------*/
   public function obtener_datos_join_join($tabla2, $on, $tabla3, $on2)
   {
     $sql = "SELECT * FROM $this->nombre
@@ -136,20 +89,17 @@ class Tabla
     ORDER BY lugar ASC";  // Quitar
 
     $res = Conexion::query($sql, array(), true, false);
-
     return $res;
   }
 
+  /** OBTIENE EL NOMBRE DE LA TABLA */
   public function setName($tabla)
   {
-    $this->datos = array();
     $this->nombre = $tabla;
   }
 
   public function __destruct()
   {
     $this->nombre;
-    $this->datos;
-    $this->db;
   }
 }

@@ -2,7 +2,7 @@
 <style media="screen">
    page {
       font-family: arial;
-      font-size: 18px;
+      font-size: 16px;
       line-height: 28px;
    }
    table {
@@ -13,8 +13,10 @@
       background: #c1c1c1;
    }
    table th, td {
-      width: 100px;
-      padding: 15px 20px;
+      border: solid 1px #c1c1c1;
+      width: 135px;
+      text-align: center;
+      padding: 15px 10px;
       box-sizing: border-box;
    }
    table tbody tr:nth-child(even) {
@@ -25,23 +27,27 @@
    }
    .fecha {
       position: absolute;
-      right: 0%;
+      right: -200%;
+   }
+   .moneda {
+      text-align: right;
+      margin: 0;
    }
 </style>
 
-<page>
-   <page_header backtop="20mm" backbottom="20mm" backleft="20mm" backright="20mm">
+<page backtop="5mm" backleft="5mm">
+   <page_header backtop="20mm" backbottom="20mm" backleft="22mm" backright="22mm">
    </page_header>
 
    <div class="container">
       <h1>Cotización</h1>
-      <p class="fecha">Fecha: {$cotizacion.fecha}</p><br>
+      <p class="fecha">{$fecha}</p><br>
 
       <b>FOLIO:</b> {$folio} <br>
-      <b>TITULO DEL EVENTO:</b> {$cotizacion.evento} <br>
-      <b>CLIENTE / CONTÁCTO:</b> {$cotizacion.contacto} <br>
+      <b>TITULO DEL EVENTO:</b> {strtoupper($cotizacion.evento)} <br>
+      <b>CLIENTE:</b> {strtoupper($cotizacion.contacto)} <br>
       <b>VENDEDOR:</b> {$usuario} <br>
-      <b>RENTA:</b> $ {$cotizacion.renta} <br>
+      <b>SALÓN:</b> {strtoupper($cotizacion.lugar)} <br>
       <b>NO. PERSONAS:</b> {$cotizacion.pax} <br><br>
       {$total = $cotizacion.renta}
       
@@ -60,9 +66,9 @@
             {$subtotal = $item.cantidad * $item.precio_unitario}
             <tr>
                <td>{$item.descripcion}</td>
-               <td>$ {$item.precio_unitario}</td>
+               <td class="moneda">$ {$item.precio_unitario|number_format:2}</td>
                <td>{$item.cantidad}</td>
-               <td>$ {$subtotal}</td>
+               <td class="moneda">$ {$subtotal|number_format:2}</td>
             </tr>
             {$total = $total + $subtotal}
             {/foreach}
@@ -71,8 +77,16 @@
          <tfoot>
             <tr>
                <td colspan="2"></td>
+               <td><b>RENTA</b></td>
+               <td class="moneda">$ {$cotizacion.renta|number_format:2}</td>
+            </tr>
+            <tr>
+               <td colspan="2"></td>
                <td><b>TOTAL</b></td>
-               <td>$ {$total}</td>
+               <td class="moneda" style="
+               background: #65c965;
+               border: solid #000;
+               ">$ {$total|number_format:2}</td>
             </tr>
          </tfoot>
       </table>

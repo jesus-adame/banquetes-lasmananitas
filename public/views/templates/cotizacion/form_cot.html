@@ -9,13 +9,13 @@
    <!-- GUARDA EL NOMBRE DEL USUARIO QUE ESTÁ EN SESIÓN -->
    Cliente
    <div class="row-between">
-      <input id="c_nombre" class="col-sm-6" type="text" maxlength="20" name="nombre" placeholder="Nombre" required>
+      <input id="c_nombre" class="col-sm-6" type="text" required minlength="3" maxlength="20" name="nombre" placeholder="Nombre">
    
-      <input id="c_apellido" class="col-ms-6" type="text" maxlength="20" name="apellido" placeholder="Apellidos" required>
+      <input id="c_apellido" class="col-ms-6" type="text" required minlength="4" maxlength="20" name="apellido" placeholder="Apellidos">
    </div>
 
    Telefono
-   <input class="col-xs-12" type="text" maxlength="13" name="telefono" placeholder="Número">
+   <input class="col-xs-12" type="text" required minlength="10" maxlength="13" name="telefono" placeholder="XXX-XXX-XX-XX">
    Correo
    <input class="col-xs-12" type="text" maxlength="50" name="email" placeholder="correo@email.com">
 

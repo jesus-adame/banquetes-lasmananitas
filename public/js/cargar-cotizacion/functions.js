@@ -1,19 +1,21 @@
 
 function getSubtotal(d) {
-   let precio = d.querySelector('.precio').value,
-      cantidad = d.querySelector('.cantidad').value,
-      subtotal = d.querySelector('.subtotal')
-   result = precio * cantidad
+   let precio   = d.querySelector('.precio').value,
+       cantidad = d.querySelector('.cantidad').value,
+       subtotal = d.querySelector('.subtotal')
 
-   subtotal.value = result.toFixed(2)
+   result = precio * cantidad;
+   subtotal.value = result.toLocaleString('en', formato_moneda);
 }
 
 function getTotal(subtotales) {
    res = 0;
    for (let i = 0; i < subtotales.length; i++) {
-      res += parseFloat(subtotales[i].value)
+      let subtotal = parseFloat(subtotales[i].value.replace(/,/g, ''));
+
+      res += subtotal
    }
-   return total_result = res.toFixed(2);
+   return total_result = res;
 }
 
 function getTotales(formData) {
@@ -21,16 +23,18 @@ function getTotales(formData) {
    .then(dataJson => {
       if (dataJson.error) {
          popup.alert({ content: dataJson.msg })
+
       } else {
          if (dataJson.data.alimentos != null) {
-            let totales = dataJson.data
-            t_alimentos.innerHTML = '$ ' + totales.alimentos
-            t_renta.innerHTML = '$ ' + totales.renta
-            t_total.innerHTML = '$ ' + totales.total
+            let totales   = dataJson.data,
+                alimentos = parseFloat(totales.alimentos).toLocaleString('es-MX', formato_moneda),
+                total     = parseFloat(totales.total).toLocaleString('es-MX', formato_moneda);
+
+            t_alimentos.innerHTML = '<span>$</span>' + alimentos;
+            t_total.innerHTML = '<span>$</span>' + total;
+
          } else {
-            t_alimentos.innerHTML = '$ 0.00'
-            t_renta.innerHTML = '$ 0.00'
-            t_total.innerHTML = '$ 0.00'
+            t_alimentos.innerHTML = '<span>$</span> 0.00';   
          }
       }
    })

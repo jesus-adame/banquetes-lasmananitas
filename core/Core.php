@@ -11,8 +11,6 @@ $service = isset($_POST['module']) ? $_POST['module'] : '';
 
 /** RESPUESTA EN FORMA DE ARRAY */
 $res = array(
-   'msg' => 'No se realizó ninguna operación',
-   'data' => '',
    'error' => true
 );
 

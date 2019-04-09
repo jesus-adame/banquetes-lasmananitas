@@ -120,7 +120,7 @@ CREATE TABLE cotizaciones (
 	`usuario_id`	INT(11) NOT NULL,
 	`folio`			VARCHAR(200) NOT NULL,
    `fecha` 			DATE NOT NULL,
-	`renta`			FLOAT(11,2) NOT NULL DEFAULT 0.00,
+	`renta`			FLOAT(11,2) NOT NULL DEFAULT 0,
 	`personas`		INT(11) NOT NULL DEFAULT 0,
    `estado` 		INT(11) NOT NULL DEFAULT 0,
    `costo_total`	FLOAT(11,2) NULL,

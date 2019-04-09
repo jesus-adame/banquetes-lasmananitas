@@ -2,24 +2,62 @@
    <div class="m-bg">
       <div class="m-content" style="min-width: 400px;">
          <div class="m-head">
-            <p>Cotizaciones</p>
-            <button class="m-close">
-               <i class="fas fa-times"></i>
-            </button>
+            <p>Cotización</p>
+            <button class="m-close">&Cross;</button>
          </div>
 
          <div class="m-body">
-            <h3>Información básica</h3><br>
             <p>
-               <b>Cliente</b> - <span id="cliente"></span> <br>
-               <b>Título</b> - <span id="titulo"></span> <br>
-               <b>Tipo</b> - <span id="tipo"></span> <br>
-               <b>Invitados</b> - <span id="pax"></span> <br>
-               <b>Lugar</b> - <span id="lugar"></span>
+               <table class="table_info_cot">
+                  <tr>
+                     <td>
+                        TÍTULO EVENTO
+                     </td>
+                     <td><b>- <span id="titulo"></span></b></td>
+                  </tr>                  
+                  <tr>
+                     <td>
+                        VENDEDOR
+                     </td>
+                     <td><b>- <span id="usuario"></span></b> </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        CLIENTE
+                     </td>
+                     <td><b>- <span id="cliente"></span></b> </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        TIPO EVENTO
+                     </td>
+                     <td><b>- <span id="tipo"></span></b> </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        INVITADOS
+                     </td>
+                     <td><b>- <span id="pax"></span></b> </td>
+                  </tr>
+                  <tr>
+                     <td>
+                        LUGAR
+                     </td>
+                     <td><b>- <span id="lugar"></span></b> </td>
+                  </tr>
+               </table>               
+               <input id="evento_id" type="hidden" name="evento_id">
             </p><br>
 
             <div class="tools-bar">
                <ul class="tools-menu row-right">
+                  {if $usuario.rol == 'Administrador' || $usuario.rol == 'Supervisor'}
+                  <li>
+                     <button id="btn_autorizar" class="btn-tools">
+                        <i class="fas fa-exclamation-circle"></i> Validación
+                     </button>
+                  </li>
+                  {/if}
                   <li>
                      <button id="btn_imprimir" class="btn-tools">
                         <i class="fas fa-print"></i> Imprimir
@@ -38,15 +76,12 @@
             <table id="table_cotizacion" class="table col-xs-12">
                <thead>
                   <tr>
-                     <th>ID</th>
-                     <th>EVENTO</th>
+                     <th>Fecha</th>
                      <th>Renta</th>
                      <th>Registró</th>
+                     <th>Costo Total</th>
                      <th>Estado</th>
-                     <th>Total</th>
-                     <th>
-                        Editar
-                     </th>
+                     <th>Detalle</th>
                   </tr>
                </thead>
                <tbody id="tbody_cotizaciones">

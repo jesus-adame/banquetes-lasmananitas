@@ -11,8 +11,24 @@
           <input id="id_edit_log" type="hidden" name="id" value="">
           <input id="id_evento" type="hidden" name="id_evento" value="">
 
-          <div class="col-xs-12">
-            Inicio:<br>
+          <div class="col-xs-12"> <!-- //FIXME: Eliminar esta opción del sistema -->
+            <div style="display: none">
+              Final<br>
+              <fieldset>
+                <div class="row-between">
+                  <input id="fecha_f_edit_log" class="col-xs-5" type="date" name="date_end" value="">
+  
+                  <input id="time_f_log" class="col-xs-5" type="time" name="time_end" value="23:00:00">
+                </div>    
+              </fieldset>
+            </div>
+
+            Actividad<br>
+            <input id="actividad_log" class="col-xs-12" type="text" name="title" value="">
+            Lugar
+            <input id="lugar_log" class="col-xs-12" type="text" name="lugar" value="">
+            
+            Fecha y Hora<br>
             <fieldset>
               <div class="row-between">
                 <input id="fecha_edit_log" class="col-xs-5" type="date" name="date_start">
@@ -20,21 +36,7 @@
                 <input id="time_start_log" class="col-xs-5" type="time" name="time_start" value="00:00:00">
               </div>
             </fieldset>
-
-            Final:<br>
-            <fieldset>
-              <div class="row-between">
-                <input id="fecha_f_edit_log" class="col-xs-5" type="date" name="date_end" value="">
-
-                <input id="time_f_log" class="col-xs-5" type="time" name="time_end" value="23:00:00">
-              </div>    
-            </fieldset>
-
-            Actividad:<br>
-            <input id="actividad_log" class="col-xs-12" type="text" name="title" value="">
-            Lugar:
-            <input id="lugar_log" class="col-xs-12" type="text" name="lugar" value="">
-            <br><br>
+            <br>
             
             <button id="btn_add" onclick="addLogistica()" class="btn success" type="button">Subir</button>
             <button id="btn_edit" onclick="editLogistica()" class="btn atention" type="button">Editar</button>

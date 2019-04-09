@@ -1,15 +1,6 @@
 <?php
 class Evento
 {
-  private $db;
-  private $datos;
-
-  public function __construct()
-  {
-    $this->db = Conexion::conectar();
-    $this->datos = array();
-  }
-
   /** CREA UN ARRAY DE LOS DATOS */
   private function getArrayData()
   {
@@ -17,26 +8,26 @@ class Evento
     $_SESSION['usuario']['nombre'].  ' ' .$_SESSION['usuario']['apellidos'];
 
     return array(
-      'title' => $_POST['title'],
-      'evento' => $_POST['evento'],
-      'folio' => isset($_POST['folio']) ? $_POST['folio'] : '',
-      'contacto' => $_POST['contacto'],
-      'cord_resp' => strtoupper($cord_resp),
+      'title'      => $_POST['title'],
+      'evento'     => $_POST['evento'],
+      'folio'      => isset($_POST['folio']) ? $_POST['folio'] : '',
+      'contacto'   => $_POST['contacto'],
+      'cord_resp'  => strtoupper($cord_resp),
       'cord_apoyo' => isset($_POST['cord_apoyo']) ? $_POST['cord_apoyo'] : '',
-      'des' => isset($_POST['description']) ? $_POST['description'] : '',
-      'lugar' => $_POST['id_lugar'],
-      'start' => $_POST['start'],
-      'end' => $_POST['end'],
-      'personas' => $_POST['personas'],
-      'categoria' => $_POST['categoria'],
-      'color' => $_POST['color']
+      'des'        => isset($_POST['description']) ? $_POST['description'] : '',
+      'lugar'      => $_POST['id_lugar'],
+      'start'      => $_POST['start'],
+      'end'        => $_POST['end'],
+      'personas'   => $_POST['personas'],
+      'categoria'  => $_POST['categoria'],
+      'color'      => $_POST['color']
     );
   }
 
-  /**---------------- INSERTA EL EVENTO */
+  /**------ INSERTA EL EVENTO ---------*/
   public function agregarEvento()
   {
-    $data = $this->getArrayData();
+    $data               = $this->getArrayData();
     $data['id_usuario'] = $_SESSION['usuario']['id_usuario'];
 
     $sql = "INSERT INTO eventos VALUES (
@@ -49,28 +40,37 @@ class Evento
     return $agregar;
   }
 
-  /**--------------------- ELIMINA EL EVENTO */
+  /**---------- ELIMINA EL EVENTO ---------*/
   public function eliminarEvento($id)
   {
-    if ($this->obtenerValidacionEvento($_SESSION['usuario']['id_usuario'], $id) ||
-      $_SESSION['usuario']['rol'] == 'Administrador' || $_SESSION['usuario']['rol'] == 'Supervisor') {
+    $error = true;
+    $validacion = $this->obtenerValidacionEvento($_SESSION['usuario']['id_usuario'], $id);
 
-      $sql = "DELETE FROM eventos WHERE id_evento = :id";
+    /** VALIDA EL ACCESO A LA FUNCIONALIDAD */
+    if ($validacion || $_SESSION['usuario']['rol'] == 'Administrador' || $_SESSION['usuario']['rol'] == 'Supervisor') {
+      $error = false;
+    }
 
-      $exe = $this->db->prepare($sql);
-      $exe->execute(array(
-        'id' => $id
-      ));
+    if ($error == true) {
+      $_SESSION['error']['msg'] = 'No tiene permiso de eliminar este evento';
+      return false;
+    }
 
-      return 1;
-    } else { return 0; }
-    
+    $sql = "DELETE FROM eventos WHERE id_evento = :id";
+
+    try {
+      Conexion::query($sql, array('id' => $id));
+
+    } catch (\Throwable $th) {
+      $_SESSION['error']['msg'] = $th->getMessage();
+    }
+    return true;
   }
 
-  /**------------------- MODIFICA EL EVENTO */
+  /**------ MODIFICA EL EVENTO --------*/
   public function modificarEvento($id)
   {
-    $data = $this->getArrayData();
+    $data       = $this->getArrayData();
     $data['id'] = $id;
 
     if ($this->obtenerValidacionEvento($_SESSION['usuario']['id_usuario'], $id) == 1 ||
@@ -89,20 +89,27 @@ class Evento
     } else { return false; }
   }
 
-  /**----------------- VALIDA LOS DATOS DEL FORMULARIO */
+  /**----- VALIDA EL AUTOR DEL EVENTO ----*/
   private function obtenerValidacionEvento($id_usu, $id_evento)
   {
+    $data = array(
+      'id'        => $id_usu,
+      'id_evento' => $id_evento
+    );
+
     $sql = "SELECT id_usuario FROM eventos
     WHERE id_usuario = :id AND id_evento = :id_evento";
 
-    $exe = $this->db->prepare($sql);
-    $exe->execute(array(
-      'id' => $id_usu,
-      'id_evento' => $id_evento
-    ));
+    try {
+      $is_autor = Conexion::query($sql, $data, true);
 
-    if (count($exe->fetchAll()) >= 1) {
-      return 1;
-    } else { return 0; }
+    } catch (PDOException $e) {
+      $_SESSION['error'] = $e->getMessage();
+      return false;
+    }
+
+    if (count($is_autor) < 1) {
+      return false;
+    } else { return true; }
   }
 }

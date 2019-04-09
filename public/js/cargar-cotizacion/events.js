@@ -8,7 +8,7 @@ addEventListener('DOMContentLoaded', () => {
       if (btnClass == 'btn primary') {
          let row = document.createElement('tr')
          row.innerHTML = `<td><input type="text" name="descripcion[]" placeholder="Descripcion" required></td>
-         <td><input class="precio" type="number" name="precio[]" placeholder="0.00"></td>
+         <td><input class="precio" type="number" name="precio[]" placeholder="0.00" step="0.01"></td>
          <td><input class="cantidad" type="number" name="cantidad[]" placeholder="0"></td>
          <td><input class="subtotal" type="text" name="subtotal[]" disabled value="0.00"></td>
          <td>
@@ -58,7 +58,7 @@ addEventListener('DOMContentLoaded', () => {
       let subtotales = form_carga_cot.querySelectorAll('.subtotal')
 
       getSubtotal(d)
-      total.value = getTotal(subtotales)
+      total.value = getTotal(subtotales).toLocaleString('es-MX', formato_moneda)
    })
 })
 

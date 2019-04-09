@@ -16,6 +16,7 @@ addEventListener('DOMContentLoaded', () => {
          let cot = dataJson.cotizacion,
          det = dataJson.detalle
          
+         /** VARIFICA SI HAY COTIZACIONES */
          if (Object.keys(cot).length > 0) {
             pintarCotizacion(cot)
          }

@@ -1,24 +1,26 @@
 addEventListener('DOMContentLoaded', () => {
-   
    const modal_precios = new Modal(m_precios);
    
+   /** OBTIENE TODOS LOS PRECIOS */
    obtenerDatosJoinJoin('precios_renta', 'tipo_eventos', 'id_tipo_evento', 'lugares', 'id_lugar')
    .then(dataJson => {
       tbody_precios.innerHTML = '';        
-      let data = '';
+      let dataHTML = '';
       
       for (i in dataJson) {
          item = dataJson[i];
-         
-         data += `<tr data-precio="${item.id_precio}">
-         <td>${item.lugar}</td> <td>${item.nombre_tevento}</td> <td>$ ${item.precio_alta}</td> <td>$ ${item.precio_baja}</td>
+         let precio_alta = parseFloat(item.precio_alta).toLocaleString('es-MX', formato_moneda),
+         precio_baja = parseFloat(item.precio_baja).toLocaleString('es-MX', formato_moneda);
+
+         dataHTML += `<tr data-precio="${item.id_precio}">
+         <td>${item.lugar}</td> <td>${item.nombre_tevento}</td> <td>$ ${precio_alta}</td> <td>$ ${precio_baja}</td>
          <td><button class="danger"><i class="fas fa-trash-alt"></i></button></td>
          </tr>`;
       }
-      
-      tbody_precios.innerHTML = data;
+      tbody_precios.innerHTML = dataHTML;
    })
    
+   /** OBTIENE TODOS LOS LUGARES */
    obtenerDatos('lugares')
    .then(dataJson => {
       select_lugar.innerHTML = '<option value="">- Elegir -</option>';
@@ -32,6 +34,7 @@ addEventListener('DOMContentLoaded', () => {
       select_lugar.innerHTML += data;
    })
    
+   /** OBTIENE TODOS LOS TIPOS DE EVENTOS */
    obtenerDatos('tipo_eventos')
    .then(dataJson => {
       select_t_evento.innerHTML = '<option value="">- Elegir -</option>';

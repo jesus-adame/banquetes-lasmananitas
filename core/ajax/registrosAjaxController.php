@@ -1,115 +1,175 @@
-<?php header('Content-type: application/json');
+<?php
 session_start();
 require '../config/conexion.php';
 require '../models/UsuariosModel.php';
 require '../models/TablasModel.php';
 $usu = new Usuario();
 
+$res = array(
+    'error' => true
+);
+
 switch ($_POST['action']) {
     case 'agregar':
-        if (!empty($_POST['usuario']) && !empty($_POST['pass']) && !empty($_POST['pass2'])) {
+        /** VALIDA LOS DATOS POR POST */
+        if (empty($_POST['usuario']) || empty($_POST['pass']) || empty($_POST['pass2'])) {
+            $res['msg']   = 'Debes llenar todos los campos';
+            $res['error'] = true;
+        }
 
-            if ($_POST['pass'] === $_POST['pass2']) {
+        /** VALIDA LAS CONTRASEÑAS */
+        if ($_POST['pass'] != $_POST['pass2']) {
+            $res['msg']   = 'Las contraseñas no coinciden';
+            $res['error'] = true;
+            break;
 
-                if (strlen($_POST['pass']) < 6) {
-                    echo json_encode('dont_length');
-                } else {
-                    $usu->setName($_POST['usuario']);
-                    $pass = sha1($_POST['pass']);
-                    $usu->setPass($pass);
+        } else if (strlen($_POST['pass']) < 6) {
+            $res['msg']   = 'Las contraseñas deben contener al menos 6 caracteres';
+            $res['error'] = true;
+            break;
+        }
 
-                    $t = new Tabla('usuarios');
-                    $validar = $t->obtener_datos_donde('username', $_POST['usuario']);
-                    if (!$validar) {
-                        $usu->insertarUsuario($_POST['nivel'], $_POST['estado']);
-                        echo json_encode('success');
-                    } else {
-                        echo json_encode('error');
-                    }
-                }
-            } else { echo json_encode('pass_dont_match'); }
-            
-        } else { echo json_encode('empty_fields'); }
-    break;
+        /** SETEA EL USUARIO */
+        $usu->setName($_POST['usuario']);
+        $pass = sha1($_POST['pass']);
+        $usu->setPass($pass);
+
+        $t = new Tabla('usuarios');
+
+        /** VALIDA QUE NO EXISTA OTRO USUARIO CO EN MISMO NOMBRE */
+        $is_user = $t->obtener_datos_donde('username', $_POST['usuario']);
+
+        if (!$is_user) {
+            /** INSERTA EL USUARIO */
+            $usu->insertarUsuario($_POST['nivel'], $_POST['estado']);
+            $res['error'] = false;
+
+        } else {
+            $res['msg']   = 'Ya existe un registro con ese nombre de usuario';
+            $res['error'] = true;
+        }
+        break;
 
     case 'editar':
-            
         $usu->setName($_POST['usuario']);
-        
-        $res = $usu->editarUsuario($_POST['id'], $_POST['nivel'], $_POST['estado']);
+        /** EDITA EL USUARIO */
+        $edit = $usu->editarUsuario($_POST['id'], $_POST['nivel'], $_POST['estado']);
 
-        if ($res) {
-            echo json_encode('success');
-        } else { echo json_encode('error'); }
-    break;
+        /** VALIDA QUE NO HAYAN ERRORES */
+        if (!$edit) {
+            $res['error'] = true;
+            $res['msg']   = 'No se pudo editar';
+            break;
+        }
+        $res['error'] = false;
+        break;
 
     case 'borrar':
-        if (!empty($_POST['id'])) {
+        if (empty($_POST['id'])) {
+            $res['error'] = true;
+            $res['msg']   = 'Debes llenar todos los campos';
+            break;
+        }
 
-            $res = $usu->borrarUsuario($_POST['id']);
+        /* BORRAR EL USUARIO */
+        $delete = $usu->borrarUsuario($_POST['id']);
 
-            if ($res) {
-                echo json_encode('success');
-            } else {
-                echo json_encode('error');
-            }
-        } else { echo json_encode('empty_fields'); }
-    break;
+        /** VARIFICA SI HAY ERRORES */
+        if (!$delete) {
+            $res['msg']   = 'No se pudo borrar';
+            $res['error'] = true;
+            break;
+        }
+        $res['error'] = false;
+        break;
 
     case 'cambiar_pass':
-        if (!empty($_POST['pass']) && !empty($_POST['pass1']) && !empty($_POST['pass2'])) {
-            
-            if ($_POST['pass1'] === $_POST['pass2']) {
+        /** VALIDA LOS DATOS POR POST */
+        if (empty($_POST['pass']) || empty($_POST['pass1']) || empty($_POST['pass2'])) {
+            $res['msg']   = 'Debes llenar todos los campos';
+            $res['error'] = true;
+            break;
+        }
 
-                if (strlen($_POST['pass1']) < 6) {
-                    echo json_encode('dont_length');                    
-                } else {
-                    $pass = sha1($_POST['pass']);
-                    $pass1 = sha1($_POST['pass1']);
-                    
-                    $validar = $usu->validar($_SESSION['id_usuario'], $pass);
-                    
-                    if ($validar) {
-                        $usu->cambiarPass($_SESSION['id_usuario'], $pass1);
-                        echo json_encode('success');
-                    } else {
-                        echo json_encode('error');
-                    }
-                }
+        /** VALIDA LA CONTRASEÑA */
+        if ($_POST['pass1'] != $_POST['pass2']) {
+            $res['msg']   = 'Las contraseñas no coinciden';
+            $res['error'] = true;
+            break;
 
-            } else { echo json_encode('pass_dont_match'); }
-        } else { echo json_encode('empty_fields'); }
-    break;
+        } else if (strlen($_POST['pass1']) < 6) {
+            $res['msg']   = 'Las contraseñas deben contener al menos 6 caracteres';  
+            $res['error'] = true;
+            break;                  
+        }
+
+        /** CIFRA LAS CONTRASEÑAS */
+        $pass  = sha1($_POST['pass']);
+        $pass1 = sha1($_POST['pass1']);
+        
+        /** VALIDA LA AUTENTICIDAD DEL USUARIO */
+        $validar = $usu->validar($_SESSION['id_usuario'], $pass);
+        
+        if ($validar) {
+            /** CAMBIA LA CONTRASEÑA */
+            $usu->cambiarPass($_SESSION['id_usuario'], $pass1);
+            $res['error'] = false;
+
+        } else {
+            $res['msg']   = 'Hubo un problema a verificar su autenticidad';
+            $res['error'] = true;
+        }
+        break;
 
     case 'auto_agregar':
-    if (!empty($_POST['usuario']) && !empty($_POST['pass']) && !empty($_POST['pass2'])) {
+        /** VALIDA EL FORMULARIO */
+        if (empty($_POST['usuario']) || empty($_POST['pass']) || empty($_POST['pass2'])) {
+            $res['msg']   = 'Debes llenar todos los campos';
+            $res['error'] = true;
+            break;
+        }
 
-        if ($_POST['pass'] === $_POST['pass2']) {
+        /** VALIDA LA CONTRASEÑA */
+        if ($_POST['pass1'] != $_POST['pass2']) {
+            $res['msg']   = 'Las contraseñas no coinciden';
+            $res['error'] = true;
+            break;
 
-            if (strlen($_POST['pass']) < 6) {
-                echo json_encode('dont_length');
-            } else {
-                $usu->setName($_POST['usuario']);
-                $pass = sha1($_POST['pass']);
-                $usu->setPass($pass);
-                $nivel = 'Consulta';
+        } else if (strlen($_POST['pass1']) < 6) {
+            $res['msg']   = 'Las contraseñas deben contener al menos 6 caracteres';  
+            $res['error'] = true;
+            break;                  
+        }
 
-                $t = new Tabla('usuarios');
-                $validar = $t->obtener_datos_donde('username', $_POST['usuario']);
-                
-                if (!$validar) {
-                    $res = $usu->insertarUsuario($nivel, 0);
-                    echo json_encode('success');
-                } else {
-                    echo json_encode('error');
-                }
-            }
-        } else { echo json_encode('pass_dont_match'); }
+        /** SETEA EL USUARIO */
+        $usu->setName($_POST['usuario']);
+        $pass = sha1($_POST['pass']);
+        $usu->setPass($pass);
+        $nivel = 'Consulta';
+
+        $t = new Tabla('usuarios');
+        $is_user = $t->obtener_datos_donde('username', $_POST['usuario']);
         
-    } else { echo json_encode('empty_fields'); }
-    break;
+        /** VALIDA SI NO EXISTE ESE USUARIO EN LA DB */
+        if (!$is_user) {
+            /** INSERTA EL USUARIO */
+            $res = $usu->insertarUsuario($nivel, 0);
+            $res['error'] = false;
+
+        } else {
+            $res['msg']   = 'No se pudo registrar el usuario';
+            $res['error'] = true;
+        }
+        break;
 
     default:
-        echo 'No se detectó su solicitud';
-    break;
+        $res['msg']   = 'No se detectó su solicitud';
+        $res['error'] = true;
+        break;
 }
+
+/** DEVUELVE EL RESULTADO EN JSON */
+header('Content-type: application/json');
+echo json_encode($res);
+
+?>

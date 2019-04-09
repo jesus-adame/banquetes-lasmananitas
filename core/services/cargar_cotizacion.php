@@ -9,17 +9,18 @@ if (isset($_POST['action'])) {
    switch ($_POST['action']) {
       case 'insertar_cotizacion':
          $cotizacion_id = $cot->getCotId($_POST['folio']);
-         $insert = $cot->insertDetalleCotizacion($cotizacion_id);
+         $insert        = $cot->insertDetalleCotizacion($cotizacion_id);
 
          if ($insert === true) {
-            $res['msg'] = 'Se insertaron los datos';
+            $res['msg']   = 'Se insertaron los datos';
             $res['error'] = false;
             
          } else {
-            $res['data'] = null;
-            $res['msg'] = 'No se insertaron los datos';
+            $res['data']  = null;
+            $res['msg']   = $_SESSION['error'];
             $res['error'] = true;
          }
+         unset($_SESSION['error']);
          break;
 
       case 'obtener_cotizacion':
@@ -29,17 +30,18 @@ if (isset($_POST['action'])) {
             if (count($cotizacion) > 0) {
                $detalle = $cot->getDetalleCotizacion($cotizacion[0]['id']);
                $res['cotizacion'] = $cotizacion[0];
-               $res['detalle'] = $detalle;
-               $res['error'] = false;
-               $res['data'] = true;
-               $res['msg'] = 'validación correcta';
+               $res['detalle']    = $detalle;
+               $res['error']      = false;
+               $res['msg']        = 'validación correcta';
 
             } else {
-               $res['msg'] = 'No se encontró ninguna cotización';
+               $res['error'] = true;
+               $res['msg']   = 'No puedes ver los detalles de esta cotización';
             }
 
          } else {
-            $res['msg'] = 'No tiene permitido acceder a esta sección';
+            $res['error'] = true;
+            $res['msg']   = 'No tiene permitido acceder a esta sección';
          }
          break;
          
@@ -48,14 +50,19 @@ if (isset($_POST['action'])) {
 
          if ($delete == true) {
             $res['error'] = false;
-            $res['msg'] = 'Elemento borrado';
+            $res['msg']   = 'Elemento borrado';
 
          } else {
             $res['msg'] = 'Nose pudo borrar';
          }
          break;
+
+      default;
+         $res['error'] = true;
+         $res['msg']   = 'No se reconoció la acción';
+         break;
    }
 } else {
-   $res['msg'] = 'No se reconoció el comando';
+   $res['msg']   = 'No se reconoció el comando';
    $res['error'] = true;
 }

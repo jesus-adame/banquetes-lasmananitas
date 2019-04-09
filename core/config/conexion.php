@@ -1,8 +1,11 @@
 <?php
+
 class Conexion
 {
+  public static $stmt;
+
   /**------- CONECTA A LA BASE DE DATOS --------*/
-  public static function conectar()
+  public static function init()
   {
     require_once 'config.php';
     $options = [
@@ -11,13 +14,12 @@ class Conexion
 
     $base = new PDO('mysql:dbname='. DB .';host='. HOST .';charset=UTF8', USER, PASSWORD, $options);
     $base->exec('SET CHARSET UTF8');
-    return $base;
+    self::$stmt = $base;
   }
 
   /**-------- EJECUTA LAS CONSULTAS A LA DB ----------*/
-  static function query($sql, $data = array(), $select = false, $one = false) {
-    $stmt = self::conectar();
-    $exec = $stmt->prepare($sql);
+  public static function query($sql, $data = array(), $select = false, $one = false) {
+    $exec = self::$stmt->prepare($sql);
     $exec->execute($data);
     
     /**----- SI ES CONSULTA SELECT -------*/
@@ -30,8 +32,10 @@ class Conexion
         return $exec->fetchAll(PDO::FETCH_ASSOC);
       }
     } else {
-      return $stmt;
+      return self::$stmt;
     }
   }
 }
+
+Conexion::init();
 ?>
