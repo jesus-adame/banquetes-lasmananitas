@@ -2,6 +2,7 @@
 include_once '../models/SesionModel.php';
 require_once '../config/conexion.php';
 
+// TODO: ACTUALIZAR EL MANEJO DE RESPUESTAS
 switch ($_POST['accion']) {
   case 'iniciar':
     if (!empty($_POST['usuario']) && !empty($_POST['pass'])) {

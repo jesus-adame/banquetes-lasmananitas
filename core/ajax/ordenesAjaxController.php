@@ -6,6 +6,7 @@ require_once '../config/conexion.php';
 $tabla = new Tabla('ordenes_servicio');
 $orden = new Orden();
 
+// TODO: ACTUALIZAR EL MANEJO DE LAS RESPUESTAS
 $accion = isset($_POST['accion']) ? $_POST['accion'] : 'leer';
 
 switch ($accion) {

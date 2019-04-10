@@ -1,16 +1,16 @@
 class Modal {
    constructor(id_modal) {
-      this.modal     = id_modal;
-      this.titulo    = this.modal.querySelector('.title');
-      this.fondo     = this.modal.querySelector('.flex');
-      this.btn_close = this.modal.querySelector('.close');
+      this.m     = id_modal;
+      this.titulo    = this.m.querySelector('.title');
+      this.fondo     = this.m.querySelector('.flex');
+      this.btn_close = this.m.querySelector('.close');
    }
 
    abrir() {
-      this.modal.style.display = 'block';
+      this.m.style.display = 'block';
    }
 
    cerrar() {
-      this.modal.style.display = 'none';
+      this.m.style.display = 'none';
    }
 }

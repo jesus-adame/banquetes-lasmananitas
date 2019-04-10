@@ -3,6 +3,7 @@ require_once '../config/conexion.php';
 require_once '../models/TablasModel.php';
 $campos = new Tabla('campos_ordenes');
 
+// TODO: ACTUALIZAR EL MANEJO DE RESPUESTAS
 $id = $_POST['id_orden'];
 
 $dataJson = $campos->obtener_datos_donde('id_orden', $id);

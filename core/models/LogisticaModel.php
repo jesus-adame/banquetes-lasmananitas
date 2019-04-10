@@ -14,7 +14,7 @@ class Logistica
     $data_log = array(
       'id_evento' => $datos[0],
       'start'     => $datos[1],
-      'end'       => $datos[2],
+      'end'       => $datos[2], // FIXME: ELIMINAR ESTA LÍNEA
       'title'     => $datos[3],
       'lugar'     => $datos[4]
     );
@@ -35,7 +35,7 @@ class Logistica
     }
     
     $sql = "INSERT INTO sub_evento (id_evento, start, end, title, lugar)
-    VALUES (:id_evento, :start, :end, :title, :lugar)";
+    VALUES (:id_evento, :start, :end, :title, :lugar)"; // FIXME: ACTUALIZAR LA QUERY
 
     /** INSERTA LA ACTIVIDAD EN LA BASE DE DATOS */
     try {
@@ -106,7 +106,7 @@ class Logistica
     end       = :end,
     title     = :title,
     lugar     = :lugar
-    WHERE id_sub_evento = :id";
+    WHERE id_sub_evento = :id"; // FIXME: ACTUALIZAR LA QUERY
 
     /** ACTUALIZA LA ACTIVIDAD */
     $exe = Conexion::query($sql, $data_log);

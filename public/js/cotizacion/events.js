@@ -14,7 +14,6 @@ table_cotizacion.addEventListener('click', e => {
    }
 
    if (btnClass == 'btn danger') {
-      console.log('borrar')
       popup.confirm({
          content: '¿Está seguro de eliminar?',
          default_btns: {

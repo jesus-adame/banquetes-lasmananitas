@@ -6,6 +6,7 @@ require_once '../config/conexion.php';
 $tabla = new Tabla('sub_evento');
 $logistica = new Logistica();
 
+// TODO: ACTUALIZAR EL MANEJO DE RESPUESTAS
 $accion = isset($_POST['accion']) ? $_POST['accion'] : 'leer';
 
 switch ($accion) {
@@ -14,7 +15,7 @@ switch ($accion) {
       $datos = array(
         $_POST['id_evento'],
         $_POST['date_start'].' '.$_POST['time_start'],
-        $_POST['date_end']. ' ' .$_POST['time_end'],
+        $_POST['date_end']. ' ' .$_POST['time_end'], // FIXME: ELIMINAR ESTA OPCIÓN
         $_POST['title'],
         $_POST['lugar']);
     } else {
@@ -35,7 +36,7 @@ switch ($accion) {
       $datos = array(
         $_POST['id_evento'],
         $_POST['date_start']. ' ' .$_POST['time_start'],
-        $_POST['date_end']. ' ' .$_POST['time_end'],
+        $_POST['date_end']. ' ' .$_POST['time_end'], // FIXME: ELIMINAR ESTA LÍNEA
         $_POST['title'],
         $_POST['lugar']);
 

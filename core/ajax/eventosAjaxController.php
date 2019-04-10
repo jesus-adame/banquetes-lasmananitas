@@ -8,6 +8,7 @@ $tabla_event = new Tabla('eventos');
 
 $accion = isset($_REQUEST['accion']) ? $_REQUEST['accion'] : 'leer';
 
+// TODO: ACTUALIZAR EL MANEJO DE RESPUESTAS EN JSON
 switch ($accion) {
   case 'agregar':
     if (!empty($_POST['title']) && !empty($_POST['evento']) &&
@@ -38,6 +39,7 @@ switch ($accion) {
     break;
 
   case 'eliminar':
+    // FIXME: MANEJAR LOS ERRORES DE SQL AL ELIMINAR UN EVENTO
     if (!empty($_POST['id'])) {
       $res = $event->eliminarEvento($_POST['id']);
 

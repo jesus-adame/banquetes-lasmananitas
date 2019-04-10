@@ -92,7 +92,7 @@ function abrirAgregarLogistica() {
   btn_add.style.display      = 'block';
   md_logistica.style.display = 'block';
   fecha_edit_log.value       = fecha;
-  fecha_f_edit_log.value     = fecha;
+  fecha_f_edit_log.value     = fecha; // FIXME: ELIMINAR ESTA LÍNEA UNA VEZ AUCTUALIZADO
   time_start_log.value       = hora;
   id_evento.value            = e_id.value;
 }

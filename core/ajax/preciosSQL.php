@@ -7,10 +7,7 @@ $res = array(
    'error' => false
 );
 
-// if ($_SESSION['puesto'] != 'Administrador') {  // Bloquea el permiso a personal no autorizado
-//   $res['msg'] = 'No tiene permiso para realizar esa operación';
-//   $res['error'] = true;
-// } else {
+// TODO: MEJORAR LA LEGIBILIDAD DEL CÓDIGO
 
    if ($_POST['action'] === 'borrar') {
    $sql = "DELETE FROM precios_renta WHERE id_precio = :id_precio";

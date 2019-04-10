@@ -68,12 +68,12 @@ class Cotizacion
         return $array;
     }
 
-    private function getArrayCliente() {
+    public function getArrayCliente() {
         return array(
             'nombre'   => strtoupper($_POST['nombre']),
             'apellido' => strtoupper($_POST['apellido']),
             'email'    => $_POST['email'],
-            'telefono' => $_POST['telefono'],
+            'telefono' => $_POST['telefono']
         );
     }
 
@@ -113,56 +113,36 @@ class Cotizacion
         $data['evento_id']  = $evento_id;
         $data['cliente_id'] = $cliente_id;
         $validacion         = $this->validaFolioCot($data['folio']);
-        $result             = false;
 
         if ($validacion) {
             $sql = "INSERT INTO cotizaciones VALUES
             (null, :evento_id, :cliente_id, :usuario_id, :folio, NOW(), :renta, :pax, :estado, :costo_total)";
             
-            $cot    = Conexion::query($sql, $data);
-            $result = $cot->lastInsertId();
+            Conexion::query($sql, $data);
+
         } else {
-            $result = null;
+           throw new Exception('No tiene permiso de crear esta cotización');
         }
-        return $result;
     }
 
     /*--- INSERT CLIENTE -----------------------------*/
 
     public function insertCliente() {
-        $d      = $this->getArrayCliente();
-        $exist  = $this->isCliente($d['nombre'], $d['apellido'], $d['email']);
-        $result = null;
-
-        if ($exist) {
-            $cliente_id = $this->getClienteId($d['email']);
-            $result     = $cliente_id;
-
-        } else {
-            $sql = "INSERT INTO clientes VALUES
-            (null, :nombre, :apellido, :email, :telefono, NOW())";
-
-            try {
-                $insert = Conexion::query($sql, $d);
-                $result = $insert->lastInsertId();
-                
-            } catch (PDOException $e) {
-                var_dump($insert); die();
-                return null;
-            }
-        }
-        /** DEVUELVE EL ID DEL CLIENTE */
-        return $result;
+        $d = $this->getArrayCliente();
+        
+        $sql = "INSERT INTO clientes VALUES
+        (null, :nombre, :apellido, :email, :telefono, CURRENT_DATE())";
+        
+        Conexion::query($sql, $d);
     }
 
     /**---- INSERT EVENTO -----------------------------*/
 
     public function insertEvento($data) {
         $sql = "INSERT INTO eventos VALUES
-        (null, :title, :evento, null, :contacto, :cord_resp, null, null, :id_lugar, :start, :end, :personas, :categoria, :color, :id_usuario)";
+        (null, :tittle, :evento, null, :contacto, :cord_resp, null, null, :id_lugar, :start, :end, :personas, :categoria, :color, :id_usuario)";
 
-        $insert = Conexion::query($sql, $data);
-        return $insert->lastInsertId();
+        Conexion::query($sql, $data);
     }
 
     /**--- INSERT DETALLE COTIZACIÓN ------------------*/
@@ -190,7 +170,7 @@ class Cotizacion
             try {
                 $insert = Conexion::query($sql, $detalle);
 
-            } catch (PDOExeption $e) {
+            } catch (PDOException $e) {
                 if ($insert->errorCode() !== 0) {
                     $_SESSION['error'] = "Syntax Error: ". $e->getMessage();
                     return false;
@@ -373,7 +353,7 @@ class Cotizacion
     }
 
     /**--- VALIDA SI HAY UN CLIENTE -----------*/
-    private function isCliente($nombre, $apellido, $email)
+    public function isCliente($nombre, $apellido, $email)
     {
         $sql = "SELECT nombre FROM clientes WHERE (nombre = :nombre AND apellido = :apellido AND email = :email) OR email = :email";
 
@@ -487,8 +467,9 @@ class Cotizacion
             'email'    => $data_post['email']
         );
 
-        /** VALIDA EL CORREO */
         //FIXME: VALIDAR EL CORREO Y EL USUARIO POR SEPARADO
+        
+        /** VALIDA EL CORREO */
         // $email_invalido = $this->isEmail($data_post['email']);
 
         // if ($email_invalido) {

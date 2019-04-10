@@ -21,7 +21,7 @@ function mostrarLogistica(data) {
             <i class="fas fa-trash"></i>
             </button>
          </td>
-      </tr>`
+      </tr>`;
    }
 }
  
@@ -54,7 +54,7 @@ function mostrarOrdenes(data) {
 /**---- PINTA EL MODAL ORDEN DE SERVICIO ---*/
 function printModalOrden(dataOrden) {
    const ord = dataOrden;
-   console.log(ord)
+   
    let mdl = document.getElementById('md_orden'),
       tabs = mdl.querySelectorAll('.tab');
 
