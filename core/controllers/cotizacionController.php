@@ -1,6 +1,9 @@
 <?php
 
-if (!isset($_SESSION['usuario'])) {
-   unset($_GET['view']);
-   header('location:index.php?view=index');
-}
+    class CotizacionController {
+        
+        public function index() {
+            Utils::isVentas();
+            return view('cotizacion');
+        }
+    }

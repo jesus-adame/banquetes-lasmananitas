@@ -1,6 +1,9 @@
 
 addEventListener('DOMContentLoaded', () => {
 
+   let number = location.href;
+   let folio = number.substr(number.length-1)
+
    /**--------------- ESCUCHA LA TABLA CARGAR COTIZACION ------------*/
    table_carga_cot.addEventListener('click', e => {
       let btnClass = e.target.className
@@ -35,10 +38,9 @@ addEventListener('DOMContentLoaded', () => {
    form_carga_cot.addEventListener('submit', e => {
       e.preventDefault()
       const dataF = new FormData(form_carga_cot)
-      const folio = location.search.split('&')[1].split('=')
 
       dataF.append('action', 'insertar_cotizacion')
-      dataF.append('folio', folio[1])
+      dataF.append('folio', folio)
 
       ajaxRequest('cargar_cotizacion', dataF)
          .then(dataJson => {

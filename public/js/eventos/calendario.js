@@ -1,7 +1,7 @@
 
 $('#calendar').fullCalendar({
    header: {
-      left: 'listYear,month,agendaWeek,agendaDay',
+      left: 'listYear,month,agendaWeek',
       center: 'title',
       right: 'today, btnAgregar, prev,next'
    },
@@ -29,7 +29,7 @@ $('#calendar').fullCalendar({
          btnAddEvent.setAttribute('disabled', 'disabled');
 
       } else {
-         btnModificar.setAttribute('disabled', 'disabled');
+         btnModificar.removeAttribute('disabled');
          btnBorrar.setAttribute('disabled', 'disabled');
          btnDetalleEvento.removeAttribute('disabled');
          btnAddEvent.setAttribute('disabled', 'disabled');

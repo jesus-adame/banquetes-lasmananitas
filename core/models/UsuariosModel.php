@@ -129,6 +129,9 @@ class Usuario
 
         if (count($valid) > 0) {
             return true;
-        } else { return false; }
+        } else {
+            $_SESSION['error']['msg'] = 'Su contraseña actual es incorrecta';
+            return false;
+        }
     }
 }

@@ -17,6 +17,8 @@ $('#calendar').fullCalendar({
       d_end.value  = date.format()
    },
    eventClick: function (calEvent) {
+      openLoading();
+
       data = new FormData;
       data.append('evento_id', calEvent.id_evento)
       data.append('action', 'obtener_cotizaciones')
@@ -28,14 +30,13 @@ $('#calendar').fullCalendar({
       .then(dataJson => {
          if (typeof dataJson.data == 'undefined') {
             btn_imprimir.style.display   = 'none'
-            btn_autorizar.style.display  = 'none'
             tbody_cotizaciones.innerHTML = `<tr><td colspan="7"><button class="btn primary">Crear Cotización</botton></td></tr>`
 
          } else {
             btn_imprimir.style.display  = 'block'
-            btn_autorizar.style.display = 'block'
             printTableCotizacion(dataJson.data)
          }
+         closeLoading();
       })
       .then(() => {
          modal_info.style.display = 'block'

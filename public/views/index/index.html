@@ -1,0 +1,97 @@
+{include file=$inc|cat:'header.html'}
+<style>
+	.pg-inicio {
+		background-image: url('storage/thumbs/copas.jpg');
+		background-position: center;
+		height: 77vh;
+		min-height: 400px;
+		max-height: 2000px;
+		background-repeat: no-repeat;
+		background-size: cover;
+		display: flex;
+	}
+
+	h1 {
+		font-family: 'English-Vivace';
+		font-size: 65px;
+	}
+
+	.pg-inicio h1,
+	h2,
+	h3,
+	.marco-index p {
+		color: #fff;
+		text-shadow: 2px 2px 2px #000;
+	}
+
+	hgroup {
+		padding-top: 20px;
+		text-align: center;
+	}
+
+	header {
+		background: rgba(0, 0, 0, 0.5);
+	}
+
+	@media only screen and (max-width: 900px) {
+		nav ul {
+			background: rgba(14, 59, 5, 0.98);
+		}
+	}
+
+	ul li .btn-h {
+		padding: 10px 12px;
+		box-sizing: border-box;
+		border-bottom: solid 2px rgba(0, 0, 0, 0.0);
+	}
+
+	ul li .btn-h:hover {
+		background: none;
+		border-bottom: solid 2px rgb(108, 143, 51);
+		box-shadow: none;
+	}
+
+	ul li .active {
+		background: rgba(0, 0, 0, 0.8);
+		border-bottom: solid 2px rgb(21, 116, 2);
+		box-shadow: none;
+	}
+
+	.btn-menu {
+		background: rgba(0, 0, 0, 0.8);
+		border-bottom: solid 2px rgb(21, 116, 2);
+	}
+
+	.marco-index {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: rgba(0, 0, 0, 0.5);
+		padding: 15px;
+		border-radius: 4px;
+	}
+
+	main {
+		margin-top: 0;
+	}
+
+	.marco-index p {
+		letter-spacing: 0.2mm;
+		text-align: center;
+	}
+</style>
+
+<main class="pg-inicio">
+	<div class="m-auto marco-index">
+		<div>
+			<hgroup>
+				<h1>Banquetes</h1>
+				<h2>Sistema de Control de Eventos</h2>
+			</hgroup>
+
+			<p>USUARIO: <strong>{$usuario.username}</strong></p>
+			<p>ROL: <strong>{$usuario.rol}</strong></p>
+		</div>
+	</div>
+</main>
+{include file=$inc|cat:'footer.html'}

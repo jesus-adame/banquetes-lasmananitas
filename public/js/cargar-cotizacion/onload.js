@@ -2,9 +2,10 @@
 addEventListener('DOMContentLoaded', () => {
 
    let dataCot = new FormData;
-   let cot = location.search.split('&')[1].split('=')
+   let number = location.href;
+   let cot = number.substr(number.length-1)
    
-   dataCot.append(cot[0], cot[1])
+   dataCot.append('cot', cot);
    dataCot.append('action', 'obtener_cotizacion')
 
    /**-------------- CARGA LA TABLA DETALLE COTIZACIÓN -------------*/
@@ -29,7 +30,7 @@ addEventListener('DOMContentLoaded', () => {
 
    /**----------- CARGA LOS TOTALES DE LA TABLA DETALLE COTIZACIÓN -----*/
    let dataTotales = new FormData;
-   dataTotales.append(cot[0], cot[1])
+   dataTotales.append('cot', cot)
    dataTotales.append('action', 'obtener_totales')
 
    getTotales(dataTotales)

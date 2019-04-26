@@ -1,67 +1,73 @@
 <?php
 
-/**----------- MODELO COTIZACIÓN --------------*/
-include_once 'core/models/CotizacionModel.php';
-$c = new Cotizacion;
+    include_once 'core/models/CotizacionModel.php';
+    use Spipu\Html2Pdf\Html2Pdf;
 
-/**---------- USAMOS LA LIBRERIA DE PDF ----------*/
-use Spipu\Html2Pdf\Html2Pdf;
+    setlocale(LC_ALL, 'es_MX.utf8');
 
-$folio = isset($_GET['folio']) ? $_GET['folio'] : '';
+    class ImprimirCotizacionController {
 
-/**----------- FORMATO DE LA HOJA ----------------*/
-$pdf = new Html2Pdf('P', '', 'es', 'true', 'UTF-8');
-$pdf->pdf->SetTitle('Cotización');
+        public function index($id) {
+            Utils::isUser();
+            
+            /** Motor de plantillas */
+            $html = new Smarty();
+            $c = new Cotizacion;
+            $folio = isset($id) ? $id : '';
 
-/**----- FORMATO DE FECHAS Y NÚMEROS DE MÉXICO -----*/
-setlocale(LC_ALL, 'es_MX.utf8');
+            /**----------- FORMATO DE LA HOJA ----------------*/
+            $pdf = new Html2Pdf('P', '', 'es', 'true', 'UTF-8');
 
-/**---------- VERIFICA LOS DATOS POR GET ------------*/
-if (empty($folio) || !isset($_SESSION['usuario'])) {
-   echo '<!DOCTYPE html>
-   <html lang="es">
-   <head>
-   <meta charset="UTF-8">
-   <title>Cotizacion</title>
-   </head><body>No se encontró el arcvivo</body>
-   </html>';
-   die();
-}
+            $pdf->pdf->SetFont('English111VivaceBT', 'regular', 'english111vivacebt.php');
+            $pdf->pdf->SetFont('caslon540btroman_9508', 'regular', 'caslon540btroman_9508.php');
+            $pdf->pdf->SetTitle('Cotización');
 
-/**---------- OBTIENE LOS DATOS DE LA COTIZACION --------*/
-$cotizacion = $c->getCotizacion($folio, $_SESSION['usuario']['id_usuario']);
+            /**---------- VERIFICA LOS DATOS POR GET ------------*/
+            if (empty($folio) || !isset($_SESSION['usuario'])) {
+            echo '<!DOCTYPE html>
+            <html lang="es">
+            <head>
+            <meta charset="UTF-8">
+            <title>Cotizacion</title>
+            </head><body>No se encontró el arcvivo</body>
+            </html>';
+            die();
+            }
 
-if (count($cotizacion) < 1) {
-   $pdf->writeHTML('<h1>No tienes acceso a esta información</h1>');
-   $pdf->output('Cotizacion_'. date('d-m-Y') .'.pdf');
-   die();
-}
+            /**---------- OBTIENE LOS DATOS DE LA COTIZACION --------*/
+            $cotizacion = $c->getCotizacion($folio, $_SESSION['usuario']['id_usuario']);
 
-$detalle = $c->getDetalleCotizacion($cotizacion[0]['id']);
-$usuario = $c->getUsuario($cotizacion[0]['usuario_id']);
+            if (count($cotizacion) < 1) {
+            $pdf->writeHTML('<h1>No tienes acceso a esta información</h1>');
+            $pdf->output('Cotizacion_'. date('d-m-Y') .'.pdf');
+            die();
+            }
 
-if (count($cotizacion) > 0) {
-   $cotizacion = $cotizacion[0];
-}
+            $detalle = $c->getDetalleCotizacion($cotizacion[0]['id']);
+            $usuario = $c->getUsuario($cotizacion[0]['usuario_id']);
 
-/**-------------- VARIABLES PHP ----------------*/
-$fecha = ucfirst(strftime('%A %d', strtotime($cotizacion['fecha']))). ' de ' .ucfirst(strftime('%B del %Y', strtotime($cotizacion['fecha'])));
+            if (count($cotizacion) > 0) {
+            $cotizacion = $cotizacion[0];
+            }
 
-/**-------------- VARIABLES SMARTY -------------*/
-$html->assign('folio', $folio);
-$html->assign('fecha', $fecha);
-$html->assign('cotizacion', $cotizacion);
-$html->assign('detalle', $detalle);
-$html->assign('usuario', isset($usuario['nombre']) ? strtoupper($usuario['nombre']. ' ' . $usuario['apellidos']) : $usuario['username']);
+            /**-------------- VARIABLES PHP ----------------*/
+            $fecha = ucfirst(strftime('%A %d', strtotime($cotizacion['fecha']))). ' de ' .ucfirst(strftime('%B del %Y', strtotime($cotizacion['fecha'])));
 
-/**-------------- CARGA LA VISTA EN LA CACHÉ -----------*/
-ob_start();
-$html->display(TEMP_PDF .'cotizacion.html');
-$html = ob_get_clean();
+            /**-------------- VARIABLES SMARTY -------------*/
+            $html->assign('folio', $folio);
+            $html->assign('fecha', $fecha);
+            $html->assign('cotizacion', $cotizacion);
+            $html->assign('detalle', $detalle);
+            $html->assign('usuario', isset($usuario['nombre']) ? strtoupper($usuario['nombre']. ' ' . $usuario['apellidos']) : $usuario['username']);
 
-/**-------------- PINTA LA VISTA EN EL DOCUMENTO PDF -----------*/
-$pdf->writeHTML($html);
-$pdf->output('Cotizacion_'. date('d-m-Y ') .'.pdf');
-die();
+            /**-------------- CARGA LA VISTA EN LA CACHÉ -----------*/
+            ob_start();
+            $html->display(TEMP_PDF_PATH .'cotizacion.html');
+            $html = ob_get_clean();
 
-?>
+            /**-------------- PINTA LA VISTA EN EL DOCUMENTO PDF -----------*/
+            $pdf->writeHTML($html);
+            $pdf->output('Cotizacion_'. date('d-m-Y ') .'.pdf');
+            die();
+        }
+    }

@@ -8,60 +8,79 @@ $logistica = new Logistica();
 
 // TODO: ACTUALIZAR EL MANEJO DE RESPUESTAS
 $accion = isset($_POST['accion']) ? $_POST['accion'] : 'leer';
+$res = array(
+  'error' => true
+);
 
 switch ($accion) {
   case 'agregar':
-    if (!empty($_POST['title'])) {
-      $datos = array(
-        $_POST['id_evento'],
-        $_POST['date_start'].' '.$_POST['time_start'],
-        $_POST['date_end']. ' ' .$_POST['time_end'], // FIXME: ELIMINAR ESTA OPCIÓN
-        $_POST['title'],
-        $_POST['lugar']);
-    } else {
-      echo json_encode('empty_fields');
+    if (empty($_POST['title'])) {
+      $res['msg'] = 'Agregue un título';
+      $res['error'] = true;
       break;
     }
 
-    $res = $logistica->agregarLogistica($datos);
-    if ($res) {
-      echo json_encode('success');
-    } else {
-      echo json_encode('not_user');
+    $datos = array(
+      'id_evento' => $_POST['id_evento'],
+      'start'     => $_POST['date_start'].' '.$_POST['time_start'],
+      'title'     => $_POST['title'],
+      'lugar'     => $_POST['lugar']
+    );
+
+    try {
+      $res = $logistica->agregarLogistica($datos);
+      $res['error'] = false;
+
+    } catch (\Exception $e) {
+      $res['error'] = true;
+
+      if ($e->getCode() === 10) {
+        $res['msg'] = $e->getMessage();
+
+      } else {
+        $res['msg'] = 'No se pudo agregar la actividad';
+        $res['log'] = $e->getMessage();
+      }
     }
     break;
 
   case 'modificar':
-    if (!empty($_POST['id']) && !empty($_POST['title'])) {
-      $datos = array(
-        $_POST['id_evento'],
-        $_POST['date_start']. ' ' .$_POST['time_start'],
-        $_POST['date_end']. ' ' .$_POST['time_end'], // FIXME: ELIMINAR ESTA LÍNEA
-        $_POST['title'],
-        $_POST['lugar']);
+    if (empty($_POST['id']) || empty($_POST['title'])) {
+      $res['msg'] = 'empty_fields';
+      $res['error'] = true;
+      break;
+    }
 
+    $datos = array(
+      'id_evento' => $_POST['id_evento'],
+      'start'     => $_POST['date_start'].' '.$_POST['time_start'],
+      'title'     => $_POST['title'],
+      'lugar'     => $_POST['lugar']
+    );
+
+    try {
       $res = $logistica->modificarLogistica($_POST['id'], $datos);
-      if ($res) {
-        echo json_encode('success');
-      } else {
-        echo json_encode('not_user');
-      }
-    } else {
-      echo json_encode('empty_fields');
+      $res['error'] = false;
+
+    } catch (\PDOException $e) {
+      $res['error'] = true;
+      $res['msg'] = $e->getMessage();
     }
     break;
 
   case 'eliminar':
-    if (!empty($_POST['id'])) {
-      $res = $logistica->eliminarLogistica($_POST['id'], $_POST['id_evento']);
+    if (empty($_POST['id'])) {
+      $res['error'] = true;
+      $res['msg'] = 'Faltan datos';
+    }
+    
+    try {
+      $logistica->eliminarLogistica($_POST['id'], $_POST['id_evento']);
+      $res['error'] = false;
       
-      if ($res) {
-        echo json_encode('success');
-      } else {
-        echo json_encode('not_user');
-      }
-    } else {
-      echo 0;
+    } catch (PDOException $e) {
+      $res['error'] = true;
+      $res['msg'] = $e->getMessage();
     }
     break;
 
@@ -70,8 +89,10 @@ switch ($accion) {
       $res = $tabla->obtener_datos_donde('id_sub_evento', $_POST['id']);
 
       echo json_encode($res);
+      die();
     } else {
-      return 0;
+      echo 0;
+      die;
     }
     break;
 
@@ -79,5 +100,10 @@ switch ($accion) {
     $res = $tabla->obtener_datos_donde('id_evento', $_POST['id']);
 
     echo json_encode($res);
+    die;
     break;
 }
+
+header('Content-type: aplication/json');
+echo json_encode($res);
+?>

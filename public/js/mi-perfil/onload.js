@@ -39,21 +39,15 @@ form_pass.addEventListener('submit', (e) => {
    /** PIDE EL CAMBIO DE CONTRASEÑA AL SERVIDOR */
    ajaxReq(d, 'core/ajax/registrosAjaxController.php')
    .then(dataJson => {
-      if (dataJson == 'empty_fields') {
-         popup.alert({ content: 'No se ingresaron datos' });
-      } else if (dataJson == 'pass_dont_match') {
-         popup.alert({ content: 'Las nuevas contraseñas no coinciden' });
-
-      } else if (dataJson == 'error') {
-         popup.alert({ content: 'Se equivocó en la contraseña actual' });
-
-      } else if (dataJson == 'dont_length') {
-         popup.alert({ content: 'La contraseña debe ser de al menos 6 caracteres' });
-
-      } else if (dataJson == 'success') {
-         popup.alert({ content: 'Su contraseña se ha actualizado' });
-         form_pass.reset();
+      if (dataJson.error) {
+         throw dataJson;
       }
+
+      popup.alert({ content: 'Su contraseña se ha actualizado' });
+      form_pass.reset();
+   })
+   .catch(dataJson => {
+      popup.alert({ content: dataJson.msg })
    })
 })
 
@@ -110,7 +104,7 @@ form_detalle_user.addEventListener('submit', e => {
    .then(dataJson => {
 
       if(dataJson.error) {
-         popup.alert({content: dataJson.msg});
+         popup.alert({ content: dataJson.msg });
       } else {
          modal_detalle.cerrar()
          form_detalle_user.reset();

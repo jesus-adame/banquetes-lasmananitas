@@ -1082,9 +1082,10 @@ table td, table th {
   vertical-align: middle;
   border: solid 1px #a7a7a7;
 }
-.table button {
+.table button, .table .btn {
   cursor: pointer;
   padding: 3px 5px;
+  min-height: 25px;
   margin: 0;
   width: 45%;
   display: inline-block;
@@ -1092,8 +1093,7 @@ table td, table th {
   box-sizing: border-box;
   transition: 0.2s;
 }
-.table button:hover {
-  letter-spacing: 1px;
+.table button:hover, .table .btn:hover {
   box-shadow: inset 0px 0px 4px #000;
 }
 
@@ -1174,7 +1174,8 @@ table td, table th {
   border-bottom: solid 1px #125812;
 }
 .modal-header h3, .modal-header p {
-  font-size: 24px;
+  font-family: "Caslon-Roman", serif;
+  font-size: 26px;
 }
 
 .modal-body {
@@ -1299,7 +1300,8 @@ table td, table th {
   color: #e0e4ee;
 }
 .win-modal .m-head p, .win-modal .m-head h3 {
-  font-size: 24px;
+  font-family: "Caslon-Roman", serif;
+  font-size: 28px;
 }
 .win-modal .m-body {
   width: auto;

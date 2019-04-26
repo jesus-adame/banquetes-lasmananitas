@@ -29,6 +29,7 @@ function loadSelectTiposEvento() {
    })
 }
 
+/** PIDE INSERTAR UN EVENTO */
 function insertEvent(formData, dataEvent) {
    let pax = document.querySelector('input[name="pax"]');
    

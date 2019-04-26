@@ -1,8 +1,10 @@
 <?php
 
-if (!isset($_SESSION['usuario'])) {
-    unset($_GET['view']);
-    header('location:index.php?view=index');
-}
+    class CalendarioController {
 
-?>
+        public function index() {
+            Utils::isUser();
+            
+            return view('calendario');
+        }
+    }

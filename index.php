@@ -1,39 +1,21 @@
 <?php
 
-  session_start();
-  require_once './core/config/rutas.php';
-  require_once './core/lib/vendor/autoload.php';
-  require_once './core/lib/smarty/Smarty.class.php';
-  require_once './core/config/conexion.php';
+	/**
+	 * Front Controller
+	 */
+	session_start();
+	require_once './core/config/parameters.php';
+	require_once './core/helpers/Utils.php';
+	require_once './core/helpers/Functions.php';
+	require_once './core/helpers/Route.php';
+	require_once './core/helpers/Router.php';
+	require_once './core/config/conexion.php';
+	require_once './core/lib/smarty/Smarty.class.php';
+	require_once './core/lib/vendor/autoload.php';
 
-  /** CREAMOS EL OBJETO DE SMARTY */
-  $html = new Smarty();
-  $usuario = null;
+	$router = new Router($_SERVER['REQUEST_URI']);
 
-  if (isset($_SESSION['usuario'])) {
-    $usuario = $_SESSION['usuario'];
-  }
+	// Recibe las rutas disponibles para usar
+	include_once './routes/web.php';
 
-  $view = isset($_GET['view']) ? $_GET['view'] : 'index';
-  $html->assign('view_url', $view);
-  $html->assign('usuario', $usuario);
-
-  /** RUTAS SMARTY */
-  $html->assign('views', VIEWS_PATH);
-  $html->assign('inc', VIEWS_PATH. 'inc/');
-  $html->assign('temp', VIEWS_PATH. 'templates/');
-
-  /** VERIFICA SI HAY UN CONTROLADOR DE LA PÁGINA */
-  if (is_file('./core/controllers/' . $view . 'Controller.php')) {
-    include './core/controllers/' . $view . 'Controller.php';
-  }
-
-  /** MUESTRA LA PÁGINA EN EL NAVEGADOR */
-  if (is_file(VIEWS_PATH . $view . '.html')) {
-    $html->display(VIEWS_PATH . $view . '.html');
-    
-  } else {
-    $html->display(VIEWS_PATH .'error-404.html');
-  }
-
-?>
+	$router->run();

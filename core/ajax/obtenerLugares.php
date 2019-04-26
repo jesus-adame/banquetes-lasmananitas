@@ -8,6 +8,7 @@ $res = array(
    'error' => false
 );
 
+// TODO: ACTUALIZAR EL MANEJO DEL MÓDULO
 if (isset($_POST['action']) && !empty( $_POST['action']) && $_POST['action'] !== 'obtener') {
 
    if ($_POST['action'] === 'agregar') {

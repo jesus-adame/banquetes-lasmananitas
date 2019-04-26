@@ -6,6 +6,7 @@ if (!isset($_SESSION)) {
 
 /** SE REQUIERE LA CONEXION A LA BASE DE DATOS Y MANEJO RÁPIDO DE QUERYS */
 require_once 'config/conexion.php';
+require_once 'helpers/Utils.php';
 
 $service = isset($_POST['module']) ? $_POST['module'] : '';
 
@@ -30,6 +31,7 @@ if ($service != '') {
 }
 
 /** RESPUESTA EN FORMATO JSON */
+header('Content-type: aplication/json');
 echo json_encode($res);
 
 ?>

@@ -11,16 +11,8 @@ class Logistica
   /**--- AGREGAR LOGISTICA ---*/
   public function agregarLogistica($datos)
   {
-    $data_log = array(
-      'id_evento' => $datos[0],
-      'start'     => $datos[1],
-      'end'       => $datos[2], // FIXME: ELIMINAR ESTA LÍNEA
-      'title'     => $datos[3],
-      'lugar'     => $datos[4]
-    );
-
     /** VALIDA EL AUTOR DEL EVENTO */
-    if ($this->obtenerValidacionEvento($_SESSION['usuario']['id_usuario'], $datos[0])
+    if ($this->obtenerValidacionEvento($_SESSION['usuario']['id_usuario'], $datos['id_evento'])
     || $_SESSION['usuario']['rol'] == 'Administrador') {
       $validacion = true;
 
@@ -30,22 +22,14 @@ class Logistica
 
     /** VALIDA */
     if (!$validacion) {
-      $_SESSION['error']['msg'] = 'No tiene permiso de editar este evento';
-      return false;
+      throw new PDOException('No tiene permiso de editar este evento', 10);
+      exit;
     }
     
-    $sql = "INSERT INTO sub_evento (id_evento, start, end, title, lugar)
-    VALUES (:id_evento, :start, :end, :title, :lugar)"; // FIXME: ACTUALIZAR LA QUERY
+    $sql = "INSERT INTO sub_evento VALUES
+    (null, :id_evento, :start, null, :title, :lugar)";
 
-    /** INSERTA LA ACTIVIDAD EN LA BASE DE DATOS */
-    try {
-      Conexion::query($sql, $data_log);
-
-    } catch (\PDOException $th) {
-      $_SESSION['error']['msg'] = $th->getMessage();
-      return false;
-    }
-    return true;
+    Conexion::query($sql, $datos);
   }
 
   /**--- ELIMINAR LOGISTICA ---*/
@@ -62,31 +46,21 @@ class Logistica
 
     /** VALIDA */
     if (!$validacion) {
-      $_SESSION['error']['msg'] = 'No tiene permiso de editar este evento';
-      return false;
+      throw new PDOException('No tiene permiso de editar este evento', 10);
+      exit;
     }
 
     $sql = "DELETE FROM sub_evento WHERE id_sub_evento = :id";
-
     /** ELIMINA EL REGISTRO */
-    $exe = Conexion::query($sql, array('id' => $id));
-    return $exe;
+    Conexion::query($sql, array('id' => $id));
   }
 
   /**--- MODIFICAR LOGISTICA ---*/
   public function modificarLogistica($id, $datos)
   {
-    $data_log = array(
-      'id_evento' => $datos[0],
-      'start'     => $datos[1],
-      'end'       => $datos[2],
-      'title'     => $datos[3],
-      'lugar'     => $datos[4],
-      'id'        => $id
-    );
-
+    $datos['id'] = $id;
     /** VALIDA EL AUTOR DEL EVENTO */
-    if ($this->obtenerValidacionEvento($_SESSION['usuario']['id_usuario'], $datos[0])
+    if ($this->obtenerValidacionEvento($_SESSION['usuario']['id_usuario'], $datos['id_evento'])
     || $_SESSION['usuario']['rol'] == 'Administrador') {
       $validacion = true;
 
@@ -96,21 +70,19 @@ class Logistica
 
     /** VALIDA */
     if (!$validacion) {
-      $_SESSION['error']['msg'] = 'No tiene permiso de editar este evento';
+      throw new PDOException('No tiene permiso de editar este evento', 10);
       return false;
     }
 
     $sql = "UPDATE sub_evento SET
     id_evento = :id_evento,
     start     = :start,
-    end       = :end,
     title     = :title,
     lugar     = :lugar
-    WHERE id_sub_evento = :id"; // FIXME: ACTUALIZAR LA QUERY
+    WHERE id_sub_evento = :id";
 
     /** ACTUALIZA LA ACTIVIDAD */
-    $exe = Conexion::query($sql, $data_log);
-    return $exe;    
+    Conexion::query($sql, $datos);
   }
 
   /**--- VALIDA EL USUARIO ---*/
@@ -126,7 +98,7 @@ class Logistica
 
     $is_autor = Conexion::query($sql, $data, true);
 
-    if (count($is_autor) > 1) {
+    if (count($is_autor) > 0) {
       return 1;
     } return 0;
   }

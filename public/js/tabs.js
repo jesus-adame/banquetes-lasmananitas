@@ -26,5 +26,6 @@ let tabs = (element) => {
             tab_selected.className         = 'tab active';
             tab_content_selected.className = 'tab_content show';
         }
+        
     })
 }

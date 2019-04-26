@@ -1,12 +1,17 @@
 <?php
+    
+    include 'core/models/TablasModel.php';
 
-if ($_SESSION['usuario']['rol'] != 'Administrador') {
-   header('location:index.php?view=index');
-}
+    class RegistrosController {
+    
+        public function index() {
+            Utils::isAdmin();
+            $tabla = new Tabla('usuarios');
+            $usuarios = $tabla->obtener_datos();
+            
+            return view('registros', ['usuarios' => $usuarios]);
+        }
+    }
 
-include 'core/models/TablasModel.php';
-$tabla = new Tabla('usuarios');
 
-$usuarios = $tabla->obtener_datos();
-$html->assign('usuarios', $usuarios);
  

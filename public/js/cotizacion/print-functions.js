@@ -1,6 +1,6 @@
 
+/** PINTA EL MODAL COTIZACIÓN */
 function printModalCotizacion(dataCot) {
-   /** TODO: REPARAR LA MAQUETACIÓN DE LA TABLA */
    let userData = new FormData;
    userData.append('action', 'obtener_uno')
    userData.append('usuario_id', dataCot.id_usuario)
@@ -21,23 +21,27 @@ function printModalCotizacion(dataCot) {
    cliente.innerHTML = dataCot.contacto
 }
 
+/** PINTA LA TABLA COTIZACIÓN */
 function printTableCotizacion(dataCot) {
    table_rows = ''
 
    if (dataCot.length > 0) {
       for (let i in dataCot) {
          cot                        = dataCot[i];
-         estado                     = 'No autorizada';
-         color                      = 'background: #ff2217';
+         estado                     = 'PENDIENTE DE AUTORIZAR';
+         color                      = 'background: #dbbb2f;';
          btn_imprimir.dataset.folio = cot.folio;
          f_formato              = new Date(cot.fecha);
          fecha = (f_formato.getDate() + 1) + '/' + MESES[f_formato.getMonth()] + '/' + f_formato.getFullYear();
          
-         if (cot.estado == 1) {
-            estado                  = 'Autorizada';
+         if (cot.estado == 'autorizada') {
+            estado                  = 'AUTORIZADA';
             color                   = 'background: green';
             send_mail.style.display = 'block';
-         } else {
+            
+         } else if (cot.estado == 'no autorizada') {
+            estado                  = 'NO AUTORIZADA';
+            color                   = 'background: red';
             send_mail.style.display = 'none';
          }
          

@@ -37,9 +37,9 @@ addEventListener('DOMContentLoaded', () => {
          },
          (clck) => {
             if (clck.proceed) {
-               renta.value = dataJson.data
                /** INSERTA EL EVENTO EN CASO DE SER CONFIRMADO */
                let dataEvento = new FormData(form_cotizacion);
+               dataEvento.append('renta', dataJson.data)
                
                /** CARGA EL EVENTO EN LA BASE DE DATOS */
                insertEvent(dataEvento, dataJson)

@@ -111,8 +111,7 @@ CREATE TABLE eventos (
 ) ENGINE=InnoDB;
 
 --------------------------ORDENES----------------------------
-CREATE TABLE campos_ordenes
-(
+CREATE TABLE campos_ordenes (
 	`id_campo`     INT(11) NOT NULL AUTO_INCREMENT,
 	`id_orden`     INT(11) NOT NULL,
 	`tag`          VARCHAR(200) NULL DEFAULT NULL COLLATE 'utf8_unicode_ci',
@@ -169,11 +168,10 @@ CREATE TABLE ordenes_servicio (
 
 -------------------------------LOGISTICA --------------------------
 
-CREATE TABLE `sub_evento` (
+CREATE TABLE sub_evento (
 	`id_sub_evento`   INT(11) NOT NULL AUTO_INCREMENT,
 	`id_evento`       INT(11) NOT NULL,
 	`start`           DATETIME NULL DEFAULT NULL,
-	`end`             DATETIME NULL DEFAULT NULL,
 	`title`           VARCHAR(200) NULL DEFAULT NULL,
 	`lugar`           VARCHAR(200) NULL DEFAULT NULL,
 	PRIMARY KEY(`id_sub_evento`),

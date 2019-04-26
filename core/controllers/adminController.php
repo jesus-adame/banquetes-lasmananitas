@@ -1,5 +1,9 @@
 <?php
+    
+    class AdminController {
 
- if ($_SESSION['usuario']['rol'] != 'Administrador') {
-   header('location:index.php?view=index');
-}
+        public function index() {
+            Utils::isAdmin();
+            return view('admin');
+        }
+    }

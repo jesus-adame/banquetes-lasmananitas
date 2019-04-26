@@ -1,8 +1,9 @@
 <?php
+    
+    class Mi_perfilController {
 
-if (!isset($_SESSION['usuario'])) {
-    unset($_GET['view']);
-    header('location:index.php?view=index');
-}
-
-?>
+        public function index() {
+            Utils::isUser();
+            return view('mi_perfil');
+        }
+    }

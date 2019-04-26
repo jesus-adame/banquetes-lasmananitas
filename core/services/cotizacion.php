@@ -3,62 +3,65 @@ include 'models/CotizacionModel.php';
 
 $action = isset($_POST['action']) ? $_POST['action'] : '';
 $c = new Cotizacion();
-
-/** MENÚ DEL SERVICIO EVENTOS */
+/**
+ * MENÚ DEL SERVICIO EVENTOS
+ */
 switch ($action) {
-   /** INSERT */
+   /**
+    * INSERTA UN EVENTO Y COTIZACIÓN
+    */
    case 'insert_event':
-      /** INICIA LA TRANSACCIÓN */
-      Conexion::beginTransaction();
-      
-      try {         
-         /** VALIDA LOS DATOS POST */
-         if (empty($_POST['nombre']) || empty($_POST['apellido'])) {
+      try {
+         // VALIDA LOS DATOS POST
+         if (empty($_POST['nombre']) || empty($_POST['apellido']) || empty($_POST['email'])) {
             throw new Exception('Hay campos vacios');
          }
-         /** VALIDA SI EXISTE EL CLIENTE */
-         $is_cliente = $c->isCliente($_POST['nombre'], $_POST['apellido'], $_POST['email']);
 
-         if ($is_cliente) {
-            /** OBTIENE EL ID DEL CLIENTE EN CASO DE QUE EXISTA */
+      } catch (Exception $e) {
+         $res['msg']   = "Error al registrar el cliente";
+         $res['log']   = $th->getMessage();
+         $res['error'] = true;
+         break;
+      }
+      // INICIA UNA TRANSACCIÓN
+      Conexion::beginTransaction();
+
+      try {
+         // VALIDA SI EXISTE EL CORREO
+         $is_email = $c->isEmail($_POST['email']);
+         
+         if ($is_email) {
+            // SI EXISTE EL CORREO VALIDA SI ES EL PROPIETARIO
+            $is_cliente = $c->isCliente($_POST['nombre'], $_POST['apellido'], $_POST['email']);
+
+            // SI NO ES EL PROPIETARIO DEL CORREO TIRA UN ERROR
+            if (!$is_cliente) {
+               throw new Exception('Ya hay otro cliente con ese correo');
+            }
+            // OBTIENE EL ID DEL CLIENTE
             $cliente_id = $c->getClienteId($_POST['email']);
 
          } else {
-            /** INSERTA EL CLIENTE EN CASO DE QUE NO EXISTA */
+            // SI NO EXISTE EL CORREO EN LA DB INSERTA EL CLIENTE
             $c->insertCliente();
             $cliente_id = Conexion::lastInsertId();
-         }
-         
-         /** SI CLIENTE ESTÁ VACIA, TIRA UN ERROR */
-         if (empty($cliente_id)) {
-            throw new Exception('No se pudo registrar el cliente');
          }
 
       } catch (PDOException $th) {
          $res['msg']   = "Error al registrar el cliente";
          $res['log']   = $th->getMessage();
          $res['error'] = true;
-         /** ERROR SQL */
          Conexion::rollBack();
          break;
-
-      } catch (Exception $th) {
-         $res['msg']   = $th->getMessage();
-         $res['error'] = true;
-         /** ERROR PERSONALIZADO */
-         Conexion::rollBack();
-         break;
-      }
-      
-      /** CAPTURA EL USUARIO EN SESSIÓN */
+      }   
+      // CAPTURA EL USUARIO EN SESSIÓN
       if (isset($_SESSION['usuario']['nombre']) && isset($_SESSION['usuario']['apellido'])) {
          $responsable = $_SESSION['usuario']['nombre']. ' ' .$_SESSION['usuario']['apellido'];
 
       } else {
          $responsable = $_SESSION['usuario']['username'];
       }
-
-      /** CREA UN ARRAY DE EVENTO */
+      // CREA UN ARRAY DE EVENTO
       $data_evento = array(
          'title'      => $_POST['title'],
          'evento'     => $_POST['evento'],
@@ -74,30 +77,30 @@ switch ($action) {
       );
       
       try {
-         /** INSERTA UN EVENTO */
+         // INSERTA UN EVENTO EN LA DB
          $c->insertEvento($data_evento);
          $evento_id = Conexion::lastInsertId();
 
-         /** INSERTA UNA COTIZACIÓN */
+         // INSERTA UNA COTIZACIÓN EN LA DB
          $c->insertCotizacion($evento_id, $cliente_id);
          $cotizacion_id = Conexion::lastInsertId();
 
+         // FIN DE LA TRANSACCIÓN Y GUARDA LOS CAMBIOS
+          $res['error'] = false;
+          $res['data']  = array('evento_id' => $evento_id);
+          Conexion::commit();
+         
       } catch (PDOException $e) {
          $res['msg']   = 'Error en la operación';
          $res['log']   = $e->getMessage();
          $res['error'] = true;
-         /** SI HAY ERRORES REALIZA UN ROLLBACK */
          Conexion::rollBack();
-         break;
       }
-
-      /** FIN DE LA TRANSACCIÓN Y GUARDA LOS CAMBIOS */
-      Conexion::commit();
-      $res['data']  = array('evento_id' => $evento_id);
-      $res['error'] = false;
       break;
    
-   /** SELECT */
+   /**
+    * OBTIENE TODAS LAS COTIZACIONES
+    */
    case 'obtener_cotizaciones':
       $cotizaciones = $c->getAll($_POST['evento_id']);
 
@@ -111,7 +114,9 @@ switch ($action) {
       }
       break;
 
-   /** SELECT */
+   /**
+    * OBTIENES LOS PRECIOS TOTALES DE UNA COTIZACIÓN
+    */
    case 'obtener_totales':
       $totales = $c->getTotalCotizacion($_POST['cot']);
 
@@ -125,20 +130,33 @@ switch ($action) {
       }
       break;
 
+   /**
+    * INSERTA UNA COTIZACIÓN
+    */
    case 'insertar_cotizacion':
       $evento_id  = $_POST['evento_id'];
       $cliente_id = $_POST['cliente_id'];
 
-      $insert = $c->insertCotizacion($evento_id, $cliente_id);
-
-      if ($insert) {
+      try {
+         // INSERTA LA COTIZACIÓN EN LA DB
+         $insert = $c->insertCotizacion($evento_id, $cliente_id);
          $res['error'] = false;
-      } else {
+
+         // MANEJA LOS ERRORES
+      } catch (PDOException $e) {
          $res['error'] = true;
-         $res['msg']   = 'No se pudo insertar la cotizacion';
+         $res['msg']   = 'Ocurrió un error';
+         $res['log']   = $e->getMessage();
+
+      } catch (Exception $e) {
+         $res['error'] = true;
+         $res['msg']   = $e->getMessage();
       }
       break;
-
+   
+   /**
+    * CAMBIA EL STATUS DE UNA COTIZACIÓN
+    */
    case 'actualizar_estado':
       $update = $c->cambiarStatus($_POST['folio'], $_POST['status']);
 
@@ -151,7 +169,10 @@ switch ($action) {
          unset($_SESSION['error']);
       }
       break;
-
+   
+   /**
+    * ENVÍA UN EMAIL
+    */
    case 'enviar_email':
       $data = array(
          'asunto' => $_POST['asunto'],
@@ -172,24 +193,27 @@ switch ($action) {
       $res['error'] = false;
       break;
 
+   /**
+    * INSERTA UNA COTIZACIÓN DE FORMA MANUAL
+    */
    case 'cotizacion_manual':
       $data = $_POST;
       $data['usuario_id'] = (int) $_SESSION['usuario']['id_usuario'];
       $evento = $c->getEvento($_POST['evento_id']);
 
+      // RELLENA EL ARRAY CON TODOS LOS DATOS NECESARIOS
       foreach ($evento[0] as $i => $e) {
          $data[$i] = $e;
       }
-
       $insert = $c->cotizacionManual($data);
 
+      // SI HAY ERRORES LOS MUESTRA
       if (!$insert) {
          $res['error'] = true;
          $res['msg'] = $_SESSION['error']['msg'];
          unset($_SESSION['error']);
          break;
-      }
-
+      }      
       $res['error'] = false;
       break;
    

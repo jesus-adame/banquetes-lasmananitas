@@ -72,10 +72,10 @@ switch ($_POST['action']) {
             break;
         }
 
-        /* BORRAR EL USUARIO */
+        // BORRAR EL USUARIO
         $delete = $usu->borrarUsuario($_POST['id']);
 
-        /** VARIFICA SI HAY ERRORES */
+        // VARIFICA SI HAY ERRORES
         if (!$delete) {
             $res['msg']   = 'No se pudo borrar';
             $res['error'] = true;
@@ -85,14 +85,14 @@ switch ($_POST['action']) {
         break;
 
     case 'cambiar_pass':
-        /** VALIDA LOS DATOS POR POST */
+        // VALIDA LOS DATOS POR POST
         if (empty($_POST['pass']) || empty($_POST['pass1']) || empty($_POST['pass2'])) {
             $res['msg']   = 'Debes llenar todos los campos';
             $res['error'] = true;
             break;
         }
 
-        /** VALIDA LA CONTRASEÑA */
+        // VALIDA LA CONTRASEÑA
         if ($_POST['pass1'] != $_POST['pass2']) {
             $res['msg']   = 'Las contraseñas no coinciden';
             $res['error'] = true;
@@ -104,45 +104,46 @@ switch ($_POST['action']) {
             break;                  
         }
 
-        /** CIFRA LAS CONTRASEÑAS */
+        // CIFRA LAS CONTRASEÑAS
         $pass  = sha1($_POST['pass']);
         $pass1 = sha1($_POST['pass1']);
         
-        /** VALIDA LA AUTENTICIDAD DEL USUARIO */
-        $validar = $usu->validar($_SESSION['id_usuario'], $pass);
+        // VALIDA LA AUTENTICIDAD DEL USUARIO
+        $validar = $usu->validar($_SESSION['usuario']['id_usuario'], $pass);
         
         if ($validar) {
-            /** CAMBIA LA CONTRASEÑA */
-            $usu->cambiarPass($_SESSION['id_usuario'], $pass1);
+            // CAMBIA LA CONTRASEÑA
+            $usu->cambiarPass($_SESSION['usuario']['id_usuario'], $pass1);
             $res['error'] = false;
 
         } else {
-            $res['msg']   = 'Hubo un problema a verificar su autenticidad';
+            $res['msg']   = $_SESSION['error']['msg'];
             $res['error'] = true;
+            unset($_SESSION['error']);
         }
         break;
 
     case 'auto_agregar':
-        /** VALIDA EL FORMULARIO */
+        // VALIDA EL FORMULARIO
         if (empty($_POST['usuario']) || empty($_POST['pass']) || empty($_POST['pass2'])) {
             $res['msg']   = 'Debes llenar todos los campos';
             $res['error'] = true;
             break;
         }
 
-        /** VALIDA LA CONTRASEÑA */
-        if ($_POST['pass1'] != $_POST['pass2']) {
+        // VALIDA LA CONTRASEÑA
+        if ($_POST['pass'] != $_POST['pass2']) {
             $res['msg']   = 'Las contraseñas no coinciden';
             $res['error'] = true;
             break;
 
-        } else if (strlen($_POST['pass1']) < 6) {
+        } else if (strlen($_POST['pass']) < 6) {
             $res['msg']   = 'Las contraseñas deben contener al menos 6 caracteres';  
             $res['error'] = true;
             break;                  
         }
 
-        /** SETEA EL USUARIO */
+        // SETEA EL USUARIO
         $usu->setName($_POST['usuario']);
         $pass = sha1($_POST['pass']);
         $usu->setPass($pass);
@@ -151,14 +152,14 @@ switch ($_POST['action']) {
         $t = new Tabla('usuarios');
         $is_user = $t->obtener_datos_donde('username', $_POST['usuario']);
         
-        /** VALIDA SI NO EXISTE ESE USUARIO EN LA DB */
-        if (!$is_user) {
-            /** INSERTA EL USUARIO */
-            $res = $usu->insertarUsuario($nivel, 0);
+        // VALIDA SI NO EXISTE ESE USUARIO EN LA DB
+        if (count($is_user) < 1) {
+            // INSERTA EL USUARIO
+            $usu->insertarUsuario($nivel, 0);
             $res['error'] = false;
 
         } else {
-            $res['msg']   = 'No se pudo registrar el usuario';
+            $res['msg']   = 'Ya existe un registro con ese nombre de usuario';
             $res['error'] = true;
         }
         break;
@@ -168,8 +169,7 @@ switch ($_POST['action']) {
         $res['error'] = true;
         break;
 }
-
-/** DEVUELVE EL RESULTADO EN JSON */
+// DEVUELVE EL RESULTADO EN JSON
 header('Content-type: application/json');
 echo json_encode($res);
 
